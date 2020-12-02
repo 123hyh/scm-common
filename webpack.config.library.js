@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-30 22:45:15
- * @LastEditTime: 2020-12-03 00:40:25
+ * @LastEditTime: 2020-12-03 00:54:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\webpack.config.library.js
@@ -28,6 +28,7 @@ module.exports = {
   },
   devServer: {
     contentBase: resolve('./dist'),
+    headers: { 'Access-Control-Allow-Origin': '*' },
     port: '9000',
     host: '0.0.0.0',
     hot: true,
