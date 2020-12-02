@@ -1,42 +1,59 @@
 /*
  * @Author: your name
  * @Date: 2020-11-30 22:45:15
- * @LastEditTime: 2020-12-02 19:52:11
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-03 00:40:25
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\webpack.config.library.js
  */
 const path = require('path')
+const webpack  = require('webpack')
+const resolve = dir => path.resolve(__dirname, dir)
 
 module.exports = {
   entry: {
-    utils: path.resolve(__dirname, './src/utils/index.ts'),
-    filters: path.resolve(__dirname, './src/filters/index.ts'),
-    directives: path.resolve(__dirname, './src/directives/index.ts')
+    utils: resolve('./src/utils/index.ts'),
+    filters: resolve('./src/filters/index.ts'),
+    directives: resolve('./src/directives/index.ts'),
+    'vue-component': resolve('./src/vue-component/index.ts')
   },
-  mode: 'production',
-  devtool:'source-map',
+  // mode: 'production',
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: path.resolve (__dirname,'./dist'),
-    library:'scmCommon',
-    libraryTarget:'umd',
+    path: resolve('./dist'),
+    library: 'scmCommon',
+    libraryTarget: 'umd',
     umdNamedDefine: true
+  },
+  devServer: {
+    contentBase: resolve('./dist'),
+    port: '9000',
+    host: '0.0.0.0',
+    hot: true,
+    compress: true
+  },
+  externals: ['vue'],
+  resolve: {
+    extensions: ['.ts', '.js'],
+    alias: {
+      '@': resolve('./src')
+    }
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         use: [
-          { 
-            loader: 'babel-loader' 
+          {
+            loader: 'babel-loader'
           }
         ],
-        include: [path.resolve(__dirname, './src')]
+        include: [resolve('./src')]
       },
       {
-        test: /\.ts$/,
-        use:[
+        test: /\.tsx?$/i,
+        use: [
           {
             loader: 'babel-loader'
           },
@@ -44,8 +61,27 @@ module.exports = {
             loader: 'ts-loader'
           }
         ]
-      }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          'postcss-loader'
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          'postcss-loader'
+        ],
+      },
     ]
   },
- 
+  plugins:[
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }

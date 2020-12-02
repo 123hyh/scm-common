@@ -2,9 +2,9 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-02 21:05:56
- * @Description: 
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-03 00:01:22
+ * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
 
@@ -21,4 +21,4 @@ export { default as camelCaseKeys} from './object/camelCaseKeys/index'
  * @param {*}
  * @return {*}
  */
-export * as useIndexedDb from './indexedDb/index'
+export { default as useIndexedDb } from '@/utils/indexedDb/index'

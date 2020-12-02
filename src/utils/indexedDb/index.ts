@@ -1,16 +1,8 @@
 /*
- * @Author: huangyuhui
- * @Date: 2020-12-02 20:39:20
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-02 21:00:16
- * @Description: 
- * @FilePath: \scm_frontend_common\src\utils\indexedDb\index.ts
- */
-/*
  * @Author: your name
  * @Date: 2020-10-27 00:51:30
- * @LastEditTime: 2020-11-03 18:40:52
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-02 23:36:39
+ * @LastEditors: Please set LastEditors
  * @Description: db api
  * @FilePath: \SCM 2.0\src\utils\indexedDb.js
  */
