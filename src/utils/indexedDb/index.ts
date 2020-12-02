@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 20:39:20
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-02 20:44:10
+ * @LastEditTime: 2020-12-02 21:00:16
  * @Description: 
  * @FilePath: \scm_frontend_common\src\utils\indexedDb\index.ts
  */
@@ -14,11 +14,7 @@
  * @Description: db api
  * @FilePath: \SCM 2.0\src\utils\indexedDb.js
  */
-export function useIndexedDb(storeName: string):Promise<{
-  getItem: (key: string) => Promise<any>;
-  setItem: (key: string, value: any) => Promise<boolean>;
-  removeItem: (key: string) => Promise<boolean>;
-}> {
+export default function (storeName: string) {
   storeName = `scm_${storeName}`;
   const generateMethod = (db: any) => {
     function getItem(key: string) {
