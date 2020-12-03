@@ -1,14 +1,13 @@
 /*
- * @Author: your name
- * @Date: 2020-11-30 22:45:15
- * @LastEditTime: 2020-12-03 00:54:52
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \scm_frontend_common\webpack.config.library.js
+ * @Author: huangyuhui
+ * @Date: 2020-12-03 15:36:30
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-03 15:40:19
+ * @Description: 
+ * @FilePath: \scm_frontend_common\scripts\production.js
  */
 const path = require('path')
-const webpack  = require('webpack')
-const resolve = dir => path.resolve(__dirname, dir)
+const resolve = dir => path.resolve(process.cwd(), dir)
 
 module.exports = {
   entry: {
@@ -17,7 +16,7 @@ module.exports = {
     directives: resolve('./src/directives/index.ts'),
     'vue-component': resolve('./src/vue-component/index.ts')
   },
-  // mode: 'production',
+  mode: 'production',
   devtool: 'source-map',
   output: {
     filename: '[name].js',
@@ -25,14 +24,6 @@ module.exports = {
     library: 'scmCommon',
     libraryTarget: 'umd',
     umdNamedDefine: true
-  },
-  devServer: {
-    contentBase: resolve('./dist'),
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    port: '9000',
-    host: '0.0.0.0',
-    hot: true,
-    compress: true
   },
   externals: ['vue'],
   resolve: {
@@ -82,7 +73,4 @@ module.exports = {
       },
     ]
   },
-  plugins:[
-    new webpack.HotModuleReplacementPlugin()
-  ]
 }

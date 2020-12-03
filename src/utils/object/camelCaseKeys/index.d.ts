@@ -2,9 +2,9 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:04:36
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-02 19:05:21
+ * @LastEditTime: 2020-12-03 16:58:00
  * @Description: 
- * @FilePath: \scm_frontend_common\src\utils\camelCaseKeys\index.d.ts
+ * @FilePath: \scm_frontend_common\src\utils\object\camelCaseKeys\index.d.ts
  */
 
-export default (t: object | object[], options: any) => any
+export default (t: object | object[], options?: {deep?:boolean}) => any

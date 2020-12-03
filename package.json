@@ -4,9 +4,9 @@
   "description": "JiaYu SCM frontend",
   "main": "./dist",
   "scripts": {
-    "build": "webpack",
-    "build:library": "webpack --config ./webpack.config.library.js",
-    "start:dev": "webpack serve --config ./webpack.config.library.js"
+    "build:library": "webpack --config ./scripts/production.js",
+    "start:dev": "webpack serve --config ./scripts/development.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "huangyuhui",
@@ -18,10 +18,13 @@
     "babel-loader": "^8.2.2",
     "core-js": "^3.8.0",
     "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "jest": "^26.6.3",
     "postcss": "^8.1.10",
     "postcss-loader": "^4.1.0",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.11",
+    "ts-node": "^9.1.0",
     "typescript": "^4.1.2",
     "vue": "^2.6.12",
     "webpack": "^5.9.0",
