@@ -1,0 +1,7 @@
+dist/*
+scripts/*
+test/*
+*.d.ts
+babel.config.js
+jest.config.ts
+postcss.config.js

@@ -1,0 +1,243 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/essential",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:vue/strongly-recommended",
+    "plugin:vue/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "process": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["vue", "@typescript-eslint"],
+  "rules": {
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": 1,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ],
+    "vue/html-indent": [
+      "error",
+      2,
+      {
+        "attribute": 1,
+        "baseIndent": 1,
+        "closeBracket": 1,
+        "alignAttributesVertically": true,
+        "ignores": []
+      }
+    ],
+    "vue/html-closing-bracket-spacing": [
+      "error",
+      {
+        "startTag": "never",
+        "endTag": "never",
+        "selfClosingTag": "never"
+      }
+    ],
+    "vue/multiline-html-element-content-newline": [
+      "error",
+      {
+        "ignoreWhenEmpty": true,
+        "ignores": ["pre", "textarea"]
+      }
+    ],
+    "vue/mustache-interpolation-spacing": ["error", "always"],
+    "vue/name-property-casing": ["error", "PascalCase"],
+    "vue/no-multi-spaces": [
+      "error",
+      {
+        "ignoreProperties": true
+      }
+    ],
+    "vue/attributes-order": [
+      "error",
+      {
+        "order": [
+          "DEFINITION",
+          "LIST_RENDERING",
+          "CONDITIONALS",
+          "RENDER_MODIFIERS",
+          "GLOBAL",
+          "UNIQUE",
+          "TWO_WAY_BINDING",
+          "OTHER_DIRECTIVES",
+          "OTHER_ATTR",
+          "EVENTS",
+          "CONTENT"
+        ]
+      }
+    ],
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        "ignores": []
+      }
+    ],
+    "vue/attribute-hyphenation": [
+      "error",
+      "never",
+      {
+        "ignore": []
+      }
+    ],
+    "vue/html-quotes": ["error", "double"],
+    "vue/no-reserved-keys": [
+      "error",
+      {
+        "reserved": [],
+        "groups": []
+      }
+    ],
+    "vue/no-unused-components": [
+      "error",
+      {
+        "ignoreWhenBindingPresent": true
+      }
+    ],
+    "vue/no-use-v-if-with-v-for": [
+      "error",
+      {
+        "allowUsingIterationVar": false
+      }
+    ],
+    "vue/return-in-computed-property": [
+      "error",
+      {
+        "treatUndefinedAsUnspecified": true
+      }
+    ],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "no-debugger": "off",
+    "indent": ["error", 2],
+    "max-len": [
+      "error",
+      { "code": 100, "ignoreStrings": true, "ignoreTemplateLiterals": true }
+    ],
+    "vue/no-spaces-around-equal-signs-in-attribute": ["error"],
+    "vue/prop-name-casing": ["error", "camelCase"],
+    "vue/singleline-html-element-content-newline": [
+      "error",
+      {
+        "ignoreWhenNoAttributes": true,
+        "ignoreWhenEmpty": true,
+        "ignores": ["pre", "textarea"]
+      }
+    ],
+    "vue/v-bind-style": ["error", "shorthand"],
+    "vue/v-on-style": ["error", "shorthand"],
+    "vue/order-in-components": [
+      "error",
+      {
+        "order": [
+          "el",
+          "name",
+          "parent",
+          "functional",
+          ["delimiters", "comments"],
+          ["components", "directives", "filters"],
+          "extends",
+          "mixins",
+          "inheritAttrs",
+          "model",
+          ["props", "propsData"],
+          "data",
+          "computed",
+          "watch",
+          "LIFECYCLE_HOOKS",
+          "methods",
+          ["template", "render"],
+          "renderError"
+        ]
+      }
+    ],
+    "vue/this-in-template": ["error", "never"],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "max-nested-callbacks": ["error", 3],
+    "max-params": ["error", 3],
+    "array-bracket-spacing": ["error", "always"],
+    "block-spacing": [2, "always"],
+    "comma-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "keyword-spacing": [
+      2,
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "semi-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "space-before-blocks": "error",
+    "space-in-parens": ["error", "always"],
+    "switch-colon-spacing": ["error", { "after": false, "before": true }],
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "guard-for-in": "error",
+    "no-extend-native": "error",
+    "no-proto": "error",
+    "no-redeclare": "error",
+    "no-dupe-keys": "error",
+    "no-unused-vars": "off",
+    "space-infix-ops": ["error", { "int32Hint": false }],
+    "new-cap": ["error", { "newIsCap": true, "capIsNew": true }],
+    "comma-dangle": ["error", "never"],
+    "func-call-spacing": ["error", "never"],
+    "comma-style": ["error", "last"],
+    "camelcase": ["error", { "properties": "always" }],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
+    "computed-property-spacing": ["error", "always"],
+    "line-comment-position": ["error", { "position": "above" }],
+    "lines-around-comment": [
+      "error",
+      { "beforeBlockComment": true, "beforeLineComment": true }
+    ],
+    "lines-between-class-members": ["error", "always"],
+    "no-multi-assign": "error",
+    "no-whitespace-before-property": "error",
+    "nonblock-statement-body-position": ["error", "beside"],
+    "no-constant-condition": ["error", { "checkLoops": false }],
+    "no-extra-semi": "error",
+    "use-isnan": "error",
+    "dot-location": ["error", "object"],
+    "dot-notation": "error",
+    "no-case-declarations": "error",
+    "no-empty-pattern": "error",
+    "no-eval": "error",
+    "no-floating-decimal": "error"
+  }
+}

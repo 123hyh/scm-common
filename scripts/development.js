@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:33:33
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-03 16:55:46
+ * @LastEditTime: 2020-12-04 16:03:35
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\development.js
  */
@@ -45,6 +45,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|ts|vue)$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        enforce: "pre",
+        options: {
+          fix: true
+        },
+      },
       {
         test: /\.js$/i,
         use: [

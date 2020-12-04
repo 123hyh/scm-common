@@ -6,4 +6,4 @@
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
  */
-export {default as ScmTable} from './table'
+export { default as ScmTable } from './table';

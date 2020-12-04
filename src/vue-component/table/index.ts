@@ -6,13 +6,13 @@
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\table\index.ts
  */
-import './index.scss'
-import { CreateElement } from 'vue'
+import './index.scss';
+import { CreateElement } from 'vue';
 
 export default {
-  render(h: CreateElement) {
-    h('div', {
+  render( h: CreateElement ) {
+    h( 'div', {
       class: 'table'
-    })
+    } );
   }
-}
+};

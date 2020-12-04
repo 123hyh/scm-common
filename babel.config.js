@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-12-01 21:55:01
- * @LastEditTime: 2020-12-01 22:16:47
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-04 13:41:25
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \testwebpack\.babel.config.js
+ * @FilePath: \scm_frontend_common\babel.config.js
  */
 module.exports = {
   presets: [
@@ -15,5 +15,5 @@ module.exports = {
         "corejs": 3
       }
     ]
-  ]
+  ],
 }
