@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:24:41
+ * @LastEditTime: 2020-12-05 22:57:44
  * @Description: 基础表格组件
  * @FilePath: \customs\src\components\common\Table\BaseTable.js
  */
@@ -128,7 +128,6 @@ export default {
               data: this.list,
               border: false,
               height: this.height,
-              // eslint-disable-next-line consistent-return
               'cell-class-name': e => {
                 const index = this.selections.findIndex( item => item === e.row );
                 if ( ~index ) {
@@ -155,7 +154,6 @@ export default {
                 } );
               },
               'row-click': ( () => {
-                let set = new WeakSet();
                 return ( row, _, event ) => {
                   
                   this.handlerRowClick( cloneDeepWith( row ) );
@@ -207,11 +205,11 @@ export default {
               props: {
                 fixed: 'left',
                 type: 'index',
-                align: this.schema.index.align ?? 'center',
-                label: this.schema.index?.label
+                align: this?.schema?.index?.align ?? 'center',
+                label: this?.schema?.index?.label
                   ? i18n$T ? i18n$T( this?.schema?.index?.label ) : this?.schema?.index?.label ?? ''
                   : '',
-                width: this.schema.index?.width
+                width: this?.schema?.index?.width
               }
             } ),
 

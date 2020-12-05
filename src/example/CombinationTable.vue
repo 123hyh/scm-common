@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-05 22:49:29
+ * @LastEditTime: 2020-12-05 22:53:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -12,7 +12,7 @@
     :list="list"
     >
     <template #table_operation="row">
-      <button>修改{{ row.id }}}</button>
+      <button>修改{{ row.id }}</button>
     </template>
     <!-- 操作栏插槽 -->
   </CombinationTable>
@@ -27,7 +27,10 @@ export default {
   },
   data() {
     return {
-      list:[],
+      list:[
+        { name: '换一换', age:18 },
+        { name: 'mff', age:18 }
+      ],
       tableSchema:{
         index:{
           width: 50,
@@ -44,8 +47,11 @@ export default {
         column: [
           {
             field: 'name',
-            label:'姓名',
-            width:100
+            label:'姓名'
+          },
+          {
+            field: 'age',
+            label:'年龄'
           }
         ]
       }
