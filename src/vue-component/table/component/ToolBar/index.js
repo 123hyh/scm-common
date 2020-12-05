@@ -1,14 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:24:41
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-25 10:30:47
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 22:16:02
  * @Description: 工具栏组件
  * @FilePath: \customs\src\components\common\Table\component\ToolBar\index.js
  */
 import './index.scss';
 import { debounce } from 'lodash-es';
-import Drawer from '@/components/common/Table/component/ToolBar/Drawer.js';
+import Drawer from './Drawer';
 import { Tooltip, Button } from 'element-ui';
 export default {
   name: 'SCM_ToolBar',
@@ -47,6 +47,7 @@ export default {
     }
   },
   render( h ) {
+    const i18n$T = this?.$t?.bind( this );
     return h(
       'div',
       {
@@ -68,7 +69,7 @@ export default {
               'el-tooltip',
               {
                 props: {
-                  content: this.$t( 'tip.editColumns' )
+                  content: i18n$T ? i18n$T( 'tip.editColumns' ) : '扩展'
                 }
               },
               [
@@ -91,7 +92,7 @@ export default {
               'el-tooltip',
               {
                 props: {
-                  content: this.$t( 'button.refresh' )
+                  content: i18n$T ? i18n$T( 'button.refresh' ) : '刷新'
                 }
               },
               [

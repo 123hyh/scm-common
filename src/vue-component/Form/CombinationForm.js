@@ -3,11 +3,11 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 17:36:03
+ * @LastEditTime: 2020-12-05 22:04:41
  * @Description: 组合表单组件
  * @FilePath: \customs\src\components\common\Form\CombinationForm.js
  */
-import { getSize } from '../index';
+import { getSize, getCodeDict } from '../index';
 
 import { forEachObject } from '../utils';
 import { cloneDeepWith, debounce } from 'lodash-es';
@@ -291,7 +291,7 @@ export default {
     },
     async setDict( dicts = [] ) {
       try {
-        const data = await Promise.all( dicts.map( item => _getCodeDict( item ) ) );
+        const data = await Promise.all( dicts.map( item => getCodeDict( item ) ) );
 
         /* 设置 options */
         data.forEach( ( item, index ) => {

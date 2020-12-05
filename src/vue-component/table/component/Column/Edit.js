@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-10-23 23:56:26
- * @LastEditTime: 2020-11-14 12:21:49
+ * @LastEditTime: 2020-12-05 22:11:36
  * @LastEditors: Please set LastEditors
  * @Description: 列表编辑 组件
  * @FilePath: /scm/src/components/common/Table/component/Column/Edit.js
  */
 import './edit.scss';
-import CombinationForm from '@/components/common/Form/CombinationForm.js';
+import CombinationForm from '../../../Form/CombinationForm';
 import { ButtonGroup, Button } from 'element-ui';
 export default {
   name: 'ScmTableColumnEdit',

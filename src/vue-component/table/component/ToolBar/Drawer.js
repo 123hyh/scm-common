@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-25 13:38:01
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:57:50
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 22:18:22
  * @Description: 工具栏 抽屉 - 用于 表格字段修改
  * @FilePath: \customs\src\components\common\Table\component\ToolBar\Drawer.js
  */
@@ -47,6 +47,8 @@ export default {
     ElInputNumber: InputNumber
   },
   render( h ) {
+    const i18n$T = this?.$t?.bind( this );
+
     return h(
       'el-drawer',
       {
@@ -69,7 +71,7 @@ export default {
           {
             slot: 'title'
           },
-          this.$t( 'table.selectField' )
+          i18n$T ? i18n$T( 'table.selectField' ) : '选择字段'
         ),
 
         /* 字段显示 */
@@ -131,7 +133,7 @@ export default {
                   ),
 
                   /* 文字 */
-                  h( 'div', { class: [ 'field-label' ] }, this.$t( node.label ) ),
+                  h( 'div', { class: [ 'field-label' ] }, i18n$T ? i18n$T( node.label ) :  node.label ),
 
                   /* 排序 */
                   h( 'div', [
@@ -195,7 +197,7 @@ export default {
                   }
                 }
               },
-              this.$t( 'button.cancel' )
+              i18n$T ? i18n$T( 'button.cancel' ) : '取消' 
             ),
 
             /* 保存 */
@@ -215,7 +217,7 @@ export default {
                   }
                 }
               },
-              this.$t( 'button.save' )
+              i18n$T ? i18n$T( 'button.save' ) : '保存'
             )
           ]
         )

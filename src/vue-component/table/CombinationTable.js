@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-03 11:20:19
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 22:13:30
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \customs\src\components\common\Table\CombinationTable.js
  */
@@ -157,7 +157,7 @@ export default {
     /* 修改后的 表格列数据 ( 如果 修改过则 取 当前组件的 column 否则 props中的 )*/
     newColumn: {
       get() {
-        return cloneDeepWith( this.column.length ? this.column : [] );
+        return cloneDeepWith( this?.column?.length ? this.column : [] );
       },
       set( val ) {
         this.column = val;
