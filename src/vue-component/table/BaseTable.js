@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-03 11:19:44
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 22:24:41
  * @Description: 基础表格组件
  * @FilePath: \customs\src\components\common\Table\BaseTable.js
  */
@@ -109,6 +109,8 @@ export default {
     }
   },
   render( h ) {
+    const i18n$T = this?.$t?.bind( this );
+
     return h(
       'div',
       {
@@ -207,7 +209,7 @@ export default {
                 type: 'index',
                 align: this.schema.index.align ?? 'center',
                 label: this.schema.index?.label
-                  ? this.$t( this.schema.index?.label )
+                  ? i18n$T ? i18n$T( this?.schema?.index?.label ) : this?.schema?.index?.label ?? ''
                   : '',
                 width: this.schema.index?.width
               }

@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 15:35:45
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-24 16:04:32
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 22:49:19
  * @Description: table column 组件
  * @FilePath: \customs\src\components\common\Table\component\Column\index.js
  */
@@ -11,11 +11,12 @@ import { cloneDeepWith } from 'lodash-es';
 import { Popover, TableColumn, Tooltip } from 'element-ui';
 import ColumnEdit from './Edit';
 
+const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
+
 const cacheMap = Vue.observable( {
   activeEdit: null,
   closeEdit() {
     if ( cacheMap.activeEdit ) {
-      console.log( 1 );
       cacheMap.activeEdit.editble = false;
       cacheMap.activeEdit.$refs.editPopover.showPopper = false;
     }
@@ -74,7 +75,7 @@ export default {
           prop: field,
           fixed: typeof fixed === 'string' && fixed !== '' ? fixed : undefined,
           sortable: sortable ? 'custom' : sortable,
-          label: this.$t( label ),
+          label: getText( label, this?.$t ),
           'show-overflow-tooltip': true,
           width
         },
@@ -181,12 +182,12 @@ export default {
                 {
                   props: {
                     'popper-class': `scm-table-column-header-tip-${ field }`,
-                    content: this.$t( tip )
+                    content: getText( tip, this?.$t ) 
                   }
                 },
                 [
                   h( 'span', { class: [ 'scm-table-header-label' ] }, [
-                    h( 'span', this.$t( label ) ),
+                    h( 'span', getText( label, this?.$t )  ),
                     h( 'i', {
                       class: [ 'el-icon-question', 'tip-icon' ]
                     } )
