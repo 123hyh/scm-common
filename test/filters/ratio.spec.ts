@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-04 15:43:00
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-04 15:43:10
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 11:15:06
  * @Description: 
  * @FilePath: \scm_frontend_common\test\filters\ratio.spec.ts
  */
@@ -58,7 +58,7 @@ test('test filters ratioToNumber', () => {
   expect(
     t(11.34)
   ).toBe(0.01134)
-  
+
   expect(
     t('')
   ).toBe('')

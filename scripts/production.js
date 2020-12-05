@@ -1,15 +1,17 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-03 15:40:19
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-05 14:37:34
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
 const path = require('path')
 const resolve = dir => path.resolve(process.cwd(), dir)
+const { analyzer = false } = require('yargs').argv
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-module.exports = {
+const ProductionOption = {
   entry: {
     utils: resolve('./src/utils/index.ts'),
     filters: resolve('./src/filters/index.ts'),
@@ -17,7 +19,6 @@ module.exports = {
     'vue-component': resolve('./src/vue-component/index.ts')
   },
   mode: 'production',
-  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: resolve('./dist'),
@@ -42,6 +43,14 @@ module.exports = {
           }
         ],
         include: [resolve('./src')]
+      },
+      {
+        test: /\.(ttf|eot|svg|woff|woff2)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
       },
       {
         test: /\.tsx?$/i,
@@ -73,4 +82,16 @@ module.exports = {
       },
     ]
   },
+  plugins: [
+    analyzer && new BundleAnalyzerPlugin()
+  ].filter(Boolean)
 }
+
+const Webpack = require('webpack');
+const compile = Webpack(ProductionOption);
+compile.run((err, stats) => {
+  if (err || stats.compilation.errors.length) {
+    console.log('错误信息: ', err, stats.compilation.errors);
+  } else {
+  }
+});

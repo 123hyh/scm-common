@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-01 21:55:01
- * @LastEditTime: 2020-12-04 13:41:25
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-05 13:55:12
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\babel.config.js
  */
@@ -16,4 +16,13 @@ module.exports = {
       }
     ]
   ],
+  plugins:[
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
 }
