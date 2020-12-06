@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:33:33
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 15:28:51
+ * @LastEditTime: 2020-12-06 11:50:16
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\development.js
  */
@@ -38,7 +38,12 @@ const devOptions =  vueOptionsMerge( {
     progress:true,
     quiet: true,
     hot: true,
-    compress: true
+    compress: true,
+    noInfo: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    }
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -100,6 +105,7 @@ const devOptions =  vueOptionsMerge( {
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      title:'webpack App',
       template: resolve('./src/example/index.html'),
       chunks: ['example']
     })

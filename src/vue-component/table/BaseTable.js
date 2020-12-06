@@ -2,12 +2,13 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:57:44
+ * @LastEditTime: 2020-12-06 14:39:31
  * @Description: 基础表格组件
  * @FilePath: \customs\src\components\common\Table\BaseTable.js
  */
 
 import { cloneDeepWith, debounce } from 'lodash-es';
+import { getSize } from '@/vue-component/index';
 import './BaseTable.scss';
 import ColumnComponent from './component/Column/index';
 import { forEachObject } from '../utils';
@@ -124,6 +125,7 @@ export default {
           {
             ref:'Table',
             props: {
+              size: getSize(),
               ...this.$attrs,
               data: this.list,
               border: false,
@@ -166,7 +168,8 @@ export default {
                       target.classList.contains( 'el-checkbox__inner' ) === false &&
                       target.classList.contains( 'el-radio__label' ) === false &&
                       target.classList.contains( 'el-radio__inner' ) === false
-                    )
+                    ) && 
+                    ( this.selectionMethod ? this.selectionMethod( row ) !== true : true )
                   ) {
                     if ( this.selections.some( item => item === row ) === false ) {
                       if ( this.schema.selection.isMultiple === true ) {
