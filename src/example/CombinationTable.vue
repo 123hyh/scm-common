@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-06 14:46:56
+ * @LastEditTime: 2020-12-06 21:53:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -49,7 +49,8 @@ export default {
         {
           field:'name',
           label:'姓名',
-          type: 'string'
+          type: 'string',
+          clearable: true
         }
       ],
       tableSchema: {

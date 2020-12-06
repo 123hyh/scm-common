@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-05 18:11:17
+ * @LastEditTime: 2020-12-06 21:50:36
  * @LastEditors: Please set LastEditors
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -60,4 +60,4 @@ export { default as CombinationForm } from './Form/CombinationForm';
  * @return {*}
  */
 
-export { default as CombinationTable } from './Table/CombinationTable';
+export { default as CombinationTable } from './table/CombinationTable';

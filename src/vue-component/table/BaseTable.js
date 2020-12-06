@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-06 14:39:31
+ * @LastEditTime: 2020-12-06 21:52:12
  * @Description: 基础表格组件
  * @FilePath: \customs\src\components\common\Table\BaseTable.js
  */
@@ -11,6 +11,7 @@ import { cloneDeepWith, debounce } from 'lodash-es';
 import { getSize } from '@/vue-component/index';
 import './BaseTable.scss';
 import ColumnComponent from './component/Column/index';
+import OperationComponent from './component/Column/Operation'; 
 import { forEachObject } from '../utils';
 import { Table, TableColumn, Checkbox, Radio } from 'element-ui';
 
@@ -22,7 +23,7 @@ export default {
     ElCheckbox: Checkbox,
     ElRadio: Radio,
     ColumnComponent,
-    OperationComponent: () => import( /* webpackChunkName: "ScmTable_column_operation" */ './component/Column/Operation' )
+    OperationComponent
   },
   props: {
 
