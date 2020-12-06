@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-06 14:41:13
+ * @LastEditTime: 2020-12-06 14:46:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -9,6 +9,7 @@
 <template>
   <CombinationTable
     clickRowSelected
+    :queryBarSchema="queryBarSchema"
     :tableSchema="tableSchema"
     :list="list"
     :selectionMethod="selectionMethod"
@@ -44,7 +45,13 @@ export default {
         { name: '换一换', age: 18, income: 3000 },
         { name: 'mff', age: 18, income: 3500 }
       ],
-
+      queryBarSchema:[
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string'
+        }
+      ],
       tableSchema: {
         index: {
           width: 50,

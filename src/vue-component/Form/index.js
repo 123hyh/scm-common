@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:56:16
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-06 14:53:01
  * @Description: Form 组件
  * @FilePath: \customs\src\components\common\Form\index.js
  */
@@ -15,6 +15,10 @@ import SwitchItem from './FormItem/Switch';
 import DateItem from './FormItem/Date';
 import CheckboxItem from './FormItem/Checkbox';
 import { Form, FormItem } from 'element-ui';
+import { getSize } from '@/vue-component/index.ts';
+const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
+
+
 
 /**
  * type 转 组件别名
@@ -141,7 +145,8 @@ export default {
         class: [ 'scm_form-container' ],
         props: {
           model,
-          inline: true
+          inline: true,
+          size: getSize()
         }
       },
 
@@ -166,7 +171,7 @@ export default {
               {
                 class: [ `form-item-${ type }` ],
                 props: {
-                  label: this.$t( label ),
+                  label: getText( label, this?.$t ),
                   for: field
                 }
               },

@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-14 13:18:00
+ * @LastEditTime: 2020-12-06 14:48:43
  * @Description: 查询栏组件
  * @FilePath: \SCM 2.0\src\components\common\QueryBar\index.js
  */
@@ -10,6 +10,8 @@ import { cloneDeepWith, debounce } from 'lodash-es';
 import './index.scss';
 import SCMForm from '../Form/index';
 import { Button, Link } from 'element-ui';
+const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
+
 export default {
   name: 'SCM_QueryBar',
   components: {
@@ -96,7 +98,7 @@ export default {
                   }
                 }
               },
-              this.$t( 'button.query' )
+              getText( 'button.query', this?.$t ) ?? '查询'
             ),
 
             /* 更多查询按钮 */
@@ -111,7 +113,7 @@ export default {
                   this.hideMore ? this.handlerHide() : this.handlerShow();
                 }
               }
-            }, this.$t( `button.${ this.hideMore ? 'moreQuery' : 'retract' }` ) )
+            }, getText( `button.${this.hideMore ? 'moreQuery' : 'retract'}`, this?.$t )  )
           ]
         )
       ]
