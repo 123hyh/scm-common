@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 21:21:11
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-07 23:09:46
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
@@ -11,7 +11,6 @@ const resolve = dir => path.resolve(process.cwd(), dir)
 const { analyzer = false } = require('yargs').argv
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
 
 const ProductionOption = {
   entry: {
@@ -87,10 +86,6 @@ const ProductionOption = {
   plugins: [
     analyzer && new BundleAnalyzerPlugin(),
   new ProgressBarPlugin(),
-  new DeclarationBundlerPlugin({
-    moduleName:'some.path.moduleName',
-    out: resolve('../dist'),
-})
   ].filter(Boolean),
 }
 
