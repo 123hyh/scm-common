@@ -1,17 +1,17 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-06 21:52:12
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-07 19:02:14
  * @Description: 基础表格组件
- * @FilePath: \customs\src\components\common\Table\BaseTable.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
 
 import { cloneDeepWith, debounce } from 'lodash-es';
 import { getSize } from '@/vue-component/index';
 import './BaseTable.scss';
-import ColumnComponent from './component/Column/index';
-import OperationComponent from './component/Column/Operation'; 
+import ColumnComponent from './component/Column/index.js';
+import OperationComponent from './component/Column/Operation.js'; 
 import { forEachObject } from '../utils';
 import { Table, TableColumn, Checkbox, Radio } from 'element-ui';
 

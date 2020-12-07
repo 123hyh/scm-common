@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:13:30
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-07 19:13:13
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
- * @FilePath: \customs\src\components\common\Table\CombinationTable.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
 import QueryBar from '../QueryBar/index.js';
 import ToolBar from './component/ToolBar/index.js';
@@ -17,10 +17,6 @@ function addSuffix( str ) {
   const date = Date.now();
   return `${date}_combinationTable_${str}`;
 }
-import Vue from 'vue';
-
-/* 刷新数据集合 */
-const refreshMap = new Map();
 
 /* 当前排序数据 */
 const sortMap = new Map();
@@ -30,7 +26,6 @@ export default {
   inheritAttrs:false,
   destroy() {
     const uid = this._uid;
-    refreshMap.delete( uid );
     sortMap.delete( uid );
   },
   methods: {
@@ -61,21 +56,16 @@ export default {
      * 注册刷新组件参数
      */
     _registerRefresh() {
-      refreshMap.set(
-        this._uid,
-        Vue.observable(
-          {
-            QueryBar: addSuffix( 'queryBar' ),
-            BaseTable: addSuffix( 'baseTable' ),
-            Pagination: addSuffix( 'pagination' )
-          }
-        )
-      );
+      this.$data._refreshMap =  {
+        QueryBar: addSuffix( 'queryBar' ),
+        BaseTable: addSuffix( 'baseTable' ),
+        Pagination: addSuffix( 'pagination' )
+      };
     },
 
     /* 刷新组件 */
     refreshComponent( updateKeys = [ 'QueryBar', 'BaseTable', 'Pagination' ] ) {
-      const refreshData = refreshMap.get( this._uid );
+      const refreshData = this.$data._refreshMap;
 
       /* 在刷新表格时 把当前组件 的 sortData 数据清理 */
       if ( updateKeys.includes( 'BaseTable' ) ) {
@@ -149,7 +139,15 @@ export default {
       dbResult: null,
 
       /* 读取完 db 标识 */
-      isLoadDbData: false
+      isLoadDbData: false,
+
+      /* 刷新标识 */
+      _refreshMap:{
+        QueryBar: addSuffix( 'queryBar' ),
+        BaseTable: addSuffix( 'baseTable' ),
+        Pagination: addSuffix( 'pagination' )
+      }
+
     };
   },
   computed: {
@@ -200,7 +198,7 @@ export default {
     }
   },
   render( h ) {
-    const currentRefreshs = refreshMap.get( this._uid );
+    const currentRefreshs = this.$data._refreshMap; 
     const {
       QueryBar: queryBarKey,
       BaseTable: baseTableKey,

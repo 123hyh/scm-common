@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-06 14:48:43
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-07 17:37:25
  * @Description: 查询栏组件
- * @FilePath: \SCM 2.0\src\components\common\QueryBar\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
 import { cloneDeepWith, debounce } from 'lodash-es';
 import './index.scss';
@@ -98,7 +98,7 @@ export default {
                   }
                 }
               },
-              getText( 'button.query', this?.$t ) ?? '查询'
+              getText( 'button.query', this?.$t?.bind( this ) ) ?? '查询'
             ),
 
             /* 更多查询按钮 */
@@ -113,7 +113,7 @@ export default {
                   this.hideMore ? this.handlerHide() : this.handlerShow();
                 }
               }
-            }, getText( `button.${this.hideMore ? 'moreQuery' : 'retract'}`, this?.$t )  )
+            }, getText( `button.${this.hideMore ? 'moreQuery' : 'retract'}`, this?.$t?.bind( this ) )  )
           ]
         )
       ]

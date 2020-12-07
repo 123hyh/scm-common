@@ -1,34 +1,21 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 15:35:45
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:49:19
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-07 18:59:35
  * @Description: table column 组件
- * @FilePath: \customs\src\components\common\Table\component\Column\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\component\Column\index.js
  */
-import Vue from 'vue';
-import { cloneDeepWith } from 'lodash-es';
 import { Popover, TableColumn, Tooltip } from 'element-ui';
-import ColumnEdit from './Edit';
 
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
 
-const cacheMap = Vue.observable( {
-  activeEdit: null,
-  closeEdit() {
-    if ( cacheMap.activeEdit ) {
-      cacheMap.activeEdit.editble = false;
-      cacheMap.activeEdit.$refs.editPopover.showPopper = false;
-    }
-  }
-} );
 
 export default {
   abstract: true,
   name: 'SCMTableColumn',
   components: {
     Popover,
-    ColumnEdit,
     ElTableColumn: TableColumn,
     ElTooltip: Tooltip
   },
@@ -62,20 +49,18 @@ export default {
       width,
       children = [],
       align = 'center',
-      tip,
+      tip
 
-      /* 列 编辑选项 */
-      input
     } = this.columnSchema;
     return h(
-      'el-table-column',
+      'ElTableColumn',
       {
         props: {
           align,
           prop: field,
           fixed: typeof fixed === 'string' && fixed !== '' ? fixed : undefined,
           sortable: sortable ? 'custom' : sortable,
-          label: getText( label, this?.$t ),
+          label: getText( label, this?.$t?.bind( this ) ),
           'show-overflow-tooltip': true,
           width
         },
@@ -87,89 +72,10 @@ export default {
             /* 点击列 时 修改 可编辑状态 */
             return h(
               'span',
-              {
-                on: {
-                  click: e => {
-
-                    // e.stopPropagation();
-                    this.editble = true;
-
-                    /* 保存当前 到激活的 edit */
-                    cacheMap.activeEdit = this;
-                  }
-                }
-              },
               [
                 this.columnSlots[ field ]
-                  ? this.columnSlots[ field ]( row, {
-
-                    /* 传入 编辑状态到 列插槽 */
-                    editble: this.editble
-                  } )
-                  : ( () => {
-                    if ( input ) {
-                      return h(
-                        'Popover',
-                        {
-                          ref: 'editPopover',
-                          props: {
-                            title: `修改${ label }`,
-                            trigger: 'click',
-                            'popper-class': 'scm-table-column-edit-popper'
-                          },
-                          on: {
-                            show: () => {
-                              this.editble = true;
-                            },
-                            hide: () => {
-                              this.editble = false;
-                              cacheMap.activeEdit = null;
-                            }
-                          }
-                        },
-                        [
-                          h(
-                            'span',
-                            {
-                              slot: 'reference'
-                            },
-                            row[ field ]
-                          ),
-
-                          /* 列编辑组件 */
-                          this.editble &&
-                              input &&
-                              h( 'ColumnEdit', {
-                                props: {
-                                  field,
-                                  schema: input,
-                                  editble: this.editble,
-                                  sourceData: row[ field ]
-                                },
-                                on: {
-                                  updateColumn: e => {
-                                    this.$emit( 'updateColumn', {
-                                      row: cloneDeepWith( row ),
-                                      data: e
-                                    },
-
-                                    /* 关闭 编辑popover回调 */
-                                    function closePopover() {
-                                      this.editble = false;
-                                    }.bind( this )
-                                    );
-                                  },
-                                  'update:editble': () => {
-                                    this.editble = !this.editble;
-                                  }
-                                }
-                              } )
-                        ].filter( Boolean )
-                      );
-                    } else {
-                      return row[ field ];
-                    }
-                  } )()
+                  ? this.columnSlots[ field ]( row )
+                  : row[ field ]
               ]
             );
           };
@@ -182,12 +88,12 @@ export default {
                 {
                   props: {
                     'popper-class': `scm-table-column-header-tip-${ field }`,
-                    content: getText( tip, this?.$t ) 
+                    content: getText( tip, this?.$t?.bind( this ) ) 
                   }
                 },
                 [
                   h( 'span', { class: [ 'scm-table-header-label' ] }, [
-                    h( 'span', getText( label, this?.$t )  ),
+                    h( 'span', getText( label, this?.$t?.bind( this ) )  ),
                     h( 'i', {
                       class: [ 'el-icon-question', 'tip-icon' ]
                     } )

@@ -2,14 +2,13 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 17:36:28
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-07 18:47:40
  * @Description:
- * @FilePath: \SCM 2.0\src\components\common\Form\useDict.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
 import { forEachObject } from '@/utils';
 import { getCodeDict } from '@/vue-component/index.ts';
-import Vue from 'vue';
 
 /**
  * 查找码值
@@ -72,9 +71,10 @@ export async function setDictValue( dicts, dictValues ) {
           if ( schemaItem?.hasOwnProperty( 'options' ) ) {
             schemaItem.options = options;
           } else {
+            console.warn( '请确保 options 响应式！' );
 
             /* 避免 无响应 */
-            Vue.set( schemaItem, 'options', options );
+            schemaItem.options = options;
           }
         }
       );

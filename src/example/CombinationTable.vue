@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-06 21:53:46
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-07 19:18:10
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
@@ -13,6 +13,7 @@
     :tableSchema="tableSchema"
     :list="list"
     :selectionMethod="selectionMethod"
+    :total="100"
     @sortChange="hanlderSort"
     @refresh="hanlderRefresh"
     @rowClick="hanlderClickRow"
@@ -54,53 +55,68 @@ export default {
         }
       ],
       tableSchema: {
-        index: {
-          width: 50,
-          label: '#'
-        },
         selection: {
           width: 50,
+          label:'',
           isMultiple: true
-        },
-        operation: {
-          width: 200,
-          label: '操作'
         },
         column: [
           {
             field: 'name',
-            label: '姓名',
-            sortable: true,
-            fixed: 'left',
-            viisble: true,
-            tip: '测试Tip',
-            width: 300
+            label: '备案号',
+            width: 150
           },
           {
-            field: 'born',
-            label: '出生日期',
-            width: 300
+            field: 'name1',
+            label: '客户名称',
+            width: 150
           },
           {
-            field: 'age',
-            label: '年龄',
-            width: 300
+            field: 'name2',
+            label: '英文名',
+            width: 150
           },
           {
-            field: 'sex',
-            label: '性别',
-            width: 300
+            field: 'name3',
+            label: '状态',
+            width: 150
           },
           {
-            field: 'height',
-            label: '身高',
-            width: 300
+            field: 'name4',
+            label: '正式客户',
+            width: 150
           },
           {
-            field: 'income',
-            align: 'right',
-            label: '收入',
-            width: 300
+            field: 'name5 ',
+            label: '业务',
+            width: 150
+          },
+          {
+            field: 'createTime',
+            label: '创建日期',
+            width: 150,
+            sortable:true
+          },
+          {
+            field: 'submitTime',
+            label: '提交日期',
+            width: 150,
+            sortable:true
+          },
+          {
+            field: 'auditTime',
+            label: '审核日期',
+            width: 150
+          },
+          {
+            field: 'predictImportTime',
+            label: '预计导入时间',
+            width: 150
+          },
+          {
+            field: 'lastTime',
+            label: '最后跟进',
+            width: 150
           }
         ]
       }

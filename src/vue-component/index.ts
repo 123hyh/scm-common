@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-06 21:50:36
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-07 18:52:24
+ * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
  */
