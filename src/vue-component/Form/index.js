@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 19:22:05
+ * @LastEditTime: 2020-12-07 20:06:39
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -100,6 +100,14 @@ export default {
     return {
       _formData:{}
     };
+  },
+  computed:{
+    formData:{
+      cache: false,
+      get() {
+        return cloneDeepWith( this.$data._formData );
+      }
+    }
   },
   props: {
 

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-07 18:52:24
+ * @LastEditTime: 2020-12-07 20:23:27
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -61,3 +61,11 @@ export { default as CombinationForm } from './Form/CombinationForm';
  */
 
 export { default as CombinationTable } from './table/CombinationTable';
+
+/**
+ * 包装路由组件
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */
+export { default as routerView } from './RouterView';
