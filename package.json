@@ -6,10 +6,11 @@
   "scripts": {
     "build:library": "node  ./scripts/production.js",
     "build:library:analyzer": "node  ./scripts/production.js --analyzer",
-    "start:dev": "node ./scripts/development.js",
+    "start": "node ./scripts/development.js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
+  "typings":"./typings/index.d.ts",
   "keywords": [],
   "author": "huangyuhui",
   "license": "ISC",
