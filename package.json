@@ -10,7 +10,11 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "typings": "./typings/index.d.ts",
+  "files": [
+    "dist/*.js",
+    "typings"
+  ],
+  "typings": "typings/index.d.ts",
   "keywords": [],
   "author": "huangyuhui",
   "license": "ISC",
