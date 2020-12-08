@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 22:12:31
- * @LastEditTime: 2020-12-03 14:09:28
+ * @LastEditTime: 2020-12-08 16:41:22
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \customs\src\components\common\Form\formSchema.d.ts
+ * @FilePath: \scm_frontend_common\typings\vue-component\formSchema.d.ts
  */
 import {RuleItem} from 'async-validator'
 type DateValueType = 'yyyy' | 'M' | 'MM' | 'W' | 'WW' | 'd' | 'dd' | 'H' | 'HH' | 'h' | 'hh' | 'm' | 'mm' | 's' | 'ss' | 'A' | 'a' | 'timestamp'
@@ -35,6 +35,6 @@ export declare type FormSchema = {
     visible?: boolean,
     card?: boolean,
     rules?: RuleItem[],
-    properties?: { [prop: string]: FormSchema }
+    properties?: FormSchema
   }
 } 
