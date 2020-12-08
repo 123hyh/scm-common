@@ -6,7 +6,7 @@
  * @Description: 
  * @FilePath: \scm_frontend_common\src\index.ts
  */
-export * from './vue-component'
-export * from './utils'
-export * from './filters'
-export * from './directives'
+export * from './vue-component';
+export * from './utils';
+export * from './filters';
+export * from './directives';

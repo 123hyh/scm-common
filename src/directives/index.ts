@@ -6,6 +6,6 @@
  * @Description: vue 指令
  * @FilePath: \scm_frontend_common\src\directives\index.ts
  */
-export function _d(){
+export function _d() {
   
 }

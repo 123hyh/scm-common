@@ -2,10 +2,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:04:41
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-08 17:11:11
  * @Description: 组合表单组件
- * @FilePath: \customs\src\components\common\Form\CombinationForm.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
 import { getSize, getCodeDict } from '../index';
 
@@ -96,18 +96,19 @@ function generateForm( params = {} ) {
               {
                 class: [ 'scm-form-card-container', this.cardVisibleMap[ key ] === false && 'hidden-form' ]
               },
-              generateForm.call( this, {
-                schema: properties,
+              this.$scopedSlots[ `field_${key}` ] ? this.$scopedSlots[ `field_${key}` ]() : 
+                generateForm.call( this, {
+                  schema: properties,
 
-                /* type 不为 object 递归传入 当前 data */
-                data: type === 'object' ? data[ key ] : data,
+                  /* type 不为 object 递归传入 当前 data */
+                  data: type === 'object' ? data[ key ] : data,
 
-                /* object 类型 需要 添加 prefx 传入 form-item 的 prop 参数 */
-                prefix: type === 'object' ?
-                  prefix ? `${prefix}.${key}` : key :
-                  undefined,
-                h
-              } )
+                  /* object 类型 需要 添加 prefx 传入 form-item 的 prop 参数 */
+                  prefix: type === 'object' ?
+                    prefix ? `${prefix}.${key}` : key :
+                    undefined,
+                  h
+                } )
             )
           ]
         )
