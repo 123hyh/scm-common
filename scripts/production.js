@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-08 10:59:17
+ * @LastEditTime: 2020-12-08 15:41:17
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
@@ -15,7 +15,10 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ProductionOption = {
   entry: {
     "index": [
-      resolve('./src/index.ts'),
+      resolve('./src/utils/index.ts'),
+      resolve('./src/filters/index.ts'),
+      resolve('./src/directives/index.ts'),
+      resolve('./src/vue-component/index.ts')
     ]
   },
   mode: 'production',
