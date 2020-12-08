@@ -8,7 +8,7 @@ $color: #343434;
     color: $color;
     box-sizing: border-box;
     margin: 0 0 1em 0;
-    display: flex;
+    display: flex !important;
     align-items: center;
     @media (min-width: 1366px) {
       flex: 0 1 33.333%;

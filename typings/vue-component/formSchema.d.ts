@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 22:12:31
- * @LastEditTime: 2020-12-08 16:41:22
+ * @LastEditTime: 2020-12-08 16:43:57
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\typings\vue-component\formSchema.d.ts
@@ -27,7 +27,7 @@ type DateType = {
 
 export declare type FormSchema = {
   [prop: string]: SelectType & DateType & {
-    type: 'string' | 'select' | 'checkbox' | 'radio' | 'switch' | 'date' | 'textarea' | 'object' | 'slot',
+    type?: 'string' | 'select' | 'checkbox' | 'radio' | 'switch' | 'date' | 'textarea' | 'object' | 'slot',
     tip?: string,
     label?: string,
     clearable?: boolean,
