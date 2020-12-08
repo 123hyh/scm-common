@@ -6,7 +6,7 @@
   "scripts": {
     "build:library": "node  ./scripts/production.js",
     "build:library:analyzer": "node  ./scripts/production.js --analyzer",
-    "start": "node ./scripts/development.js",
+    "start": "node ./scripts/development.js --development",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
