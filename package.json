@@ -1,6 +1,6 @@
 {
   "name": "scm-common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "JiaYu SCM frontend",
   "main": "./dist",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "typings":"./typings/index.d.ts",
+  "typings": "./typings/index.d.ts",
   "keywords": [],
   "author": "huangyuhui",
   "license": "ISC",
