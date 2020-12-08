@@ -15,10 +15,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ProductionOption = {
   entry: {
     "index": [
-      resolve('./src/utils/index.ts'),
-      resolve('./src/filters/index.ts'),
-      resolve('./src/directives/index.ts'),
-      resolve('./src/vue-component/index.ts')
+      resolve('./src/index.ts'),
     ]
   },
   mode: 'production',
