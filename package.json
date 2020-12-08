@@ -1,6 +1,6 @@
 {
   "name": "scm-common",
-  "version": "1.0.8-5",
+  "version": "1.0.8-6",
   "description": "JiaYu SCM frontend",
   "main": "./dist",
   "scripts": {
