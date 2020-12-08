@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-07 20:23:27
+ * @LastEditTime: 2020-12-08 15:11:18
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -69,3 +69,12 @@ export { default as CombinationTable } from './table/CombinationTable';
  * @return {*}
  */
 export { default as routerView } from './RouterView';
+
+/**
+ * tab 组件
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */
+
+export { default as ScmTabs } from './Tbas';

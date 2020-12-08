@@ -28,3 +28,10 @@ export { default as CombinationTable } from './table/CombinationTable';
  * @return {*}
  */
 export { default as routerView } from './RouterView';
+/**
+ * tab 组件
+ * @description:
+ * @param {*}
+ * @return {*}
+ */
+export { default as ScmTabs } from './Tbas';
