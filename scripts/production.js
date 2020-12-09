@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-08 23:32:42
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-09 10:10:37
  * @Description:
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
@@ -25,14 +25,15 @@ const ProductionOption = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
-  externals: {
+  externals:[
+    'vue',
+    'element-ui'
+  ] /* {
     vue: 'Vue',
     'element-ui': {
-      commonjs:'ELEMENT',
-      commonjs2:'ELEMENT',
       root: 'ELEMENT',
     },
-  },
+  } */,
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {

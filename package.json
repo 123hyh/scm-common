@@ -4,8 +4,8 @@
   "description": "JiaYu SCM frontend",
   "main": "./dist",
   "scripts": {
-    "build:library": "node  ./scripts/production.js",
-    "build:library:analyzer": "node  ./scripts/production.js --analyzer",
+    "build": "node  ./scripts/production.js",
+    "build:analyzer": "node  ./scripts/production.js --analyzer",
     "start": "node ./scripts/development.js --development",
     "test": "jest",
     "test:coverage": "jest --coverage"
