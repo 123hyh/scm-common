@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 11:15:51
+ * @LastEditTime: 2020-12-09 13:58:39
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -215,6 +215,19 @@ function generateForm( params = {} ) {
 
 export default {
   name: 'ScmCombinationForm',
+  
+  /**
+   * 暴露 用户自行设置 dictOptions
+   * @description: 
+   * @param {*} schemaItem
+   * @param {*} filterOptions
+   * @return {*}
+   */
+  setDictValue( schemaItem, filterOptions ) {
+    const { __resultOptions = [] } = schemaItem;
+    schemaItem.options =  __resultOptions.filter( filterOptions );
+    return schemaItem.options;
+  },
   methods: {
 
     /**
@@ -291,6 +304,7 @@ export default {
       this.$refs.form.clearValidate( params );
       return true;
     },
+
     async setDict( dicts = [] ) {
       try {
         const data = await Promise.all( dicts.map( item => getCodeDict( item ) ) );

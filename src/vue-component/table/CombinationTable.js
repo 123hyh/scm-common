@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 19:13:13
+ * @LastEditTime: 2020-12-09 14:17:38
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -366,5 +366,15 @@ export default {
         )
       ].filter( Boolean )
     );
-  }
+  },
+
+  /**
+ * 向外暴露组件
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */  
+  QueryBar:QueryBar,
+  BaseTable:BaseTable,
+  Pagination
 };

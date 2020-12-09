@@ -3,12 +3,13 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 18:47:40
+ * @LastEditTime: 2020-12-09 13:42:59
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
 import { forEachObject } from '@/utils';
 import { getCodeDict } from '@/vue-component/index.ts';
+import { cloneDeepWith } from 'lodash-es';
 
 /**
  * 查找码值
@@ -56,11 +57,15 @@ export async function setDictValue( dicts, dictValues ) {
       const dict = dicts[ index ];
       dictValues[ dict ]?.forEach(
         schemaItem => {
+          const optionsData  = transformOptions( value );
 
           /* schemaItem 如果存在 filterOptions 方法 则传入过滤 返回新的 options*/
           let options = typeof ( schemaItem?.filterOptions ) === 'function'
-            ? schemaItem.filterOptions( transformOptions( value ) )
-            : transformOptions( value );
+            ? schemaItem.filterOptions( cloneDeepWith( optionsData ) )
+            : cloneDeepWith( optionsData );
+
+          /* 将 返回结果 存入该 schemaItem */
+          schemaItem.__resultOptions =  optionsData;
 
           if ( Array.isArray( options ) === false && process.env.NODE_ENV === 'development' ) {
             console.error( 'schemaItem 的 options 必须为 Array类型！' );

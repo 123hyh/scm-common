@@ -1,16 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2020-12-07 23:37:03
- * @LastEditTime: 2020-12-07 23:37:58
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-09 13:59:00
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: /scm-common/typings/scm-vue-component/CombinationForm.d.ts
+ * @FilePath: \scm_frontend_common\typings\vue-component\CombinationForm.d.ts
  */
 import { ComponentOptions } from 'vue';
 
-import { FormSchema } from './formSchema';
+import { FormSchema, OptionsItem, OptionsType, SelectType } from './formSchema';
 
- type CombinationFormType = ComponentOptions<{
+type CombinationFormType =  ComponentOptions<{
+    
   props: {
     /* 表单schema */
     schema: FormSchema;
@@ -30,5 +31,10 @@ import { FormSchema } from './formSchema';
     /* 移除表单校验结果 */
     clearValidate: (fields: string | string[]) => boolean;
   };
-}>;
+}> & {
+  setDictValue(
+    schemaItem: SelectType,
+    filterCallback: (element: OptionsItem, index: number, array: OptionsType) => boolean
+  ): OptionsType
+}
 export const CombinationForm: CombinationFormType;

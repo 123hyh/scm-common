@@ -1,16 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 22:12:31
- * @LastEditTime: 2020-12-09 12:06:20
+ * @LastEditTime: 2020-12-09 13:56:16
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\typings\vue-component\formSchema.d.ts
  */
 import {RuleItem} from 'async-validator'
-type DateValueType = 'yyyy' | 'M' | 'MM' | 'W' | 'WW' | 'd' | 'dd' | 'H' | 'HH' | 'h' | 'hh' | 'm' | 'mm' | 's' | 'ss' | 'A' | 'a' | 'timestamp'
+type DateValueType = string;/* 'yyyy' | 'M' | 'MM' | 'W' | 'WW' | 'd' | 'dd' | 'H' | 'HH' | 'h' | 'hh' | 'm' | 'mm' | 's' | 'ss' | 'A' | 'a' | 'timestamp' */
 
+export type OptionsItem = { label: string, value: any }
+export  type OptionsType = Array<OptionsItem>
 
-type SelectType = {
+export  type SelectType = {
   /* 下拉值 */
   options?: Array<{ label: string, value: any, disabled?: boolean }>,
   /* 字典值 */
@@ -18,7 +20,7 @@ type SelectType = {
   /* 多选 */
   multiple?:boolean,
   /* 过滤 options   */
-  filterOptions?: (keys: any[]) => any,
+  filterOptions?: (options: OptionsType ) => OptionsType,
 }
 type DateType = {
   /* 当type = date */
