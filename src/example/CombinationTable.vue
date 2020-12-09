@@ -1,37 +1,45 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-09 15:18:08
+ * @LastEditTime: 2020-12-09 15:29:16
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
 <template>
-  <CombinationTable
-    clickRowSelected
-    :queryBarSchema="queryBarSchema"
-    :tableSchema="tableSchema"
-    :list="list"
-    :selectionMethod="selectionMethod"
-    :total="100"
-    :border="true"
-    @sortChange="hanlderSort"
-    @refresh="hanlderRefresh"
-    @rowClick="hanlderClickRow"
-    @rowDoubleClick="hanlderDblclickRow"
-    @select="handlerSelectionChange"
-    @selectAll="handlerSelectAll"
-    >
-    <!-- 字段插槽 -->
-    <template #table_field_name="row">
-      <span>【{{ row.name }}】 - 插槽</span>
-    </template>
-    <!-- 操作插槽 -->
-    <template #table_operation="row">
-      <button>修改{{ row.id }}</button>
-    </template>
+  <div>  
+    <CombinationTable
+      clickRowSelected
+      :queryBarSchema="queryBarSchema"
+      :tableSchema="tableSchema"
+      :list="list"
+      :selectionMethod="selectionMethod"
+      :total="100"
+      :border="true"
+      @sortChange="hanlderSort"
+      @refresh="hanlderRefresh"
+      @rowClick="hanlderClickRow"
+      @rowDoubleClick="hanlderDblclickRow"
+      @select="handlerSelectionChange"
+      @selectAll="handlerSelectAll"
+      >
+      <!-- 字段插槽 -->
+      <template #table_field_name="row">
+        <span>【{{ row.name }}】 - 插槽</span>
+      </template>
+      <!-- 操作插槽 -->
+      <template #table_operation="row">
+        <button>修改{{ row.id }}</button>
+      </template>
     <!-- 操作栏插槽 -->
-  </CombinationTable>
+    </CombinationTable>
+
+    <BaseTable
+      border
+      :schema="tableSchema"
+      :list="list"
+      />
+  </div>
 </template>
 
 <script>
@@ -39,7 +47,8 @@ import { CombinationTable } from '@/vue-component/index';
 console.log( CombinationTable );
 export default {
   components: {
-    CombinationTable
+    CombinationTable,
+    BaseTable:CombinationTable.BaseTable
   },
   data() {
     return {
