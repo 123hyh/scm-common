@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-08 15:11:18
+ * @LastEditTime: 2020-12-09 11:24:16
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -24,19 +24,20 @@ let _SIZE = 'small';
  */
 let _getCodeDict: ( dictKeyword: string ) => Promise<any> | any[] = ( keyword: string ) => [];
 
-export default {
-  install: function useScmComponent( _Vue: any, options: {
+export function useScmComponent( options: {
     size: 'medium' | 'small' | 'mini',
     dictRequest: ( dictKeyword: string ) => Promise<any> | any[]
-  }
-  ) {
-    const { size = 'small', dictRequest } = options ?? {};
-    _SIZE = size;
-    if ( typeof dictRequest === 'function' ) {
-      _getCodeDict = dictRequest;
+  } ) {
+  return  {
+    install: function useScmComponent( _Vue: any ) {
+      const { size = 'small', dictRequest } = options ?? {};
+      _SIZE = size;
+      if ( typeof dictRequest === 'function' ) {
+        _getCodeDict = dictRequest;
+      }
     }
-  }
-};
+  };
+} 
 
 export function getSize() {
   return _SIZE;

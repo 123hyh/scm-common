@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 22:12:31
- * @LastEditTime: 2020-12-08 16:43:57
+ * @LastEditTime: 2020-12-09 12:06:20
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\typings\vue-component\formSchema.d.ts
@@ -15,6 +15,8 @@ type SelectType = {
   options?: Array<{ label: string, value: any, disabled?: boolean }>,
   /* 字典值 */
   dict?: string,
+  /* 多选 */
+  multiple?:boolean,
   /* 过滤 options   */
   filterOptions?: (keys: any[]) => any,
 }

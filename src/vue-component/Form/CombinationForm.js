@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-08 17:11:11
+ * @LastEditTime: 2020-12-09 11:15:51
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -193,6 +193,7 @@ function generateForm( params = {} ) {
                       value: data[ key ],
                       conf: {
                         ...options,
+                        multiple,
                         field: key
                       }
                     },
