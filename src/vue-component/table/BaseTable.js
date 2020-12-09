@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 15:02:50
+ * @LastEditTime: 2020-12-09 15:10:12
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
@@ -17,7 +17,7 @@ import { Table, TableColumn, Checkbox, Radio } from 'element-ui';
 
 export default {
   name: 'ScmTable',
-  inheritAttrs:false,
+  inheritAttrs: false,
   components: {
     ElTable: Table,
     ElTableColumn: TableColumn,
@@ -126,6 +126,7 @@ export default {
           'el-table',
           {
             ref:'Table',
+            attrs: this.$attrs,
             props: {
               size: getSize(),
               ...this.$attrs,
