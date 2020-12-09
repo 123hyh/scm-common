@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 15:19:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-09 22:59:28
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
@@ -162,18 +162,18 @@ export default {
                   
                   this.handlerRowClick( cloneDeepWith( row ) );
                   const { target } = event;
+                  const containsClass = [ 'el-checkbox__inner', 'el-radio__label', 'el-radio__inner' ];
 
                   /* 单击列头 选择 无效 */
                   if (
                     this.clickRowSelected &&
-                    (
-                      target.classList.contains( 'el-checkbox__inner' ) === false &&
-                      target.classList.contains( 'el-radio__label' ) === false &&
-                      target.classList.contains( 'el-radio__inner' ) === false
-                    ) && 
+                      containsClass.every( item => target.classList.contains( item ) === false ) && 
                     ( this.selectionMethod ? this.selectionMethod( row ) !== true : true )
                   ) {
-                    if ( this.selections.some( item => item === row ) === false ) {
+                    
+                    if ( 
+                      this.selections.some( item => item === row ) === false 
+                    ) {
                       if ( this.schema.selection.isMultiple === true ) {
                         this.selections.push( row );
                       } else {
@@ -182,6 +182,7 @@ export default {
                     } else {
                       this.selections = this.selections.filter( item => item !== row );
                     }
+                    
                     this.$emit( 'select', {
                       isSelect: this.selections.some( item => item === row ),
                       row: row,
