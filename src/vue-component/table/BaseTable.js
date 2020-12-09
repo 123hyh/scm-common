@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 15:10:12
+ * @LastEditTime: 2020-12-09 15:19:24
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
@@ -126,10 +126,8 @@ export default {
           'el-table',
           {
             ref:'Table',
-            attrs: this.$attrs,
             props: {
               size: getSize(),
-              ...this.$attrs,
               data: this.list,
               border: false,
               height: this.height,
@@ -139,6 +137,7 @@ export default {
                   return 'scm-table-cell-checked';
                 }
               },
+              ...this.$attrs,
               rowClassName: e => {
                 const { rowIndex } = e;
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-07 19:18:10
+ * @LastEditTime: 2020-12-09 15:18:08
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -14,6 +14,7 @@
     :list="list"
     :selectionMethod="selectionMethod"
     :total="100"
+    :border="true"
     @sortChange="hanlderSort"
     @refresh="hanlderRefresh"
     @rowClick="hanlderClickRow"
