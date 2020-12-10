@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 20:06:39
+ * @LastEditTime: 2020-12-10 16:31:36
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -14,7 +14,7 @@ import SwitchItem from './FormItem/Switch';
 import DateItem from './FormItem/Date';
 import CheckboxItem from './FormItem/Checkbox';
 import { Form, FormItem } from 'element-ui';
-import { getSize } from '@/vue-component/index.ts';
+import { getSize } from '../index.ts';
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
 
 

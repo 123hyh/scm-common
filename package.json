@@ -2,7 +2,7 @@
   "name": "scm-common",
   "version": "1.0.8-24",
   "description": "JiaYu SCM frontend",
-  "main": "./dist",
+  "main": "./src",
   "scripts": {
     "build": "node  ./scripts/production.js",
     "build:analyzer": "node  ./scripts/production.js --analyzer",
@@ -12,7 +12,8 @@
   },
   "files": [
     "dist/*.js",
-    "typings"
+    "typings",
+    "src"
   ],
   "typings": "typings/index.d.ts",
   "keywords": [],

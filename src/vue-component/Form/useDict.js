@@ -3,12 +3,12 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 13:42:59
+ * @LastEditTime: 2020-12-10 16:32:05
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
 import { forEachObject } from '@/utils';
-import { getCodeDict } from '@/vue-component/index.ts';
+import { getCodeDict } from '../index.ts';
 import { cloneDeepWith } from 'lodash-es';
 
 /**
