@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-10 11:51:28
+ * @LastEditTime: 2020-12-10 14:07:33
  * @Description:
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
@@ -23,8 +23,8 @@ const ProductionOption = {
     filename: '[name].js',
     path: resolve('./dist'),
     library: 'scmCommon',
-    libraryTarget: 'var',
-    // umdNamedDefine: true,
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
   },
   externals:[
     'vue',
@@ -84,7 +84,6 @@ const ProductionOption = {
   plugins: [
     analyzer && new BundleAnalyzerPlugin(),
     new ProgressBarPlugin(),
-    new EsmWebpackPlugin()
   ].filter(Boolean),
 };
 
