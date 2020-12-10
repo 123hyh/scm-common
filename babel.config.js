@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-01 21:55:01
- * @LastEditTime: 2020-12-08 23:36:49
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-10 14:56:44
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\babel.config.js
  */
@@ -18,7 +18,7 @@ module.exports = {
     ]
   ],
   plugins: [
-    development && [
+    [
       "component",
       {
         "libraryName": "element-ui",
