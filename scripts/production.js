@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 10:10:37
+ * @LastEditTime: 2020-12-10 11:51:28
  * @Description:
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
@@ -12,6 +12,7 @@ const { analyzer = false } = require('yargs').argv;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 
 const ProductionOption = {
   entry: {
@@ -22,8 +23,8 @@ const ProductionOption = {
     filename: '[name].js',
     path: resolve('./dist'),
     library: 'scmCommon',
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
+    libraryTarget: 'var',
+    // umdNamedDefine: true,
   },
   externals:[
     'vue',
@@ -83,6 +84,7 @@ const ProductionOption = {
   plugins: [
     analyzer && new BundleAnalyzerPlugin(),
     new ProgressBarPlugin(),
+    new EsmWebpackPlugin()
   ].filter(Boolean),
 };
 
