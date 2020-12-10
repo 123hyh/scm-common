@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-09 11:24:16
+ * @LastEditTime: 2020-12-10 17:17:47
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -52,7 +52,7 @@ export function getCodeDict( keyword:string ) {
  * @param {*}
  * @return {*}
  */
-export { default as CombinationForm } from './Form/CombinationForm';
+// export { default as CombinationForm } from './Form/CombinationForm';
 
 /**
  * 表格组件
@@ -61,7 +61,7 @@ export { default as CombinationForm } from './Form/CombinationForm';
  * @return {*}
  */
 
-export { default as CombinationTable } from './table/CombinationTable';
+// export { default as CombinationTable } from './table/CombinationTable';
 
 /**
  * 包装路由组件
@@ -69,7 +69,7 @@ export { default as CombinationTable } from './table/CombinationTable';
  * @param {*}
  * @return {*}
  */
-export { default as routerView } from './RouterView';
+// export { default as routerView } from './RouterView';
 
 /**
  * tab 组件
@@ -78,4 +78,4 @@ export { default as routerView } from './RouterView';
  * @return {*}
  */
 
-export { default as ScmTabs } from './Tbas';
+// export { default as ScmTabs } from './Tbas';
