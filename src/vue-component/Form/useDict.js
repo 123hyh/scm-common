@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-10 16:32:05
+ * @LastEditTime: 2020-12-11 17:19:40
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
@@ -31,7 +31,7 @@ function findDict( schema, handler = () => {} ) {
  * 码值 转换成 [ {label: '', value: ''} ]
  * @param {*} response
  */
-function transformOptions( { data } = {} ) {
+export default function transformOptions( data = {} ) {
   const list = [];
   forEachObject( data, ( key, value ) => {
     list.push( {
@@ -57,7 +57,7 @@ export async function setDictValue( dicts, dictValues ) {
       const dict = dicts[ index ];
       dictValues[ dict ]?.forEach(
         schemaItem => {
-          const optionsData  = transformOptions( value );
+          const optionsData  = transformOptions( value?.data );
 
           /* schemaItem 如果存在 filterOptions 方法 则传入过滤 返回新的 options*/
           let options = typeof ( schemaItem?.filterOptions ) === 'function'
