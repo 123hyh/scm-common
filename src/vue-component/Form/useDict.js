@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-11 17:19:40
+ * @LastEditTime: 2020-12-11 17:23:01
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
@@ -31,7 +31,7 @@ function findDict( schema, handler = () => {} ) {
  * 码值 转换成 [ {label: '', value: ''} ]
  * @param {*} response
  */
-export default function transformOptions( data = {} ) {
+export  function transformOptions( data = {} ) {
   const list = [];
   forEachObject( data, ( key, value ) => {
     list.push( {
