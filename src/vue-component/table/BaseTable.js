@@ -1,14 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-09 22:59:28
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-10 16:34:26
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
 
 import { cloneDeepWith, debounce } from 'lodash-es';
-import { getSize } from '@/vue-component/index';
+import { getSize } from '../index';
 import './BaseTable.scss';
 import ColumnComponent from './component/Column/index.js';
 import OperationComponent from './component/Column/Operation.js'; 

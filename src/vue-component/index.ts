@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-09 11:24:16
+ * @LastEditTime: 2020-12-10 17:29:57
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -45,37 +45,3 @@ export function getSize() {
 export function getCodeDict( keyword:string ) {
   return _getCodeDict( keyword );
 }
-
-/**
- * 表单组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-export { default as CombinationForm } from './Form/CombinationForm';
-
-/**
- * 表格组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-
-export { default as CombinationTable } from './table/CombinationTable';
-
-/**
- * 包装路由组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-export { default as routerView } from './RouterView';
-
-/**
- * tab 组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-
-export { default as ScmTabs } from './Tbas';

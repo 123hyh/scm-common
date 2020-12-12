@@ -1,8 +1,12 @@
 {
   "name": "scm-common",
+<<<<<<< HEAD
   "version": "1.0.8-20",
+=======
+  "version": "1.0.8-28",
+>>>>>>> da686c6f6fee45ac7f425ce1aa4c7a25fa261b35
   "description": "JiaYu SCM frontend",
-  "main": "./dist",
+  "main": "./src",
   "scripts": {
     "build": "node  ./scripts/production.js",
     "build:analyzer": "node  ./scripts/production.js --analyzer",
@@ -12,7 +16,8 @@
   },
   "files": [
     "dist/*.js",
-    "typings"
+    "typings",
+    "src"
   ],
   "typings": "typings/index.d.ts",
   "keywords": [],
@@ -21,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
+    "@purtuga/esm-webpack-plugin": "^1.5.0",
     "@types/jest": "^26.0.16",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",

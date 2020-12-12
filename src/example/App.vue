@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2020-12-05 18:12:05
+ * @LastEditTime: 2020-12-12 07:46:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -23,6 +23,12 @@
       >
       <CombinationTable/>
     </TabPane>
+    <TabPane
+      name="print"
+      label="打印"
+      >
+      <ScmPint/>
+    </TabPane>
   </Tabs>
 </template>
 
@@ -30,12 +36,14 @@
 import { Tabs, TabPane } from 'element-ui';
 import CombinationForm from './CombinationForm.vue';
 import CombinationTable from './CombinationTable.vue';
+import Print from './Print.vue';
 export default {
   components:{
     Tabs,
     TabPane,
     CombinationForm,
-    CombinationTable
+    CombinationTable,
+    ScmPint:Print
   },
   data() {
     return {

@@ -1,11 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 20:18:20
- * @LastEditTime: 2020-11-29 20:47:15
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-11 17:17:47
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \customs\src\components\common\Form\useDict.d.ts
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.d.ts
  */
+
+import { AnyObject } from "typings";
 
 /**
  * 远程获取 dict 并设置表单
@@ -41,3 +43,9 @@ export declare const getDictSchemaItem: (
 export declare const filterOptions: (
   keys: Array<string | number | boolean>
 ) => () => any[];
+
+/**
+ * 码值 转换成 [ {label: '', value: ''} ]
+ * @param {*} response
+ */
+export declare const transformOptions: (dictValue:AnyObject)=>Array<{label: string, value: any}>

@@ -1,15 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-11-15 14:34:19
- * @LastEditTime: 2020-11-26 11:42:40
+ * @LastEditTime: 2020-12-10 11:12:55
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \customs\src\components\common\RouterView\index.ts
+ * @FilePath: \scm_frontend_common\src\vue-component\RouterView\index.ts
  */
-import { CreateElement } from 'vue';
 let id = 0;
 
-function generateBox( h: CreateElement ) {
+function generateBox( h: any ) {
   return h(
     'router-view',
     {
@@ -29,7 +28,7 @@ export default function routerView(
   keepAlive: { exclude: string[] } | boolean = true ) {
   return {
     name: componentName || `RouterWrapper_${id++}`,
-    render( h: CreateElement ) {
+    render( h: any ) {
       return h(
         'div',
         [
