@@ -1,10 +1,6 @@
 {
   "name": "scm-common",
-<<<<<<< HEAD
-  "version": "1.0.8-20",
-=======
   "version": "1.0.8-28",
->>>>>>> da686c6f6fee45ac7f425ce1aa4c7a25fa261b35
   "description": "JiaYu SCM frontend",
   "main": "./src",
   "scripts": {
