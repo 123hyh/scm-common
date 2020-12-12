@@ -1,8 +1,8 @@
 <!--
  * @Author: huangyuhui
  * @Date: 2020-09-25 11:34:10
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-27 10:15:31
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-12 07:37:12
  * @Description: 模态窗组件
  * @FilePath: \customs\src\components\common\ModalWindow\index.vue
 -->
@@ -162,6 +162,9 @@ const Modal = {
     }, 700 );
   },
   computed: {
+    zIndex(){
+      return this?.$ELEMENT?.zIndex ?? 2000
+    },
     classList() {
       return [ 'drag-box', this.visible ? 'show' : 'hide' ];
     }
