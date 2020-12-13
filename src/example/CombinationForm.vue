@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 12:44:08
- * @LastEditTime: 2020-12-05 17:05:19
+ * @LastEditTime: 2020-12-13 00:14:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\example\TestForm.vue
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { CombinationForm } from '@/vue-component/index';
+import CombinationForm  from '@/vue-component/Form/CombinationForm';
 import { Button, ButtonGroup } from 'element-ui';
 export default {
   components:{

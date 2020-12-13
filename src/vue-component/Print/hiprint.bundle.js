@@ -12,7 +12,8 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 import $ from 'jquery'
-var hiprint = function (t) {
+const jQuery = $
+export default  (function (t) {
     var e = {};
 
     function n(i) {
@@ -59,7 +60,8 @@ var hiprint = function (t) {
     }, n.o = function (t, e) {
         return Object.prototype.hasOwnProperty.call(t, e);
     }, n.p = "/", n(n.s = 21);
-}([function (t, e, n) {
+})([
+    function (t, e, n) {
     "use strict";
 
     var i;
@@ -251,7 +253,8 @@ var hiprint = function (t) {
         }
         return "";
     };
-}, function (t, e, n) {
+}, 
+function (t, e, n) {
     "use strict";
 
     n.d(e, "a", function () {
@@ -868,7 +871,8 @@ var hiprint = function (t) {
                 configurable: !0
             }), t;
         }();
-}, function (t, e, n) {
+}, 
+function (t, e, n) {
     "use strict";
 
     var i = function () {
@@ -979,7 +983,8 @@ var hiprint = function (t) {
             return t.instance.printTemplateContainer[e] = n;
         }, t;
     }();
-}, function (t, e, n) {
+},
+ function (t, e, n) {
     "use strict";
 
     var i = function () {
@@ -1052,7 +1057,8 @@ var hiprint = function (t) {
             });
         }, t;
     }();
-}, function (module, __webpack_exports__, __webpack_require__) {
+}, 
+function (module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.d(__webpack_exports__, "a", function () {
@@ -1367,7 +1373,8 @@ var hiprint = function (t) {
                 this.updateSizeAndPositionOptions(t + this.options.getLeft(), e + this.options.getTop()), this.designTarget.css("left", this.options.displayLeft()), this.designTarget.css("top", this.options.displayTop());
             }, BasePrintElement;
         }();
-}, function (t, e, n) {
+},
+ function (t, e, n) {
     "use strict";
 
     var i = function () {
@@ -1546,7 +1553,8 @@ var hiprint = function (t) {
 
             return h(e, t), e.prototype.css = function (t) { }, e;
         }(d);
-}, function (t, e, n) {
+}, 
+function (t, e, n) {
     "use strict";
 
     n.d(e, "a", function () {
@@ -1558,7 +1566,8 @@ var hiprint = function (t) {
             this.printLine = t.printLine, this.target = t.target, this.referenceElement = t.referenceElement;
         };
     }();
-}, function (module, __webpack_exports__, __webpack_require__) {
+}, 
+function (module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.d(__webpack_exports__, "a", function () {
@@ -1746,7 +1755,8 @@ var hiprint = function (t) {
                 return e[t.totalLayer - 1];
             }, TableExcelHelper;
         }();
-}, function (t, e, n) {
+}, 
+function (t, e, n) {
     "use strict";
 
     n.d(e, "a", function () {
@@ -1762,7 +1772,8 @@ var hiprint = function (t) {
             return this.top <= t && this.top + this.height > t;
         }, t;
     }();
-}, function (t, e, n) {
+}, 
+function (t, e, n) {
     "use strict";
 
     var i = function () {

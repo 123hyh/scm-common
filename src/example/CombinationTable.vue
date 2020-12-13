@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-09 15:29:16
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-13 00:14:55
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { CombinationTable } from '@/vue-component/index';
+import  CombinationTable from '@/vue-component/table/CombinationTable';
 console.log( CombinationTable );
 export default {
   components: {

@@ -162,8 +162,8 @@ const Modal = {
     }, 700 );
   },
   computed: {
-    zIndex(){
-      return this?.$ELEMENT?.zIndex ?? 2000
+    zIndex() {
+      return this?.$ELEMENT?.zIndex ?? 2000;
     },
     classList() {
       return [ 'drag-box', this.visible ? 'show' : 'hide' ];
