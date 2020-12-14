@@ -2,12 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-25 11:34:10
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-14 17:01:54
+ * @LastEditTime: 2020-12-14 18:23:16
  * @Description: 模态窗组件
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\index.vue
 -->
 <template>
-  <div :class="classList">
+  <div
+    :class="classList"
+    :style="{zIndex}">
     <div
       v-drag="dragConfig"
       :class="{'x-window':true}"
@@ -53,6 +55,8 @@
 <script>
 import Vue from 'vue';
 import dragDirective from './directive';
+
+import { PopupManager } from 'element-ui/src/utils/popup/popup-manager.js';
 const Modal = {
   name: 'ScmModalWindow',
   directives: {
@@ -154,10 +158,11 @@ const Modal = {
       }
     };
   },
- 
   computed: {
+
+    /* 获取 elementUi modal zIndex */
     zIndex() {
-      return this?.$ELEMENT?.zIndex ?? 2000;
+      return PopupManager.nextZIndex();
     },
     classList() {
       return [ 'drag-box', this.visible ? 'show' : 'hide' ];
@@ -231,7 +236,6 @@ export const MessageBox = {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2000;
   box-sizing: border-box;
   &::after {
     display: block;
