@@ -9,7 +9,8 @@
 <template>
   <div
     :class="classList"
-    :style="{zIndex}">
+    :style="{zIndex: zIndex}"
+    >
     <div
       v-drag="dragConfig"
       :class="{'x-window':true}"
