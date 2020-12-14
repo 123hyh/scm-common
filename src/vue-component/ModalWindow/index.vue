@@ -1,16 +1,16 @@
 <!--
  * @Author: huangyuhui
  * @Date: 2020-09-25 11:34:10
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-12 07:37:12
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-14 17:01:54
  * @Description: 模态窗组件
- * @FilePath: \customs\src\components\common\ModalWindow\index.vue
+ * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\index.vue
 -->
 <template>
   <div :class="classList">
     <div
       v-drag="dragConfig"
-      :class="{'x-window':true,'popup-window': showAnimate}"
+      :class="{'x-window':true}"
       :style="{
         width,
         left: `calc(50% - ${width} / 2)`,
@@ -83,7 +83,6 @@ const Modal = {
     return {
 
       /* 显示初始动画 */
-      showAnimate:true,
       dragConfig: {
 
         // Drag and drop configuration
@@ -155,15 +154,10 @@ const Modal = {
       }
     };
   },
-  mounted() {
-    let time = setTimeout( () => {
-      time = null;
-      this.showAnimate = false;
-    }, 700 );
-  },
+ 
   computed: {
-    zIndex(){
-      return this?.$ELEMENT?.zIndex ?? 2000
+    zIndex() {
+      return this?.$ELEMENT?.zIndex ?? 2000;
     },
     classList() {
       return [ 'drag-box', this.visible ? 'show' : 'hide' ];
@@ -230,14 +224,7 @@ export const MessageBox = {
 
   }
 }
-.popup-window {
-  animation-name: animate;
-  animation-duration: 0.3s;
-  animation-timing-function: cubic-bezier(0.21, 0.85, 1, 1);
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  /* animation: animate 0.5s cubic-bezier(0.21, 0.85, 1, 1) 1 forwards; 动画属性简写 */
-}
+
 .drag-box {
   position: fixed;
   top: 0;
