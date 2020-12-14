@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-25 11:34:10
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-14 18:23:16
+ * @LastEditTime: 2020-12-14 18:25:38
  * @Description: 模态窗组件
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\index.vue
 -->
@@ -56,7 +56,7 @@
 import Vue from 'vue';
 import dragDirective from './directive';
 
-import { PopupManager } from 'element-ui/src/utils/popup/popup-manager.js';
+import PopupManager from 'element-ui/src/utils/popup/popup-manager.js';
 const Modal = {
   name: 'ScmModalWindow',
   directives: {
