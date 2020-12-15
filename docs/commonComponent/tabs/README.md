@@ -1,16 +1,17 @@
 <!--
  * @Author: huangyuhui
  * @Date: 2020-10-16 17:32:21
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-10-16 18:09:02
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-14 23:32:23
  * @Description: 
  * @FilePath: \SCM 2.0\docs\commonComponent\tabs\README.md
 -->
 # tabs 
 
   该组件默认点击会跳转到对应的 path
-  
-  `import ScmTabs from '@/components/common/Tbas'`
+  ```js
+    import ScmTabs from 'scm-common/src/vue-component/Tbas'
+  ```
   
   - ## Props:
     | 属性名| 类型 | 是否必传 | 默认值 | 备注 |

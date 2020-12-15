@@ -1,14 +1,15 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-10-16 17:34:43
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-14 23:20:00
  * @Description: 
  * @FilePath: \SCM 2.0\docs\.vuepress\config.js
  */
 module.exports = {
   title: 'SCM 2.0 Frontend Docs',
   description: '版本 1.1',
+  lineNumbers:true,
   themeConfig: {
     nav: [
       { text: '指南', link: '/' },
@@ -28,6 +29,29 @@ module.exports = {
           {
             title: '权限',
             path: '/permission/'
+          },
+          {
+            title:'过滤器',
+            path: '/filters/',
+            initialOpenGroupIndex: 0,
+            children:[
+              {
+                title: '率转换',
+                path:'/filters/radio/'
+              },
+              {
+                title: '日期时间',
+                path:'/filters/date/'
+              }
+            ]
+          },
+          {
+            title:'工具函数',
+            path: '/utils/',
+            initialOpenGroupIndex: 0,
+            children:[
+                
+            ]
           },
           {
             title: '公共组件',
