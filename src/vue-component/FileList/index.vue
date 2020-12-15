@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-15 16:45:02
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 18:43:43
+ * @LastEditTime: 2020-12-15 18:46:31
  * @Description: 文件上传公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\FileList\index.vue
 -->
@@ -113,7 +113,7 @@ export default {
     };
   },
   mounted() {
-    this.getFileList();,
+    this.getFileList();
   },
   methods: {
     getScmMsg,
