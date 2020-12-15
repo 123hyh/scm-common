@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-15 11:44:09
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 13:30:24
+ * @LastEditTime: 2020-12-15 13:56:04
  * @Description: scm 国际化
  * @FilePath: \scm_frontend_common\src\locale\index.ts
  */
@@ -28,9 +28,7 @@ const messageStore = Vue.observable( {
  * @return {*}
  */
 export function getScmMsg( key: string ) {
-  const x = get( messageStore, key );
-  debugger;
-  return x ?? key;
+  return  get( messageStore, key ) ?? key;
 }
 
 /**
@@ -61,5 +59,4 @@ export function useLocale(
         return { [ key ]:cb( key, value ) };
       }
     } );
-  console.log( messageStore );
 }

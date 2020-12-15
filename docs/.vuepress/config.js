@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-14 23:20:00
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-15 14:05:47
  * @Description: 
- * @FilePath: \SCM 2.0\docs\.vuepress\config.js
+ * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
 module.exports = {
   title: 'SCM 2.0 Frontend Docs',
@@ -58,6 +58,14 @@ module.exports = {
             path: '/commonComponent/',
             initialOpenGroupIndex: 0,
             children: [
+              {
+                title:'开始',
+                path:'/commonComponent/start/'
+              },
+              {
+                title: '国际化',
+                path: '/commonComponent/locale/',
+              },
               {
                 title: '表单',
                 path: '/commonComponent/form/',
