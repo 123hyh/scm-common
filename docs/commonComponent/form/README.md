@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 18:38:29
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-14 19:58:03
+ * @LastEditTime: 2020-12-15 14:15:17
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\commonComponent\form\README.md
 -->
@@ -19,6 +19,7 @@
       | schema | object | 是 | - | 表单配置 |
 
       ::: details 点击查看schema配置
+      <<< @/src/vue-component/Form/CombinationFormSchema.js
       :::
 
 ---
