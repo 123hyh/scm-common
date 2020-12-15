@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-15 16:45:02
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 18:46:31
+ * @LastEditTime: 2020-12-15 18:50:43
  * @Description: 文件上传公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\FileList\index.vue
 -->
@@ -17,10 +17,10 @@
     <template #tool_bar>
       <div class="table-tool-wrap">
         <EButton type="primary">
-          {{getScmMsg('button.fileUpload')}}
+          {{ getScmMsg('button.fileUpload') }}
         </EButton>
-        <EButton>{{ $t("button.export") }}</EButton>
-        <EButton>{{ $t("button.delete") }}</EButton>
+        <EButton>{{ getScmMsg("button.export") }}</EButton>
+        <EButton>{{ getScmMsg("button.delete") }}</EButton>
       </div>
     </template>
     <!-- 必须上传 -->
@@ -30,13 +30,13 @@
     <!-- 操作插槽 -->
     <template #table_operation>
       <EButton type="text">
-        {{getScmMsg('button.down')}}
+        {{ getScmMsg('button.down') }}
       </EButton>
       <EButton
         class="customs-delete-text"
         type="text"
         >
-        {{getScmMsg('button.delete')}}
+        {{ getScmMsg('button.delete') }}
       </EButton>
     </template>
   </CombinationTable>
@@ -47,7 +47,7 @@ import CombinationTable from '../table/CombinationTable';
 import { Button } from 'element-ui';
 import { booleanToText } from '../../filters';
 import BoolTag from '../BoolTag';
-import { getScmMsg } from '@/locale';
+import { getScmMsg } from '../../locale';
 export default {
   name: 'ScmFile',
   components: {
