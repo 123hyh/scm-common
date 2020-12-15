@@ -1,13 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 16:49:17
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:49:38
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-15 13:42:25
  * @Description:
- * @FilePath: \customs\src\components\common\Table\component\Column\Operation.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\component\Column\Operation.js
  */
 
 import { cloneDeepWith } from 'lodash-es';
+import { getScmMsg } from '../../../../locale';
 
 const getText = ( key, i18nHandler ) => key && i18nHandler  ? i18nHandler( key ) : key;
 
@@ -22,7 +23,7 @@ export default {
       {
         props: {
           'class-name': 'scm-table-column-operation',
-          label: _i18n$T ? getText( schema?.label, _i18n$T ) : '操作',
+          label:  _i18n$T ? getText( schema?.label, _i18n$T ) : getScmMsg( schema.label ?? 'table.operation' ),
           width: schema.width,
           fixed: 'right',
           align: schema.align ?? 'center'
