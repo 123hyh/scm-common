@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-11-15 14:34:19
- * @LastEditTime: 2020-12-10 11:12:55
+ * @LastEditTime: 2020-12-15 14:40:35
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\RouterView\index.ts
  */
+import './transtion.scss';
 let id = 0;
 
 function generateBox( h: any ) {
@@ -21,11 +22,14 @@ function generateBox( h: any ) {
  * 包装 router-view组件
  * @param { string } componentName 组件name
  * @param { boolean | { exclude: string[] } } keepAlive 是否缓存该组件 | 不需要缓存组件的名称
+ * @param { boolean } animated 启用动画
  */
 
 export default function routerView(
   componentName: string,
-  keepAlive: { exclude: string[] } | boolean = true ) {
+  keepAlive: { exclude: string[] } | boolean = true,
+  animated = true
+) {
   return {
     name: componentName || `RouterWrapper_${id++}`,
     render( h: any ) {
@@ -36,7 +40,7 @@ export default function routerView(
             'transition',
             {
               props: {
-                name: 'side'
+                name:  animated ? 'side' : undefined
               }
             },
             [
