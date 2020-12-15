@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-10-16 16:00:46
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 15:09:33
+ * @LastEditTime: 2020-12-15 15:12:43
  * @Description: 路由 tabs 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Tbas\index.js
  */
@@ -67,6 +67,8 @@ export default {
                     class: [ 'scm-tabs-item-link' ],
                     props: {
                       to: path,
+                      
+                      /* 修复replace 引发的bug */
                       replace: path !== this.$route.path 
                     }
                   },
