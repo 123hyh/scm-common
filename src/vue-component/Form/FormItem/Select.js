@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-14 13:15:25
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-09 11:12:25
  * @Description:
- * @FilePath: \SCM 2.0\src\components\common\Form\FormItem\Select.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
 import { debounce } from 'lodash-es';
 import { Select, Option } from 'element-ui';
@@ -32,7 +32,7 @@ export default {
     get emit() {
       return debounce( function ( data ) {
         this.$emit( 'change', data );
-      }, 200 );
+      }, 100 );
     }
   },
   render( h ) {

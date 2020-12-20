@@ -1,15 +1,16 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:24:41
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:16:02
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-15 13:42:42
  * @Description: 工具栏组件
- * @FilePath: \customs\src\components\common\Table\component\ToolBar\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\component\ToolBar\index.js
  */
 import './index.scss';
 import { debounce } from 'lodash-es';
 import Drawer from './Drawer';
 import { Tooltip, Button } from 'element-ui';
+import { getScmMsg } from '../../../../locale';
 export default {
   name: 'SCM_ToolBar',
   components: {
@@ -69,7 +70,7 @@ export default {
               'el-tooltip',
               {
                 props: {
-                  content: i18n$T ? i18n$T( 'tip.editColumns' ) : '扩展'
+                  content: getScmMsg( 'tip.editColumns' ) /* i18n$T ? i18n$T( 'tip.editColumns' ) : '扩展' */
                 }
               },
               [
@@ -92,7 +93,7 @@ export default {
               'el-tooltip',
               {
                 props: {
-                  content: i18n$T ? i18n$T( 'button.refresh' ) : '刷新'
+                  content: getScmMsg( 'button.refresh' ) 
                 }
               },
               [

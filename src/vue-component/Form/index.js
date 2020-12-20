@@ -1,21 +1,20 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-06 14:53:01
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-10 16:31:36
  * @Description: Form 组件
- * @FilePath: \customs\src\components\common\Form\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
 
 import { cloneDeepWith } from 'lodash-es';
-import Vue from 'vue';
 import StringItem from './FormItem/String';
 import SelectItem from './FormItem/Select';
 import SwitchItem from './FormItem/Switch';
 import DateItem from './FormItem/Date';
 import CheckboxItem from './FormItem/Checkbox';
 import { Form, FormItem } from 'element-ui';
-import { getSize } from '@/vue-component/index.ts';
+import { getSize } from '../index.ts';
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
 
 
@@ -91,21 +90,24 @@ const schema = [
   }
 ];
 
-/* 缓存 observe data */
-const map = new Map();
+
 export function useForm() {
 
 }
 export default {
   name: 'SCM_Form',
-  created() {
-    map.set(
-      this._uid,
-      Vue.observable( {} )
-    );
+  data() {
+    return {
+      _formData:{}
+    };
   },
-  destroy() {
-    map.delete( this._uid );
+  computed:{
+    formData:{
+      cache: false,
+      get() {
+        return cloneDeepWith( this.$data._formData );
+      }
+    }
   },
   props: {
 
@@ -121,11 +123,6 @@ export default {
       default: () => ( [] )
     }
   },
-  computed: {
-    formData() {
-      return map.get( this._uid );
-    }
-  },
   components: {
     StringItem,
     SelectItem,
@@ -138,7 +135,8 @@ export default {
   render( h ) {
 
     /* 获取 当前 组件 的 form model  */
-    const model = map.get( this._uid );
+
+    const model = this.$data._formData;
     return h(
       'el-form',
       {
@@ -171,7 +169,7 @@ export default {
               {
                 class: [ `form-item-${ type }` ],
                 props: {
-                  label: getText( label, this?.$t ),
+                  label: getText( label, this?.$t?.bind( this ) ),
                   for: field
                 }
               },
@@ -190,7 +188,7 @@ export default {
                         if ( model.hasOwnProperty( field ) ) {
                           model[ field ] = newVal;
                         } else {
-                          Vue.set( model, field, newVal );
+                          this.$set( model, field, newVal );
                           this.$forceUpdate();
                         }
                       },

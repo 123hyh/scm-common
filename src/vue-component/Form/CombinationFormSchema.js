@@ -59,11 +59,22 @@ export default {
         filterOptions( options = [] ) {
           return options;
         },
+
+        /* 是否多选 */
+        multiple: true,
         options: [
           {
             label: '难',
             value: 1,
             disabled: true
+          },
+          {
+            label: '难2',
+            value: 2
+          },
+          {
+            label: '难3',
+            value: 3
           }
         ],
         label: '年龄'

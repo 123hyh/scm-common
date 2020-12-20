@@ -1,28 +1,30 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-06 14:39:31
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-10 16:34:26
  * @Description: 基础表格组件
- * @FilePath: \customs\src\components\common\Table\BaseTable.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
 
 import { cloneDeepWith, debounce } from 'lodash-es';
-import { getSize } from '@/vue-component/index';
+import { getSize } from '../index';
 import './BaseTable.scss';
-import ColumnComponent from './component/Column/index';
+import ColumnComponent from './component/Column/index.js';
+import OperationComponent from './component/Column/Operation.js'; 
 import { forEachObject } from '../utils';
 import { Table, TableColumn, Checkbox, Radio } from 'element-ui';
 
 export default {
   name: 'ScmTable',
+  inheritAttrs: false,
   components: {
     ElTable: Table,
     ElTableColumn: TableColumn,
     ElCheckbox: Checkbox,
     ElRadio: Radio,
     ColumnComponent,
-    OperationComponent: () => import( /* webpackChunkName: "ScmTable_column_operation" */ './component/Column/Operation' )
+    OperationComponent
   },
   props: {
 
@@ -126,7 +128,6 @@ export default {
             ref:'Table',
             props: {
               size: getSize(),
-              ...this.$attrs,
               data: this.list,
               border: false,
               height: this.height,
@@ -136,6 +137,7 @@ export default {
                   return 'scm-table-cell-checked';
                 }
               },
+              ...this.$attrs,
               rowClassName: e => {
                 const { rowIndex } = e;
 
@@ -160,18 +162,18 @@ export default {
                   
                   this.handlerRowClick( cloneDeepWith( row ) );
                   const { target } = event;
+                  const containsClass = [ 'el-checkbox__inner', 'el-radio__label', 'el-radio__inner' ];
 
                   /* 单击列头 选择 无效 */
                   if (
                     this.clickRowSelected &&
-                    (
-                      target.classList.contains( 'el-checkbox__inner' ) === false &&
-                      target.classList.contains( 'el-radio__label' ) === false &&
-                      target.classList.contains( 'el-radio__inner' ) === false
-                    ) && 
+                      containsClass.every( item => target.classList.contains( item ) === false ) && 
                     ( this.selectionMethod ? this.selectionMethod( row ) !== true : true )
                   ) {
-                    if ( this.selections.some( item => item === row ) === false ) {
+                    
+                    if ( 
+                      this.selections.some( item => item === row ) === false 
+                    ) {
                       if ( this.schema.selection.isMultiple === true ) {
                         this.selections.push( row );
                       } else {
@@ -180,6 +182,7 @@ export default {
                     } else {
                       this.selections = this.selections.filter( item => item !== row );
                     }
+                    
                     this.$emit( 'select', {
                       isSelect: this.selections.some( item => item === row ),
                       row: row,

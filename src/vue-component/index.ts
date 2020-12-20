@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-05 18:11:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-10 17:29:57
+ * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
  */
@@ -24,19 +24,20 @@ let _SIZE = 'small';
  */
 let _getCodeDict: ( dictKeyword: string ) => Promise<any> | any[] = ( keyword: string ) => [];
 
-export default {
-  install: function useScmComponent( _Vue: any, options: {
+export function useScmComponent( options: {
     size: 'medium' | 'small' | 'mini',
     dictRequest: ( dictKeyword: string ) => Promise<any> | any[]
-  }
-  ) {
-    const { size = 'small', dictRequest } = options ?? {};
-    _SIZE = size;
-    if ( typeof dictRequest === 'function' ) {
-      _getCodeDict = dictRequest;
+  } ) {
+  return  {
+    install: function useScmComponent( _Vue: any ) {
+      const { size = 'small', dictRequest } = options ?? {};
+      _SIZE = size;
+      if ( typeof dictRequest === 'function' ) {
+        _getCodeDict = dictRequest;
+      }
     }
-  }
-};
+  };
+} 
 
 export function getSize() {
   return _SIZE;
@@ -44,20 +45,3 @@ export function getSize() {
 export function getCodeDict( keyword:string ) {
   return _getCodeDict( keyword );
 }
-
-/**
- * 表单组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-export { default as CombinationForm } from './Form/CombinationForm';
-
-/**
- * 表格组件
- * @description: 
- * @param {*}
- * @return {*}
- */
-
-export { default as CombinationTable } from './Table/CombinationTable';

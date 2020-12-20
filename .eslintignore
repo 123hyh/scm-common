@@ -5,3 +5,4 @@ test/*
 babel.config.js
 jest.config.ts
 postcss.config.js
+hiprint.bundle.js

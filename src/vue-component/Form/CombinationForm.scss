@@ -7,8 +7,9 @@ $color: #343434;
     font-size: 16px;
     color: $color;
     box-sizing: border-box;
-    margin: 0 0 1em 0;
-    display: flex;
+    margin: 0 0 0 0 !important;
+    margin-bottom: 1em !important;
+    display: flex !important;
     align-items: center;
     @media (min-width: 1366px) {
       flex: 0 1 33.333%;
@@ -31,8 +32,14 @@ $color: #343434;
     .el-form-item__content {
       flex: 1;
       .el-select,
-      .el-date-editor{
+      .el-date-editor      {
         width: 100%;
+        >.el-date-picker{
+          width:100%;
+          .el-picker-panel__content{
+            width:100%
+          }
+        }
       }
       .el-textarea > .el-textarea__inner {
         @include Overideinput;

@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-10-16 16:00:46
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-15 23:18:26
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-15 15:12:43
  * @Description: 路由 tabs 组件
- * @FilePath: \SCM 2.0\src\components\common\Tbas\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Tbas\index.js
  */
 import './index.scss';
 import { getType } from '../utils';
@@ -67,7 +67,9 @@ export default {
                     class: [ 'scm-tabs-item-link' ],
                     props: {
                       to: path,
-                      replace: true
+                      
+                      /* 修复replace 引发的bug */
+                      replace: path !== this.$route.path 
                     }
                   },
                   generate( label )

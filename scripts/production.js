@@ -1,22 +1,22 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:36:30
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 14:37:34
- * @Description: 
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-10 14:07:33
+ * @Description:
  * @FilePath: \scm_frontend_common\scripts\production.js
  */
-const path = require('path')
-const resolve = dir => path.resolve(process.cwd(), dir)
-const { analyzer = false } = require('yargs').argv
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const path = require('path');
+const resolve = (dir) => path.resolve(process.cwd(), dir);
+const { analyzer = false } = require('yargs').argv;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 
 const ProductionOption = {
   entry: {
-    utils: resolve('./src/utils/index.ts'),
-    filters: resolve('./src/filters/index.ts'),
-    directives: resolve('./src/directives/index.ts'),
-    'vue-component': resolve('./src/vue-component/index.ts')
+    index: resolve('./src/index.ts'),
   },
   mode: 'production',
   output: {
@@ -24,14 +24,22 @@ const ProductionOption = {
     path: resolve('./dist'),
     library: 'scmCommon',
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
-  externals: ['vue'],
+  externals:[
+    'vue',
+    'element-ui'
+  ] /* {
+    vue: 'Vue',
+    'element-ui': {
+      root: 'ELEMENT',
+    },
+  } */,
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      '@': resolve('./src')
-    }
+      '@': resolve('./src'),
+    },
   },
   module: {
     rules: [
@@ -39,10 +47,10 @@ const ProductionOption = {
         test: /\.js$/i,
         use: [
           {
-            loader: 'babel-loader'
-          }
+            loader: 'babel-loader',
+          },
         ],
-        include: [resolve('./src')]
+        include: [resolve('./src')],
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)$/i,
@@ -56,36 +64,28 @@ const ProductionOption = {
         test: /\.tsx?$/i,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
           {
-            loader: 'ts-loader'
-          }
-        ]
+            loader: 'ts-loader',
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader",
-          'postcss-loader'
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
       },
       {
         test: /\.css$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          'postcss-loader'
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
-    ]
+    ],
   },
   plugins: [
-    analyzer && new BundleAnalyzerPlugin()
-  ].filter(Boolean)
-}
+    analyzer && new BundleAnalyzerPlugin(),
+    new ProgressBarPlugin(),
+  ].filter(Boolean),
+};
 
 const Webpack = require('webpack');
 const compile = Webpack(ProductionOption);

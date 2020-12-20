@@ -1,14 +1,15 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-25 13:38:01
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-05 22:18:22
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-15 13:52:42
  * @Description: 工具栏 抽屉 - 用于 表格字段修改
- * @FilePath: \customs\src\components\common\Table\component\ToolBar\Drawer.js
+ * @FilePath: \scm_frontend_common\src\vue-component\table\component\ToolBar\Drawer.js
  */
 import { cloneDeepWith } from 'lodash-es';
 import { Drawer, Tree, Button, InputNumber } from 'element-ui';
 import './Drawer.scss';
+import { getScmMsg } from '../../../../locale';
 export default {
   props: {
     visible: {
@@ -71,7 +72,7 @@ export default {
           {
             slot: 'title'
           },
-          i18n$T ? i18n$T( 'table.selectField' ) : '选择字段'
+          getScmMsg( 'table.selectField' )
         ),
 
         /* 字段显示 */
@@ -197,7 +198,7 @@ export default {
                   }
                 }
               },
-              i18n$T ? i18n$T( 'button.cancel' ) : '取消' 
+              getScmMsg( 'button.cancel' )
             ),
 
             /* 保存 */
@@ -217,7 +218,7 @@ export default {
                   }
                 }
               },
-              i18n$T ? i18n$T( 'button.save' ) : '保存'
+              getScmMsg( 'button.save' )
             )
           ]
         )

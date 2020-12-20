@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-12-01 21:55:01
- * @LastEditTime: 2020-12-05 13:55:12
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-10 14:56:44
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\babel.config.js
  */
+const {development} = require('yargs').argv
 module.exports = {
   presets: [
     [
@@ -16,7 +17,7 @@ module.exports = {
       }
     ]
   ],
-  plugins:[
+  plugins: [
     [
       "component",
       {
@@ -24,5 +25,5 @@ module.exports = {
         "styleLibraryName": "theme-chalk"
       }
     ]
-  ]
+  ].filter(Boolean)
 }
