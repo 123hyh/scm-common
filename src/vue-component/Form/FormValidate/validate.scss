@@ -1,0 +1,17 @@
+.scm-validate-wrap{
+  .scm_required::before{
+    display: inline-block;
+    content: '*';
+    color: #ff4c4c;
+    margin-right: 5px;
+  }
+  .scm-validate-content{
+    position: relative;
+    .scm-validate-error{
+    color: #ff4c4c;
+    position: absolute;
+    bottom: -1.2em;
+  }
+  }
+  
+}
