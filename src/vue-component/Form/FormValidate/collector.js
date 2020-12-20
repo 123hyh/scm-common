@@ -13,15 +13,16 @@
  * @return {*}
  */
 export default function useCollector() {
-  const rules = {}
+  const rules = {};
   return {
     subscribe( itemValidate, field ) {
-      rules[field] = itemValidate
+      rules[ field ] = itemValidate;
     },
     unSubscribe( field ) {
-      rules[field]?.reset()
-      delete rules[field]
+      rules[ field ]?.reset();
+      delete rules[ field ];
     },
+
     /**
      * 校验字段方法
      * @description: 如果传入空参数则校验所有，否则校验 fields中的 字段
@@ -32,34 +33,36 @@ export default function useCollector() {
       return new Promise( ( resolve, reject ) => {
         Promise.allSettled(
           (
+
             /* 如果 fields 是空 则校验所有 */
             fields.length ? fields : Object.keys( rules )
           ).reduce(
             ( prev, rulesKey ) => {
               prev.push(
-                rules[rulesKey].validateCb()
-              )
-              return prev
+                rules[ rulesKey ].validateCb()
+              );
+              return prev;
             }, []
           )
         ).then( result => {
-          let isAllPass = true
-          let errorFields = []
+          let isAllPass = true;
+          let errorFields = [];
           result.forEach( item => {
             if ( item.status === 'rejected' ) {
-              const { fields } = item.reason
-              isAllPass = false
-              errorFields = [...errorFields, ...Object.keys( fields )]
+              const { fields } = item.reason;
+              isAllPass = false;
+              errorFields = [ ...errorFields, ...Object.keys( fields ) ];
             } else if ( item.status === 'fulfilled' ) {
-              const { value: field } = item
-              rules[field].reset()
+              const { value: field } = item;
+              rules[ field ].reset();
             }
-          } )
+          } );
 
-          isAllPass ? resolve( true ) : reject( errorFields )
-        } )
-      } )
+          isAllPass ? resolve( true ) : reject( errorFields );
+        } );
+      } );
     },
+
     /**
      * 重置校验信息
      * @description:
@@ -68,9 +71,9 @@ export default function useCollector() {
      */
     resetValidate( fields = [] ) {
       ( fields.length ? fields : Object.keys( rules ) ).forEach( rulesKey => {
-        const { reset } = rules[rulesKey]
-        reset()
-      } )
+        const { reset } = rules[ rulesKey ];
+        reset();
+      } );
     }
-  }
+  };
 }

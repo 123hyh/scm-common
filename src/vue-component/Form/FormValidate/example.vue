@@ -1,48 +1,70 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-06 21:46:52
- * @LastEditTime: 2020-11-08 00:03:45
+ * @LastEditTime: 2020-12-20 22:16:13
  * @LastEditors: Please set LastEditors
  * @Description: 测试 scm from 组件
  * @FilePath: \SCM_2.0\src\views\example\src\formvalidate\example.vue
 -->
 <template>
-<div>
-	<div class="test-form-validate">
-		<ScmFormItem
-				:collector="formCollector"
-				:rules="nameRules"
-				field="name"
-				:value="formModel.name"
-			>
-			<template #label>name</template>
-			<el-input
-					id="name"
-					v-model="formModel.name"
-				/>
-		</ScmFormItem>
-		<ScmFormItem
-				:collector="formCollector"
-				:rules="remarkRules"
-				field="remark"
-				:value="formModel.remark"
-			>
-			<template #label>remark</template>
-			<el-input v-model="formModel.remark" />
-		</ScmFormItem>
-	</div>
+  <div>
+    <div class="test-form-validate">
+      <ScmFormItem
+        :collector="formCollector"
+        :rules="nameRules"
+        field="name"
+        :value="formModel.name"
+        >
+        <template #label>
+          name
+        </template>
+        <ElInput
+          id="name"
+          v-model="formModel.name"
+          />
+      </ScmFormItem>
+      <ScmFormItem
+        :collector="formCollector"
+        :rules="remarkRules"
+        field="remark"
+        :value="formModel.remark"
+        >
+        <template #label>
+          remark
+        </template>
+        <ElInput v-model="formModel.remark"/>
+      </ScmFormItem>
+    </div>
 
-	<el-button type="primary" @click="handlerValidate">校验</el-button>
-	<el-button type="primary" @click="resetValidate">重置校验信息</el-button>
-	<el-button type="primary" @click="handlerDeleteRemarkRules">删除remark的rules</el-button>
-</div>
+    <ElButton
+      type="primary"
+      @click="handlerValidate"
+      >
+      校验
+    </ElButton>
+    <ElButton
+      type="primary"
+      @click="resetValidate"
+      >
+      重置校验信息
+    </ElButton>
+    <ElButton
+      type="primary"
+      @click="handlerDeleteRemarkRules"
+      >
+      删除remark的rules
+    </ElButton>
+  </div>
 </template>
 
 <script>
-import ScmFormItem, { useCollector } from './Validate'
+import ScmFormItem, { useCollector } from './Validate';
+import { Button, Input } from 'element-ui';
 export default {
   components: {
-    ScmFormItem
+    ScmFormItem,
+    ElButton: Button,
+    ElInput:Input
   },
   data() {
     return {
@@ -51,12 +73,12 @@ export default {
       nameRules: [
         {
           required: true,
-          trigger: ['blur', 'change'],
+          trigger: [ 'blur', 'change' ],
           validator: ( rule, value, cb ) => {
             if ( value !== '2' ) {
-              cb( '错误' )
+              cb( '错误' );
             } else {
-              cb()
+              cb();
             }
           }
         }
@@ -65,16 +87,17 @@ export default {
         {
           required: true,
           message: '必填',
-          trigger: ['blur', 'change']
+          trigger: [ 'blur', 'change' ]
         }
       ],
       formModel: {
         name: '',
         remark: ''
       }
-    }
+    };
   },
   methods: {
+
     /**
      * 校验字段
      * @description:
@@ -82,10 +105,11 @@ export default {
      * @return {*}
      */
     async handlerValidate() {
-      this.enable = false
-      const x = await this.formCollector.validate()
-      console.log( `校验结果：`, x )
+      this.enable = false;
+      const x = await this.formCollector.validate();
+      console.log( '校验结果：', x );
     },
+
     /**
      * 清空校验信息
      * @description:
@@ -93,8 +117,9 @@ export default {
      * @return {*}
      */
     resetValidate() {
-      this.formCollector.resetValidate()
+      this.formCollector.resetValidate();
     },
+
     /**
      * 清空一个rules
      * @description:
@@ -102,10 +127,10 @@ export default {
      * @return {*}
      */
     handlerDeleteRemarkRules() {
-      this.remarkRules = []
+      this.remarkRules = [];
     }
   }
-}
+};
 </script>
 
 <style lang='scss'>
