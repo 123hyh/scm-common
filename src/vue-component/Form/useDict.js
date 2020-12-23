@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-23 18:35:25
+ * @LastEditTime: 2020-12-23 18:41:34
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
@@ -50,7 +50,7 @@ import { _isUseCodeDict } from '../index';
  * @return {type}
  */
 export async function setDictValue( dicts, dictValues ) {
-  if ( _isUseCodeDict === false ) return; 
+  if ( _isUseCodeDict() === false ) return; 
   const data = await Promise.allSettled( dicts.map( type => getCodeDict( type ) ) );
 
   /* 设置 表单的 options */
