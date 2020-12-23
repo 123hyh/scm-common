@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 13:41:15
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 00:18:08
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -11,6 +11,7 @@ import './index.scss';
 import SCMForm from '../Form/index';
 import { Button, Link } from 'element-ui';
 import { getScmMsg } from '../../locale';
+import { getSize } from '../index';
 export default {
   name: 'SCM_QueryBar',
   components: {
@@ -26,6 +27,11 @@ export default {
       get() {
         return cloneDeepWith( this.$refs.form.formData );
       }
+    },
+    resetFormData: {
+      get() {
+        return this.$refs.form.resetFormData;
+      }
     }
   },
   props: {
@@ -39,8 +45,15 @@ export default {
   data() {
     return {
 
-      /* 展开/收起 查询栏  */
-      hideMore: true
+      /**
+       *  展开/收起 查询栏 标识
+       */
+      hideMore: true,      
+
+      /**
+       * 是否存在更多查询，用于隐藏 更多按钮
+       */
+      hasMore: true
     };
   },
   render( h ) {
@@ -67,53 +80,75 @@ export default {
                 this.formDataChange( data );
               }
             }
-          }
-        ),
-
-        /* 查询按钮 */
-        h(
-          'div',
-          {
-            class: [ 'query-buttons-container' ]
           },
           [
-
-            /* 查询按钮 */
-            h(
-              'el-button',
+            h( 
+              'div',
               {
-                props: {
-                  type: 'primary'
-                },
-                on: {
+                class:[ 'query-operation' ],
+                slot: 'operation',
+                ref:'queryOperation'
+              }, 
+              [
+                h( 'el-button', {
+                  props:{
+                    size: getSize()
+                  },
+                  on:{
+                    click:( e ) => {
+                      e.stopPropagation();
 
-                  /* 点击查询 事件 */
-                  click: e => {
-                    e.stopPropagation();
-                    this.handlerButtonClick( {
-                      trigger: 'search',
-                      formData: this.formData
-                    } );
+                      /* 重置表单内容 */
+                      this.resetFormData();
+                      this.handlerButtonClick( {
+                        trigger: 'search',
+                        formData: {}
+                      } );
+                    }
                   }
-                }
-              },
-              getScmMsg( 'button.query' )
-            ),
+                }, getScmMsg( 'button.reset' ) ),
+                h( 'el-button', {
+                  props:{
+                    type: 'primary',
+                    size: getSize()
+                  },
+                  on:{
 
-            /* 更多查询按钮 */
-            h( 'el-link', {
-              props: {
-                type: 'primary'
-              },
-              nativeOn: {
-                click: ( e ) => {
-                  e.stopPropagation();
-                  this.hideMore = !this.hideMore;
-                  this.hideMore ? this.handlerHide() : this.handlerShow();
-                }
-              }
-            }, 
-            getScmMsg( `button.${this.hideMore ? 'moreQuery' : 'retract'}` )
+                    /**
+                     * 点击查询按钮
+                     * @param {*} e 
+                     */
+                    click: ( e ) => {
+                      e.stopPropagation();
+                      this.handlerButtonClick( {
+                        trigger: 'search',
+                        formData: this.formData
+                      } );
+                    }
+                  }
+                }, getScmMsg( 'button.query' ) ),
+                h( 'el-button', {
+                  style:{
+                    display: this.hasMore ? 'inline-flex' : 'none'
+                  },
+                  class: [ 'collapse-button' ],
+                  props:{
+                    type:'text',
+                    size: getSize(),
+                    icon: `el-icon-arrow-${this.hideMore ? 'down' : 'up'}`
+                  },
+                  on:{
+                    click: ( e ) => {
+                      e.stopPropagation();
+                      this.hideMore = !this.hideMore;
+                      if ( this.hideMore === true ) {
+                        return this.handlerHide();
+                      }
+                      this.handlerShow();
+                    }
+                  }
+                }, getScmMsg( `button.${this.hideMore ? 'expand' : 'collapse'}` ) )
+              ] 
             )
           ]
         )
@@ -135,38 +170,54 @@ export default {
     },
 
     /* 隐藏 form 溢出元素 */
-    handlerHide() {
-      this.$nextTick( () => {
-        const formElem = this.$refs.form.$el;
-        const children = formElem.children;
+    get handlerHide() {
 
-        /* 暂存 溢出的Elem */
-        let overflowElems = [];
+      /* 用于初次赋值 */
+      let useFlag = false;
+      return function () {
+        this.$nextTick( () => {
+          const formElem = this.$refs.form.$el;
+          const children = formElem.children;
 
-        /* 1、收集溢出元素 */
-        children?.forEach( ( () => {
-          let prevTop = null;
-          return item => {
-            const top = item.offsetTop;
-            if ( prevTop && top > prevTop ) {
-              overflowElems.push( item );
-            } else {
-              prevTop = top;
-            }
-          };
-        } )() );
+          /* 暂存 溢出的Elem */
+          let overflowElems = [];
 
-        /* 2、对溢出元素 进行一次性的隐藏 */
-        overflowElems.forEach( elem => { elem.style.display = 'none'; } );
-        overflowElems = [];
+          /* 1、收集溢出元素 */
+          children?.forEach( ( () => {
+            let prevTop = null;
+            return item => {
+              const top = item.offsetTop;
+              if (
+                prevTop &&
+                top > prevTop &&
+                item.classList.contains( 'query-operation' ) === false
+              ) {
+                overflowElems.push( item );
+              } else {
+                prevTop = top;
+              }
+            };
+          } )() );
 
-        /* 3、给 formBox 固定宽度 */
-        if ( formElem?.offsetWidth ) {
+          /* 1.1 是否 显示展开按钮 */
+          if ( useFlag === false ) {
+            this.hasMore = overflowElems.length > 0;
+            useFlag = true;
+          }
 
-          /* 之所以加 1px 是避免 实际有小数，获取的是个整数，导致换行 */
-          formElem.style.width = formElem.offsetWidth + 1 + 'px';
-        }
-      } );
+          /* 2、对溢出元素 进行一次性的隐藏 */
+          overflowElems.forEach( elem => { elem.style.display = 'none'; } );
+          overflowElems = [];
+
+          /* 3、给 formBox 固定宽度 */
+          if ( formElem?.offsetWidth ) {
+
+            /* 之所以加 1px 是避免 实际有小数，获取的是个整数，导致换行 */
+            formElem.style.width = formElem.offsetWidth + 1 + 'px';
+          }
+        } );
+      };
+      
     },
 
     /**
@@ -202,6 +253,15 @@ export default {
     }
   },
   mounted() {
+    const handler = debounce( () => {
+      if ( this.hideMore === true ) {
+        this.handlerHide();
+      }
+    }, 100 );
+    const unWatch = this.$watch( 'hideMore', handler );
+
+    /* 首次加载先隐藏一次 */
     this.handlerHide();
+    this.$once( 'hook:beforeDestroy', unWatch );
   }
 };

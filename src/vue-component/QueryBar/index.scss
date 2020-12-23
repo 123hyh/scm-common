@@ -14,6 +14,7 @@ $containerBgColor: #ffffff;
   background-color: $containerBgColor;
   /* 表单区 */
   .query-bar-form-block {
+    width: 100%;
     @include layout;
     align-items: flex-start;
     .el-form-item {
@@ -47,7 +48,16 @@ $containerBgColor: #ffffff;
   .more-btn-wrap {
     align-self: flex-start;
   }
-
+  @mixin baseButtonStyle{
+    $bgColor: #0086fa;
+    [type="button"]:not(.collapse-button) {
+      padding: 9px 20px;
+      border-radius: $radiusSize;
+    }
+    .el-button--primary {
+      background-color: $bgColor;
+    }
+  }
   /* 按钮区 */
   .query-buttons-container {
     $bgColor: #0086fa;
@@ -62,5 +72,14 @@ $containerBgColor: #ffffff;
     .el-button--primary {
       background-color: $bgColor;
     }
+  }
+  .query-operation{
+    flex-grow: 1;
+    text-align: right;
+    @include baseButtonStyle;
+  }
+  .collapse-button{
+    display: inline-flex;
+    flex-direction: row-reverse;
   }
 }

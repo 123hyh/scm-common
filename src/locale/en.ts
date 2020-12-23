@@ -1,16 +1,16 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-15 11:35:14
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 18:53:57
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-23 23:30:14
  * @Description: 
  * @FilePath: \scm_frontend_common\src\locale\en.ts
  */
 export default Object.freeze( {
   button: {
     query: 'Search',
-    moreQuery: 'More Search',
-    retract: 'Retract',
+    expand: 'Expand',
+    collapse: 'Collapse',
     refresh: 'Refresh',
     save:'Save',
     cancel:'Cancel',
