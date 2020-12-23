@@ -1,0 +1,26 @@
+.scm-validate-wrap{
+  .scm_required::before{
+    display: inline-block;
+    content: '*';
+    color: #ff4c4c;
+    margin-right: 5px;
+  }
+  .scm-validate-content{
+    position: relative;
+    .scm-validate-error{
+    color: #ff4c4c;
+    position: absolute;
+    bottom: -1.2em;
+  }
+  .validate-error{
+    padding:  5px ;
+    background-color: #ff4c4c;
+    color: #fff;
+    border-color: #ff4c4c;
+    .popper__arrow::after{
+      border-bottom-color: #ff4c4c;
+    }
+  }
+  }
+  
+}
