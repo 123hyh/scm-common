@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-25 11:34:10
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-23 10:57:52
+ * @LastEditTime: 2020-12-23 11:00:00
  * @Description: 模态窗组件
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\index.vue
 -->
@@ -261,7 +261,6 @@ export const MessageBox = {
     background: #fff;
     box-sizing: border-box;
     overflow: hidden;
-    transform: translateX(-50%);
 
     .x-window-header {
       box-sizing: border-box;
