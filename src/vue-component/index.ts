@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 23:58:52
- * @LastEditTime: 2020-12-23 17:57:56
+ * @LastEditTime: 2020-12-23 18:34:35
  * @LastEditors: huangyuhui
  * @Description: vue 公共组件
  * @FilePath: \scm_frontend_common\src\vue-component\index.ts
@@ -23,7 +23,6 @@ let _SIZE = 'small';
  * @return {*}
  */
 let _getCodeDict: ( dictKeyword: string ) => Promise<any> | any[];
-
 export function useScmComponent( options: {
     size: 'medium' | 'small' | 'mini',
     dictRequest: ( dictKeyword: string ) => Promise<any> | any[]
@@ -43,5 +42,12 @@ export function getSize() {
   return _SIZE;
 }
 export function getCodeDict( keyword:string ) {
-  return _getCodeDict ? _getCodeDict( keyword ) : undefined;
+  return  _getCodeDict( keyword );
+}
+
+/**
+ * 是否使用 dict api
+ */
+export function _isUseCodeDict() {
+  return typeof _getCodeDict === 'function'; 
 }

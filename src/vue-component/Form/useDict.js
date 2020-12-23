@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-23 17:58:38
+ * @LastEditTime: 2020-12-23 18:35:25
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
@@ -41,6 +41,7 @@ export  function transformOptions( data = {} ) {
   } );
   return list;
 }
+import { _isUseCodeDict } from '../index';
 
 /**
  * 远程获取 dict 并设置表单
@@ -49,7 +50,7 @@ export  function transformOptions( data = {} ) {
  * @return {type}
  */
 export async function setDictValue( dicts, dictValues ) {
-  if ( typeof getCodeDict !== 'function' ) return; 
+  if ( _isUseCodeDict === false ) return; 
   const data = await Promise.allSettled( dicts.map( type => getCodeDict( type ) ) );
 
   /* 设置 表单的 options */
