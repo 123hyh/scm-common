@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-28 15:03:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-11 17:23:01
+ * @LastEditTime: 2020-12-23 17:58:38
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\useDict.js
  */
@@ -49,6 +49,7 @@ export  function transformOptions( data = {} ) {
  * @return {type}
  */
 export async function setDictValue( dicts, dictValues ) {
+  if ( typeof getCodeDict !== 'function' ) return; 
   const data = await Promise.allSettled( dicts.map( type => getCodeDict( type ) ) );
 
   /* 设置 表单的 options */
