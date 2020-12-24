@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 21:00:51
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 23:11:10
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -46,7 +46,7 @@ export default {
     }
   },
   render( h ) {
-    const { schema: { field, type, visible = true, options = [], label }, formData } = this;
+    const { schema: { field, type, visible = true,  label }, formData } = this;
     return visible ? h(
       'td',
       {

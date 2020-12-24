@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:57:52
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 23:56:33
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -105,3 +105,32 @@ export default {
     ] );
   }
 };
+
+/**
+ * 查找 tableInput Schema 的 字段
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */
+export function pickTableInputSchemaItem( fields = [], tableInputSchema = [] ) {
+  const fieldSets = new Set( fields );
+  function handler( schema = [], results = {} ) {
+    return schema.reduce( ( prev, item ) => {
+      const type = Object.prototype.toString.call( item ).slice( 8, -1 );
+      if ( type === 'Array' ) {
+        prev = { ...prev, ...handler( item ) };
+      } else if ( type === 'Object' && fieldSets.has( item.field )  ) {
+        const { field } = item;
+        const prevItem = prev[ field ];
+        if ( prevItem ) {
+          prev[ field ] = [ prevItem, item ];
+        } else {
+          prev[ field ] = item;
+        }
+      }
+      return prev;
+    }, results );
+  }
+  return handler( tableInputSchema );
+}
+
