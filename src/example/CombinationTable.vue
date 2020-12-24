@@ -1,13 +1,16 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-13 00:14:55
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 12:57:28
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
 <template>
-  <div>  
+  <div
+    v-loading="loading"
+    class="combination-table"
+    >  
     <CombinationTable
       clickRowSelected
       :queryBarSchema="queryBarSchema"
@@ -45,13 +48,18 @@
 <script>
 import  CombinationTable from '@/vue-component/table/CombinationTable';
 console.log( CombinationTable );
+import { loading } from '../directives/index';
 export default {
   components: {
     CombinationTable,
     BaseTable:CombinationTable.BaseTable
   },
+  directives:{
+    loading:loading
+  },
   data() {
     return {
+      loading:true,
       list: [
         { name: '换一换', age: 18, income: 3000 },
         { name: 'mff', age: 18, income: 3500 }
