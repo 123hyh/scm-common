@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2020-12-20 22:04:44
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 19:23:29
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
 -->
@@ -35,6 +35,12 @@
       >
       <FormValidate/>
     </TabPane>
+    <TabPane
+      label="表格输入"
+      name="tableinput"
+      >
+      <TableInput/>
+    </TabPane>
   </Tabs>
 </template>
 
@@ -44,6 +50,7 @@ import CombinationForm from './CombinationForm.vue';
 import CombinationTable from './CombinationTable.vue';
 import FormValidate  from './FormValidate.vue';
 import Print from './Print.vue';
+import TableInput  from './TableInput.vue';
 export default {
   components:{
     Tabs,
@@ -51,11 +58,12 @@ export default {
     CombinationForm,
     CombinationTable,
     ScmPint:Print,
-    FormValidate
+    FormValidate,
+    TableInput
   },
   data() {
     return {
-      activeName:'form'
+      activeName:'tableinput'
     };
   }
 };

@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 12:26:19
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 13:51:03
+ * @LastEditTime: 2020-12-24 14:01:57
  * @Description: 加载动画
  * @FilePath: \scm_frontend_common\src\directives\loading\index.ts
  */
@@ -30,6 +30,13 @@ const LoadingElem = Vue.extend( {
   }
 } );
 const elemMap = new WeakMap();
+
+/**
+ * 加载动画指令
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */
 export const loading: DirectiveOptions = {
   inserted( el: HTMLElement, binding, vnode ) {
     const { value } = binding;
