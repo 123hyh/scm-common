@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:22:18
+ * @LastEditTime: 2020-12-24 20:57:52
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -28,7 +28,7 @@ const schema = [
     {
       rowspan: 2,
       field: 'sex',
-      label:'label',
+      label: 'label',
       type: 'text',
       key: 2,
       visible: true
@@ -71,13 +71,13 @@ export default {
       type: Array,
       default: () => schema
     },
-    formData:{
+    formData: {
       type: Object,
       default: () => ( {} )
     }
   },
   render( h ) {
-    return h( 'div', { class: [ 'table-input-wrap' ] }, [
+    return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
       h(
         'table',
         {
@@ -86,17 +86,21 @@ export default {
           },
           class: [ 'table-wrap' ]
         },
-        this.schema.map( ( item, index ) =>
-          h( 'TrItem', {
-            key: index,
-            props: {
-              size: 'small',
-              schema: item,
-              formData: this.formData
-            },
-            scopedSlots: this.$scopedSlots
-          } )
-        )
+        [
+
+          /* 标题 */
+          h( 'caption', this.$slots.table_caption ? this.$slots.table_caption : '测试标题' ),
+          ...this.schema.map( ( item, index ) =>
+            h( 'TrItem', {
+              key: index,
+              props: {
+                size: 'small',
+                schema: item,
+                formData: this.formData
+              },
+              scopedSlots: this.$scopedSlots
+            } )
+          ) ]
       )
     ] );
   }

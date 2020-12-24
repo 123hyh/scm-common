@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:23:48
+ * @LastEditTime: 2020-12-24 21:00:51
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -56,8 +56,9 @@ export default {
           rowspan: this.schema.rowspan
         },
         class: [
-          'td-item'
-        ]
+          'td-item',
+          type === 'label' && 'td-label'
+        ].filter( Boolean )
       },
       [
 
