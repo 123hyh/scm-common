@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 12:26:19
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 13:33:06
+ * @LastEditTime: 2020-12-24 13:51:03
  * @Description: 加载动画
  * @FilePath: \scm_frontend_common\src\directives\loading\index.ts
  */
@@ -37,11 +37,11 @@ export const loading: DirectiveOptions = {
     elemMap.set( el, $el );
     if ( value ) {
       el.classList.add( 'relative-container' );
-      el.appendChild( $el );
     } else {
       $el.classList.add( 'hide-load' );
       el.classList.remove( 'relative-container' );
     }
+    el.appendChild( $el );
   },
   update( el: HTMLElement, binding ) {
     const { value } = binding;
