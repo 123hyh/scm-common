@@ -1,17 +1,18 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-15 11:35:10
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 18:54:08
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-23 23:51:27
  * @Description: 
  * @FilePath: \scm_frontend_common\src\locale\zh.ts
  */
 
 export default Object.freeze( {
   button: {
+    reset:'重置',
     query: '查询',
-    moreQuery: '更多查询',
-    retract: '收起',
+    expand: '展开',
+    collapse:'收起',
     refresh: '刷新',
     save:'保存',
     cancel:'取消',

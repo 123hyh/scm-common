@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-10 16:31:36
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-23 23:43:05
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -109,6 +109,18 @@ export default {
       }
     }
   },
+  methods:{
+
+    /**
+     * 重置表单数据
+     * @description: 
+     * @param {*}
+     * @return {*}
+     */
+    resetFormData() {
+      this.$data._formData = {};
+    }
+  },
   props: {
 
     /* 实体字段 */
@@ -149,69 +161,74 @@ export default {
       },
 
       /* form item */
-      cloneDeepWith( this.schema ).reduce(
-        ( prev, currentItemConf ) => {
-          const {
-            label,
-            type = 'string',
-            field = '',
-            visible = true
-          } = currentItemConf;
-          // eslint-disable-next-line no-prototype-builtins
-          if ( !aliasComponents.hasOwnProperty( type ) ) {
-            return h( 'div' );
-          }
+      [ 
+        ...cloneDeepWith( this.schema ).reduce(
+          ( prev, currentItemConf ) => {
+            const {
+              label,
+              type = 'string',
+              field = '',
+              visible = true
+            } = currentItemConf;
+            // eslint-disable-next-line no-prototype-builtins
+            if ( !aliasComponents.hasOwnProperty( type ) ) {
+              return h( 'div' );
+            }
 
-          /* 控制 是否显示  */
-          visible && prev.push(
-            h(
-              'el-form-item',
-              {
-                class: [ `form-item-${ type }` ],
-                props: {
-                  label: getText( label, this?.$t?.bind( this ) ),
-                  for: field
-                }
-              },
-              [
-                h(
-                  aliasComponents[ type ],
-                  {
-                    props: {
-                      entity: this.entity,
-                      conf: currentItemConf,
-                      value: model[ field ]
-                    },
-                    on: {
-                      input: newVal => {
-                      // eslint-disable-next-line no-prototype-builtins
-                        if ( model.hasOwnProperty( field ) ) {
-                          model[ field ] = newVal;
-                        } else {
-                          this.$set( model, field, newVal );
-                          this.$forceUpdate();
-                        }
+            /* 控制 是否显示  */
+            visible && prev.push(
+              h(
+                'el-form-item',
+                {
+                  class: [ `form-item-${ type }` ],
+                  props: {
+                    label: getText( label, this?.$t?.bind( this ) ),
+                    for: field
+                  }
+                },
+                [
+                  h(
+                    aliasComponents[ type ],
+                    {
+                      props: {
+                        entity: this.entity,
+                        conf: currentItemConf,
+                        value: model[ field ]
                       },
-                      change: data => {
-                        this.$emit(
-                          'change',
-                          {
-                            field,
-                            data,
-                            formData: cloneDeepWith( model )
+                      on: {
+                        input: newVal => {
+                          // eslint-disable-next-line no-prototype-builtins
+                          if ( model.hasOwnProperty( field ) ) {
+                            model[ field ] = newVal;
+                          } else {
+                            this.$set( model, field, newVal );
+                            this.$forceUpdate();
                           }
-                        );
+                        },
+                        change: data => {
+                          this.$emit(
+                            'change',
+                            {
+                              field,
+                              data,
+                              formData: cloneDeepWith( model )
+                            }
+                          );
+                        }
                       }
                     }
-                  }
-                )
-              ]
-            )
-          );
-          return prev;
-        },
-        []
-      )
+                  )
+                ]
+              )
+            );
+            return prev;
+          },
+          []
+        ),
+
+        /* 查询操作 */
+        this.$scopedSlots?.operation() 
+      ]
     );
   }
 };
