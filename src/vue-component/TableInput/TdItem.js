@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:12:53
+ * @LastEditTime: 2020-12-24 20:21:53
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -46,7 +46,7 @@ export default {
     }
   },
   render( h ) {
-    const { schema: { field, type, visible = true, options = [] }, formData } = this;
+    const { schema: { field, type, visible = true, options = [], label }, formData } = this;
     return visible ? h(
       'td',
       {
@@ -74,7 +74,8 @@ export default {
         } ),
 
         /* 插槽 */
-        visible && type === 'slot' && this.$scopedSlots[ field ]()
+        visible && type === 'slot' && this.$scopedSlots[ field ](),
+        visible && type === 'text' && label
       ].filter( Boolean )
     ) : undefined;
   }

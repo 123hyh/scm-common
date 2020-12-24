@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:14:36
+ * @LastEditTime: 2020-12-24 20:22:18
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -28,7 +28,8 @@ const schema = [
     {
       rowspan: 2,
       field: 'sex',
-      type: 'string',
+      label:'label',
+      type: 'text',
       key: 2,
       visible: true
     }
