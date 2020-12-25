@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-24 23:11:10
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-25 11:27:55
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -79,5 +79,16 @@ export default {
         visible && type === 'label' && label
       ].filter( Boolean )
     ) : undefined;
+  },
+  mounted() {
+    const { field } = this.schema;
+    if ( field ) {
+      const unwatch = this.$watch( `formData.${field}`, ( val ) => {
+        this.$emit( 'change', { field, val } );
+      }, {
+        deep: true
+      } );
+      this.$once( 'hook:beforeDestroy', unwatch );
+    }
   }
 };

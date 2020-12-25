@@ -8,29 +8,29 @@
     tr {
       box-sizing: border-box;
       border-top: 1px solid #d9d9d9;
-      > td {
+      > td[class~="td-item"] {
         box-sizing: border-box;
         border-right: 1px solid #d9d9d9;
       }
     }
     .td-item {
-      .el-input__inner{
+      .el-input__inner {
         border: none;
       }
-      .el-select{
+      .el-select {
         width: 100%;
       }
-      &>[class^="el-date-" ]{
+      & > [class^="el-date-"] {
         width: 100%;
       }
-      &>[class^="el-checkbox"],
-      &>[class^="el-radio"],
-      &>[class^="el-switch"]{
+      & > [class^="el-checkbox"],
+      & > [class^="el-radio"],
+      & > [class^="el-switch"] {
         width: 100%;
         min-height: 32px;
         display: flex;
         align-items: center;
-        padding:0 10px;
+        padding: 0 10px;
       }
     }
   }
