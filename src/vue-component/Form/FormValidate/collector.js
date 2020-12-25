@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-11-08 00:24:12
- * @LastEditTime: 2020-11-08 01:01:42
+ * @LastEditTime: 2020-12-22 23:37:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SCM_2.0\src\views\example\src\formvalidate\collector.js
  */
+
 /**
  * rules 收集器
  * @description:
@@ -51,6 +52,7 @@ export default function useCollector() {
             if ( item.status === 'rejected' ) {
               const { fields } = item.reason;
               isAllPass = false;
+              debugger;
               errorFields = [ ...errorFields, ...Object.keys( fields ) ];
             } else if ( item.status === 'fulfilled' ) {
               const { value: field } = item;

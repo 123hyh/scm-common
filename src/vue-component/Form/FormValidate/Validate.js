@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-06 22:12:55
- * @LastEditTime: 2020-12-20 23:09:05
+ * @LastEditTime: 2020-12-22 23:38:45
  * @LastEditors: Please set LastEditors
  * @Description: FormItem 组件(带校验)
  * @FilePath: \SCM_2.0\src\views\example\src\formvalidate\Validate.js
@@ -10,7 +10,6 @@ import AsyncValidator from 'async-validator';
 import { debounce } from 'lodash-es';
 import './validate.scss';
 export { default as useCollector } from './collector.js';
-
 export default {
   name: 'ScmFormItem',
   componentName: 'ElFormItem',

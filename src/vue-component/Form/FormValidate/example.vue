@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-06 21:46:52
- * @LastEditTime: 2020-12-20 22:16:13
+ * @LastEditTime: 2020-12-22 23:38:56
  * @LastEditors: Please set LastEditors
  * @Description: 测试 scm from 组件
  * @FilePath: \SCM_2.0\src\views\example\src\formvalidate\example.vue
@@ -60,6 +60,8 @@
 <script>
 import ScmFormItem, { useCollector } from './Validate';
 import { Button, Input } from 'element-ui';
+import { PublishSubscribe } from './publishSubscribe';
+
 export default {
   components: {
     ScmFormItem,
@@ -69,7 +71,7 @@ export default {
   data() {
     return {
       enable: true,
-      formCollector: useCollector(),
+      formCollector: new PublishSubscribe(),
       nameRules: [
         {
           required: true,

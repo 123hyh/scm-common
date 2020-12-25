@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2020-12-24 19:23:29
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-25 23:15:34
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
 -->
@@ -41,6 +41,12 @@
       >
       <TableInput/>
     </TabPane>
+    <TabPane
+      label="模态窗"
+      name="ScmModal"
+      >
+      <ScmModal/>
+    </TabPane>
   </Tabs>
 </template>
 
@@ -59,11 +65,12 @@ export default {
     CombinationTable,
     ScmPint:Print,
     FormValidate,
-    TableInput
+    TableInput,
+    ScmModal: () => import( './Modal.vue' )
   },
   data() {
     return {
-      activeName:'tableinput'
+      activeName:'ScmModal'
     };
   }
 };
