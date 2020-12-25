@@ -2,12 +2,11 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 20:03:26
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:12:20
+ * @LastEditTime: 2020-12-25 10:16:21
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TrItem.js
  */
 import TdItem from './TdItem.js';
-import './style/tr.scss';
 export default {
   name: 'TrItem',
   components: {
