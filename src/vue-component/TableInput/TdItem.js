@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 11:27:55
+ * @LastEditTime: 2020-12-25 11:38:06
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -83,8 +83,8 @@ export default {
   mounted() {
     const { field } = this.schema;
     if ( field ) {
-      const unwatch = this.$watch( `formData.${field}`, ( val ) => {
-        this.$emit( 'change', { field, val } );
+      const unwatch = this.$watch( `formData.${field}`, ( value ) => {
+        this.$emit( 'change', { field, value } );
       }, {
         deep: true
       } );
