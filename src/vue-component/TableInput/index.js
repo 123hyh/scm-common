@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 11:30:30
+ * @LastEditTime: 2020-12-25 16:04:50
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -89,7 +89,7 @@ export default {
         [
 
           /* 标题 */
-          h( 'caption', this.$slots.table_caption ? this.$slots.table_caption : '测试标题' ),
+          this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
           ...this.schema.map( ( item, index ) =>
             h( 'TrItem', {
               key: index,
