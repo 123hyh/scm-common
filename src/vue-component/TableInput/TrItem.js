@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 20:03:26
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 10:16:21
+ * @LastEditTime: 2020-12-25 11:30:42
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TrItem.js
  */
@@ -31,6 +31,9 @@ export default {
           {
             key: index,
             scopedSlots: this.$scopedSlots,
+            on:{
+              ...this.$listeners
+            },
             props: {
               formData: this.formData,
               schema: item

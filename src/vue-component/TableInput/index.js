@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 11:25:40
+ * @LastEditTime: 2020-12-25 11:30:30
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -97,6 +97,9 @@ export default {
                 size: 'small',
                 schema: item,
                 formData: this.formData
+              },
+              on:{
+                ...this.$listeners
               },
               scopedSlots: this.$scopedSlots
             } )
