@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-25 23:50:08
- * @LastEditTime: 2020-12-26 02:11:34
+ * @LastEditTime: 2020-12-26 19:47:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\ScmModal.vue
@@ -10,21 +10,35 @@
 <template>
   <ScmModal
     ref="scmModal"
+    class="scm-modal-1206"
     v-bind="$attrs"
     :name="modalName"
     draggable=".window-header"
-    resizable
+    :resizable="isFullScreen === false"
     adaptive
     reset
     :clickToClose="false"
     :scrollable="true"
     >
-    <p
+    <div
       ref="header"
       class="window-header"
       >
       <slot name="title"/>
-    </p>
+      <!-- 右侧操作 -->
+      <div class="right-layout">
+        <!-- <div
+          :class="{
+            [isFullScreen ? 'modal-out-full-icon' : 'modal-full-icon']: true,
+          }"
+          @click.stop="handlerFullScreen"
+          /> -->
+        <div
+          class="el-icon-close"
+          @click.stop="() => $emit('close')"
+          />
+      </div>
+    </div>
     <div :style="{ height: contentHeight, overflow: 'auto' }">
       <slot/>
     </div>
@@ -67,7 +81,16 @@ export default {
   data() {
     return {
       modalName: `scmModal_${counter++}`,
-      contentHeight: ''
+
+      /**
+       * 内容高度
+       */
+      contentHeight: '',
+
+      /**
+       * 是否全屏
+       */
+      isFullScreen: false
     };
   },
   mounted() {
@@ -77,12 +100,14 @@ export default {
   methods: {
     getMarginY( el ) {
       const { marginBottom, marginTop, bottom } = getComputedStyle( el );
-      return `${marginTop} - ${marginBottom} - ${bottom === 'auto' ? '0px' : bottom }`;
+      return `${marginTop} - ${marginBottom} - ${
+        bottom === 'auto' ? '0px' : bottom
+      }`;
     },
 
     /**
      * 修改content 高度
-     * @description: 
+     * @description:
      * @param {*}
      * @return {*}
      */
@@ -93,16 +118,13 @@ export default {
             const { header, footer, scmModal } = this.$refs;
             const modal = scmModal?.$refs?.modal;
             if ( modal ) {
-              const { offsetHeight:mHeight } = modal;
-              const { offsetHeight:fHeight }  = footer;
-              const { offsetHeight:hHeight }  = header;
+              const { offsetHeight: mHeight } = modal;
+              const { offsetHeight: fHeight } = footer;
+              const { offsetHeight: hHeight } = header;
 
               this.contentHeight = `calc( ${
                 mHeight - fHeight - hHeight
-              }px - ${this.getMarginY( header )} - ${
-                this.getMarginY( footer )
-              })`;
-
+              }px - ${this.getMarginY( header )} - ${this.getMarginY( footer )})`;
             }
           }, 10 )
         );
@@ -111,6 +133,29 @@ export default {
           target && ro.observe( target );
         } );
       };
+    },
+
+    /**
+     * 点击全屏
+     */
+    get handlerFullScreen() {
+      let prevSize = {
+        width: 0,
+        height: 0
+      };
+      const fullStyleText = 'top: 1%; left: 1%; width: 99%; height: 99%';
+      return function () {
+        this.isFullScreen = !this.isFullScreen;
+        const target = this.$refs.scmModal.$refs.modal;
+        if ( target ) {
+          if ( this.isFullScreen ) {
+            prevSize = target.style.cssText;
+            target.style.cssText = fullStyleText;
+          } else {
+            target.style.cssText = prevSize;
+          }
+        }
+      };
     }
   }
 };
@@ -118,9 +163,22 @@ export default {
 
 <style scoped lang='scss'>
 ::v-deep.window-header {
+  position: relative;
   box-sizing: border-box;
-  margin: 10px 5px;
+  padding: 10px 5px;
+  margin: 0;
   color: #6b6b6b;
+  border-bottom: 1px solid #f0f0f0;
+  .right-layout {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    position: absolute;
+    .el-icon-close {
+      font-size: 22px;
+      cursor: pointer;
+    }
+  }
 }
 ::v-deep .window-footer {
   position: absolute;

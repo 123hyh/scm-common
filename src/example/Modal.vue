@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-25 23:14:15
- * @LastEditTime: 2020-12-26 02:15:44
+ * @LastEditTime: 2020-12-26 19:38:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\Modal.vue
@@ -10,14 +10,15 @@
   <div>
     <ScmModal
       :visible="visible"
-      :width="'100%'"
-      :height="'100%'"
+      :width="800"
+      :height="600"
+      @close="closeModal"
       >
       <template #title>
         合同审批
       </template>
       <div class="content-wrap-a">
-        内容
+        <CombinationTable/>
       </div>
       <template #footer>
         <ElButton @click.stop="visible = false">
@@ -39,11 +40,13 @@
 
 <script>
 import ScmModal from '@/vue-component/ModalWindow/ScmModal';
+import CombinationTable from './CombinationTable.vue';
 import { Button } from 'element-ui';
 export default {
   components: {
     ScmModal,
-    ElButton: Button
+    ElButton: Button,
+    CombinationTable
   },
   data() {
     return {
@@ -53,7 +56,11 @@ export default {
   methods: {
     hanlderCick() {
       this.visible = !this.visible;
+    },
+    closeModal() {
+      this.visible = false;
     }
+ 
   }
 };
 </script>

@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-24 00:18:08
+ * @LastEditTime: 2020-12-26 21:41:18
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -210,7 +210,8 @@ export default {
           overflowElems = [];
 
           /* 3、给 formBox 固定宽度 */
-          if ( formElem?.offsetWidth ) {
+          // eslint-disable-next-line no-constant-condition
+          if ( false && formElem?.offsetWidth ) {
 
             /* 之所以加 1px 是避免 实际有小数，获取的是个整数，导致换行 */
             formElem.style.width = formElem.offsetWidth + 1 + 'px';

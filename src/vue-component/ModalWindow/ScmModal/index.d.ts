@@ -2,11 +2,12 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 01:55:49
- * @LastEditTime: 2020-12-26 02:14:13
+ * @LastEditTime: 2020-12-26 19:50:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\ScmModal\index.d.ts
  */
+
 /**
  * 模态窗组件
  */
@@ -23,7 +24,17 @@ const ScmModal: {
     /**
      * 是否显示模态窗
      */
-    visible: boolean
+    visible: boolean,
+    /**
+     * 缓存组件
+     */
+    cached: boolean
+  },
+  listeners: {
+    /**
+     * 关闭模态窗事件
+     */
+    close: () => void
   },
   slots: {
     /**
@@ -40,4 +51,5 @@ const ScmModal: {
     footer: any,
   }
 }
+
 export default ScmModal

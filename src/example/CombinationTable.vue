@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-24 12:57:28
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-26 20:07:15
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
@@ -59,12 +59,54 @@ export default {
   },
   data() {
     return {
-      loading:true,
+      loading:false,
       list: [
         { name: '换一换', age: 18, income: 3000 },
         { name: 'mff', age: 18, income: 3500 }
       ],
       queryBarSchema:[
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名',
+          type: 'string',
+          clearable: true
+        },
         {
           field:'name',
           label:'姓名',

@@ -1,11 +1,12 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 16:04:50
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-26 19:48:12
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
+
 import './style/index.scss';
 
 const schema = [

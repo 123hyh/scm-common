@@ -1,9 +1,9 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 00:46:41
- * @LastEditTime: 2020-12-26 02:08:36
+ * @LastEditTime: 2020-12-26 19:47:35
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 模态窗组件
  * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\ScmModal\index.js
  */
 import ScmModal from './ScmModal.vue';
@@ -17,10 +17,14 @@ export default {
     visible: {
       type:Boolean,
       default: false
+    },
+    cached:{
+      type: Boolean,
+      default: true
     }
   },
   render( h ) {
-    const base =  h( 'component', {
+    const BASE =  h( 'component', {
       is: this.visible ? 'ScmModal' : '',
       scopedSlots: this.$scopedSlots,
       attrs: this.$attrs,
@@ -31,7 +35,7 @@ export default {
         ...this.$listeners
       }
     } );
-    const keep = h( 'keep-alive',  [ base ]  );
-    return  keep;
+    const KEEP = h( 'keep-alive', [ BASE ]  );
+    return this.cached ? KEEP : BASE;
   }
 };
