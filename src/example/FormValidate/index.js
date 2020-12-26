@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 21:50:49
- * @LastEditTime: 2020-12-27 00:56:27
+ * @LastEditTime: 2020-12-27 01:16:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\FormValidate\index.js
@@ -12,6 +12,7 @@ import { Collector } from './collector';
 
 export default {
   name: 'FormValidate',
+  componentName: 'ElFormItem',
   props: {
     field: {
       type: String,
@@ -34,6 +35,8 @@ export default {
     };
   },
   mounted() {
+    this.handlerRegisterEvent();
+    
     this.$watch( 'rules', () => {
       if ( this.field ) {
         this.collector.addValidate( this.field, () => {
@@ -50,6 +53,15 @@ export default {
         } );
       }
     }, { deep: true, immediate: true } );
+  },
+  methods:{
+    handlerRegisterEvent() {
+      this.$on( 'el.form.blur', () => {
+        debugger;
+      } );
+      this.$on( 'el.form.change', () => {
+      } );
+    }
   },
   render( h ) {
     return h(
