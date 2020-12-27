@@ -1,11 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 23:36:48
- * @LastEditTime: 2020-12-24 23:42:34
+ * @LastEditTime: 2020-12-27 23:32:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.d.ts
  */
+
+import { Collector } from "../Form/FormValidate/collector"
 
 /**
 * 查找 tableInput Schema 的 字段
@@ -26,7 +28,11 @@ declare const TableInput:{
     /**
      * 表格输入数据集合
      */
-    formData: object
+    formData: object,
+    /**
+     * 校验收集器
+     */
+    collector: Collector
   }
 }
 export default pickTableInputSchemaItem

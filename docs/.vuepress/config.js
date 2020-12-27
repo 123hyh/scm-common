@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 17:29:49
+ * @LastEditTime: 2020-12-27 23:12:35
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
@@ -102,6 +102,10 @@ module.exports = {
                     path: '/commonComponent/pagination/',
                   },
                 ],
+              },
+              {
+                title:'表格Input',
+                path:'/commonComponent/TableInput/'
               },
               {
                 title: '模态窗',

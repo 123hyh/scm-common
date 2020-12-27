@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 18:18:37
+ * @LastEditTime: 2020-12-27 23:14:37
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -25,55 +25,58 @@ import { useCollertor } from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
 export default {
   components: {
-    
     TableInput
-    
   },
-  data:() => ( {
+  data: () => ( {
     collector: useCollertor(),
-    schema:[
+    schema: [
       [
         {
-          type:'label',
-          label:'姓名'
+          type: 'label',
+          label: '姓名'
         },
         {
-          type:'string',
-          field:'customerName',
-          rules:{
+          type: 'string',
+          field: 'customerName',
+          rules: {
+            required: true,
+            length: { min: 3, max: 4 },
             use: {
               checkInt( v ) {
-                return isEmpty( v ) || /^[0-9]+$/.test( v );
+                const isPass = isEmpty( v ) || /^[0-9]+$/.test( v );
+                debugger;
+                return isPass;
               }
             },
             message: {
+              length: '长度3-4',
               checkInt: '必需整数',
               required: '必填'
             }
           }
         },
         {
-          type:'label',
-          label:'年龄'
+          type: 'label',
+          label: '年龄'
         },
         {
-          type:'string',
-          field:'age'
+          type: 'string',
+          field: 'age'
         },
         {
-          type:'label',
-          label:'性别'
+          type: 'label',
+          label: '性别'
         },
         {
-          type:'select',
-          options:[
+          type: 'select',
+          options: [
             {
-              value:0,
-              label:'女'
+              value: 0,
+              label: '女'
             },
             {
-              label:'男',
-              value:1
+              label: '男',
+              value: 1
             }
           ]
         }
@@ -84,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.test-table-input{
+.test-table-input {
   margin: 50px 0;
 }
 </style>

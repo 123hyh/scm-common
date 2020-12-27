@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-27 17:26:39
- * @LastEditTime: 2020-12-27 18:13:38
+ * @LastEditTime: 2020-12-27 23:28:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\docs\directives\validate\README.md
@@ -23,6 +23,22 @@ import {
   指令必须绑定在组件上,例如 Element-ui 的 input组件
 :::
 
+- ## props:
+----- 
+
+| 属性名 | 类型  | 是否必传 | 默认值 | 备注 |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| collertor | object | 是 | - | 收集器 |
+| rules | object | 是 | - | 表单的校验规则（参考 validate 规则） |
+| field | string | 是 | - | 字段名 |
+
+- ## collertor: 校验收集器
+
+-----
+| 方法名 | 参数  |  备注 |
+| ----------- | ----------- | ----------- |
+| validate | validate(fields: string[] \| undefined)  | 校验表单， 不传入参数则校验所收集的所有字段 |
+
 ```vue
 <template>
   <div>
@@ -31,6 +47,7 @@ import {
       rules,
       field:'name'
     }"/>
+    <button @click.stop="handlerValidate">校验</button>
   </div>
 </template>
 <script>
@@ -48,7 +65,10 @@ export default{
      * */
     rules:{
       required: true,
-      length: { min: 3, max: 4 },
+      length: { 
+        min: 3, 
+        max: 4 
+      },
       use: {
         /**
          * 自定义校验方法
@@ -56,18 +76,28 @@ export default{
          * @return { boolean }
          * */
         checkInt(value){
-          return /^[0-9]+$/.test(v)
+          return  /^[0-9]+$/.test(v)
         }
       }
       message: {
         required: '必填',
+        length:'长度3~4'
         /**
          * 自定义校验方法错误提示语
          * */
         checkInt:'不是整数'
       }
     }
-  })
+  }),
+  methods:{
+    handlerValidate(){
+      /* 校验全部 */
+      this.collertor.validate()
+      /* 校验部分字段 */
+      this.collertor.validate( [ 'name', 'age' ] )
+
+    }
+  }
 }
 </script>
 ```
