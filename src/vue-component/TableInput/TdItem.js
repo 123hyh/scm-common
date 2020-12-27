@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 11:38:06
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:11:46
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -15,10 +15,10 @@ import CheckboxItem from '../Form/FormItem/Checkbox.js';
 import SwitchItem from '../Form/FormItem/Switch';
 const aliasComName = {
   string: 'StringItem',
-  select:'SelectItem',
-  date:'DateItem',
-  radio:'RadioItem',
-  checkbox:'CheckboxItem',
+  select: 'SelectItem',
+  date: 'DateItem',
+  radio: 'RadioItem',
+  checkbox: 'CheckboxItem',
   switch: 'SwitchItem'
 };
 export default {
@@ -43,10 +43,14 @@ export default {
     schema: {
       type: Object,
       required: true
+    },
+    collector: {
+      type: Object,
+      required: false
     }
   },
   render( h ) {
-    const { schema: { field, type, visible = true,  label }, formData } = this;
+    const { schema: { field, type, visible = true, label, rules }, formData } = this;
     return visible ? h(
       'td',
       {
@@ -62,17 +66,21 @@ export default {
       },
       [
 
-        type && type !== 'slot'  && visible && h( aliasComName[ type ], {
-          props: {
-            value: formData[ field ],
-            conf:this.schema
-          },
-          on:{
-            input: v  => {
-              this.$set( this.formData, field, v ); 
+        type && type !== 'slot' && visible && h(
+          aliasComName[ type ], 
+          {
+            props: {
+              value: formData[ field ],
+              conf: this.schema,
+              collector: this.collector
+            },
+            on: {
+              input: v => {
+                this.$set( this.formData, field, v );
+              }
             }
-          }
-        } ),
+          } 
+        ),
 
         /* 插槽 */
         visible && type === 'slot' && this.$scopedSlots[ field ](),

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2020-12-26 21:55:35
+ * @LastEditTime: 2020-12-27 15:32:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -56,7 +56,7 @@ import CombinationForm from './CombinationForm.vue';
 import CombinationTable from './CombinationTable.vue';
 import Print from './Print.vue';
 import TableInput  from './TableInput.vue';
-import FormValidate from './FormValidate/example.vue';
+import FormValidate from './FormValidate/index.vue';
 export default {
   components:{
     Tabs,

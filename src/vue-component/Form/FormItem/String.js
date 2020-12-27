@@ -1,14 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 16:36:25
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:56:53
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:07:25
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\String.js
  */
 import { debounce } from 'lodash-es';
 import { Input } from 'element-ui';
-
+import { validate } from '../FormValidate/directive';
 export default {
   abstract: true,
   components:{
@@ -23,10 +23,21 @@ export default {
       type: [ String, Number ],
       default: ''
     },
+
+    /* 校验收集器 */
+    collector:{
+      type:Object,
+      required: false
+    },
     entity: {
       type: String,
       default: ''
     }
+  },
+  directives:{
+
+    /* 校验输入 */
+    validate
   },
   methods: {
     get emit() {
@@ -41,7 +52,12 @@ export default {
       showPassword = false,
       disabled = false,
       clearable = false,
-      placeholder = ''
+      placeholder = '',
+
+      /**
+       * 校验规则
+       */
+      rules = {}
     } = this.conf;
     return h(
       'el-input',
@@ -52,6 +68,16 @@ export default {
           disabled,
           clearable
         },
+        directives: [
+          field && this.collector &&  {
+            name:'validate',
+            value:{
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         attrs: {
           placeholder: this.entity
             ? this.$t( `${ this.entity }.${ placeholder }` )

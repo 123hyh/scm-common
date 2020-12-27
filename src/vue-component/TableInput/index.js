@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-26 19:48:12
+ * @LastEditTime: 2020-12-27 15:42:18
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -75,6 +75,10 @@ export default {
     formData: {
       type: Object,
       default: () => ( {} )
+    },
+    collector:{
+      type:Object,
+      required:false
     }
   },
   render( h ) {
@@ -97,7 +101,8 @@ export default {
               props: {
                 size: 'small',
                 schema: item,
-                formData: this.formData
+                formData: this.formData,
+                collector: this.collector
               },
               on:{
                 ...this.$listeners

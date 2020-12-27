@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 20:03:26
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 11:30:42
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 15:42:47
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TrItem.js
  */
@@ -20,6 +20,10 @@ export default {
     schema: {
       type: Array,
       required: true
+    },
+    collector:{
+      type:Object,
+      required: false
     }
   },
   render( h ) {
@@ -36,7 +40,8 @@ export default {
             },
             props: {
               formData: this.formData,
-              schema: item
+              schema: item,
+              collector: this.collector
             }
           }
         )

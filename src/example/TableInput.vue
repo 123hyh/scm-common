@@ -1,27 +1,90 @@
 <!--
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-24 20:15:11
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 18:18:37
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
 <template>
-  <TableInput>
-    <template #age>
-      <input type="text">
-    </template>
-  </TableInput>
+  <div class="test-table-input">
+    <TableInput
+      :schema="schema"
+      :collector="collector"
+      >
+      <template #age>
+        <input type="text">
+      </template>
+    </TableInput>
+  </div>
 </template>
 
 <script>
 import TableInput from '../vue-component/TableInput/index';
+import { useCollertor } from '../vue-component/Form/FormValidate/directive';
+import { isEmpty } from '../utils';
 export default {
   components: {
+    
     TableInput
-  }
+    
+  },
+  data:() => ( {
+    collector: useCollertor(),
+    schema:[
+      [
+        {
+          type:'label',
+          label:'姓名'
+        },
+        {
+          type:'string',
+          field:'customerName',
+          rules:{
+            use: {
+              checkInt( v ) {
+                return isEmpty( v ) || /^[0-9]+$/.test( v );
+              }
+            },
+            message: {
+              checkInt: '必需整数',
+              required: '必填'
+            }
+          }
+        },
+        {
+          type:'label',
+          label:'年龄'
+        },
+        {
+          type:'string',
+          field:'age'
+        },
+        {
+          type:'label',
+          label:'性别'
+        },
+        {
+          type:'select',
+          options:[
+            {
+              value:0,
+              label:'女'
+            },
+            {
+              label:'男',
+              value:1
+            }
+          ]
+        }
+      ]
+    ]
+  } )
 };
 </script>
 
-<style>
+<style scoped>
+.test-table-input{
+  margin: 50px 0;
+}
 </style>

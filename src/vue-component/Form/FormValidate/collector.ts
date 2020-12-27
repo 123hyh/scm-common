@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 22:01:32
- * @LastEditTime: 2020-12-27 00:44:05
+ * @LastEditTime: 2020-12-27 15:33:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\FormValidate\collector.ts
  */
-import { forEachObject } from '../../utils';
+import { forEachObject } from '../../../utils/index';
 import Schema, { SchemaDefinition } from 'validate';
 
 abstract class CollectorMeth {

@@ -1,150 +1,185 @@
 <!--
  * @Author: your name
- * @Date: 2020-11-06 21:46:52
- * @LastEditTime: 2020-12-22 23:38:56
+ * @Date: 2020-12-26 21:53:31
+ * @LastEditTime: 2020-12-27 17:21:18
  * @LastEditors: Please set LastEditors
- * @Description: 测试 scm from 组件
- * @FilePath: \SCM_2.0\src\views\example\src\formvalidate\example.vue
+ * @Description: 表单校验组件
+ * @FilePath: \scm_frontend_common\src\example\FormValidate\example.vue
 -->
 <template>
-  <div>
-    <div class="test-form-validate">
-      <ScmFormItem
-        :collector="formCollector"
-        :rules="nameRules"
-        field="name"
-        :value="formModel.name"
-        >
-        <template #label>
-          name
-        </template>
-        <ElInput
-          id="name"
-          v-model="formModel.name"
-          />
-      </ScmFormItem>
-      <ScmFormItem
-        :collector="formCollector"
-        :rules="remarkRules"
-        field="remark"
-        :value="formModel.remark"
-        >
-        <template #label>
-          remark
-        </template>
-        <ElInput v-model="formModel.remark"/>
-      </ScmFormItem>
-    </div>
+  <div class="test-form-validate">
+    <!-- 组件测试 -->
+    <FormValidate
+      :collector="collector"
+      field="namea"
+      :rules="{
+        required: true,
+        length: { min: 3, max: 4 },
+        use: {
+          checkInter: (value, formData, field) => {
+            return /^[0-9]+$/.test(value);
+          },
+        },
+        message: {
+          checkInter: '不是整数',
+        },
+      }"
+      :value="formData.namea"
+      >
+      <ElInput v-model="formData.namea"/>
+    </FormValidate>
+    <FormValidate
+      :collector="collector"
+      field="agea"
+      :rules="{
+        required: true,
+        message: {
+          match: '测试age',
+        },
+        match: /^[0-9]+$/,
+      }"
+      :value="formData.agea"
+      >
+      <ElInput v-model="formData.agea"/>
+    </FormValidate>
 
-    <ElButton
-      type="primary"
-      @click="handlerValidate"
-      >
+    <!-- 指令测试 -->
+    <ElInput
+      v-model="formData.name"
+      v-validate="{
+        collector: collector,
+        field: 'name',
+        rules: {
+          required: true,
+          message: {
+            required: '必填',
+          },
+        },
+      }"
+      />
+    <ElInput
+      v-model="formData.sex"
+      v-validate="{
+        collector: collector,
+        field: 'sex',
+        rules: sexRule
+      }"
+      />
+    <button @click.stop="handlerValidate">
       校验
-    </ElButton>
-    <ElButton
-      type="primary"
-      @click="resetValidate"
-      >
-      重置校验信息
-    </ElButton>
-    <ElButton
-      type="primary"
-      @click="handlerDeleteRemarkRules"
-      >
-      删除remark的rules
-    </ElButton>
+    </button>
+    <button @click.stop="()=>handlerValidate(['sex'])">
+      校验单个
+    </button>
+    <button @click.stop="()=>updateRules()">
+      添加非必填校验 & 校验整数
+    </button>
+    <button @click.stop="addRules">
+      添加单个校验
+    </button>
+    <button @click.stop="()=>formData.sex = 'a1'">
+      动态修改值
+    </button>
+    <button @click.stop="clearRules">
+      清空校验
+    </button>
   </div>
 </template>
 
 <script>
-import ScmFormItem, { useCollector } from './Validate';
-import { Button, Input } from 'element-ui';
-import { PublishSubscribe } from './publishSubscribe';
-
+import { Input } from 'element-ui';
+import FormValidate from './index';
+import { Collector } from './collector';
+import { validate } from './directive';
+import { isEmpty } from '../../../utils';
 export default {
+  name: 'FormValidateexample',
   components: {
-    ScmFormItem,
-    ElButton: Button,
-    ElInput:Input
+
+    FormValidate,
+    ElInput: Input
   },
-  data() {
-    return {
-      enable: true,
-      formCollector: new PublishSubscribe(),
-      nameRules: [
-        {
-          required: true,
-          trigger: [ 'blur', 'change' ],
-          validator: ( rule, value, cb ) => {
-            if ( value !== '2' ) {
-              cb( '错误' );
-            } else {
-              cb();
-            }
-          }
-        }
-      ],
-      remarkRules: [
-        {
-          required: true,
-          message: '必填',
-          trigger: [ 'blur', 'change' ]
-        }
-      ],
-      formModel: {
+  directives: {
+    validate
+  },
+  data: () => ( {
+    collector: new Collector(),
+    sexRule:{},
+    formData: {    }
+  } ),
+  mounted() {
+    setTimeout( () => {
+      this.formData = {
         name: '',
-        remark: ''
-      }
-    };
+        sex: '18',
+        namea:'',
+        agea:''
+      };
+    }, 2000 );
   },
   methods: {
 
     /**
-     * 校验字段
-     * @description:
+     * 校验
+     * @description: 
      * @param {*}
      * @return {*}
      */
-    async handlerValidate() {
-      this.enable = false;
-      const x = await this.formCollector.validate();
-      console.log( '校验结果：', x );
+    async handlerValidate( fields = [] ) {
+      const x = await this.collector.validate( fields );
+      debugger;
     },
 
     /**
-     * 清空校验信息
-     * @description:
-     * @param {*}
-     * @return {*}
-     */
-    resetValidate() {
-      this.formCollector.resetValidate();
+   * 清空校验
+   * @description: 
+   * @param {*}
+   * @return {*}
+   */  
+    clearRules() {
+      this.sexRule = {};
     },
 
     /**
-     * 清空一个rules
-     * @description:
-     * @param {*}
-     * @return {*}
+     * 添加rules
      */
-    handlerDeleteRemarkRules() {
-      this.remarkRules = [];
+    addRules() {
+      this.sexRule = {
+        required: true,
+        use: {
+          checkInt( v ) {
+            return /^[0-9]+$/.test( v );
+          }
+        },
+        message: {
+          checkInt: '必需整数',
+          required: '必填'
+        }
+      };
+    },
+
+    /**
+     * 修改校验规则
+     */
+    updateRules() {
+      this.sexRule = {
+        use: {
+          checkInt( v ) {
+            return isEmpty( v ) || /^[0-9]+$/.test( v );
+          }
+        },
+        message: {
+          checkInt: '必需整数',
+          required: '必填'
+        }
+      };
     }
   }
 };
 </script>
 
-<style lang='scss'>
+<style scoped>
 .test-form-validate {
-  display: flex;
-  .scm-validate-wrap {
-    display: flex;
-    flex-basis: 25%;
-    margin-bottom: 1.2em;
-    .scm-validate-label {
-      width: 100px;
-    }
-  }
+  margin: 50px 0;
 }
 </style>

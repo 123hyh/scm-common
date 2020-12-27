@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 21:50:49
- * @LastEditTime: 2020-12-27 01:16:20
+ * @LastEditTime: 2020-12-27 12:51:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\FormValidate\index.js
@@ -9,7 +9,6 @@
 import './style/index.scss';
 
 import { Collector } from './collector';
-
 export default {
   name: 'FormValidate',
   componentName: 'ElFormItem',
@@ -36,7 +35,7 @@ export default {
   },
   mounted() {
     this.handlerRegisterEvent();
-    
+
     this.$watch( 'rules', () => {
       if ( this.field ) {
         this.collector.addValidate( this.field, () => {
@@ -54,12 +53,13 @@ export default {
       }
     }, { deep: true, immediate: true } );
   },
-  methods:{
+  methods: {
     handlerRegisterEvent() {
       this.$on( 'el.form.blur', () => {
-        debugger;
+        console.log( 'blur' );
       } );
       this.$on( 'el.form.change', () => {
+        console.log( 'change' );
       } );
     }
   },
@@ -67,8 +67,8 @@ export default {
     return h(
       'div',
       {
-        attrs:{
-          'aria-controls':this.errMsg
+        attrs: {
+          'aria-controls': this.errMsg
         },
         class: [
           this.errMsg && 'poptip-validate-err',
