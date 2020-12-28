@@ -2,9 +2,9 @@
  * @Author: huangyuhui
  * @Date: 2020-11-05 11:38:41
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-02 15:33:03
+ * @LastEditTime: 2020-12-28 11:38:21
  * @Description: 表单自定义校验方法
- * @FilePath: \customs\src\components\common\Form\validators.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\validators.js
  */
 import { debounce } from 'lodash-es';
 
@@ -65,4 +65,21 @@ export function checkIntegerDecimal( decimal = 2 ) {
       }
     }
   }, 150 );
+}
+
+/**
+ * 小数正则
+ * @param {*} decimal 
+ */
+export function decimalRegExp( decimal ) {
+  return new RegExp( 
+    `^([-+]?[0-9]+[\\d]*(.[0-9]{1,${ decimal }})?)$`
+  );
+}
+
+/**
+ * 整数正则
+ */
+export function integerRegExp() {
+  return /^-?[1-9]\d*$/;
 }
