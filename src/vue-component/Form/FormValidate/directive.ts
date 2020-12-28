@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2020-12-28 21:30:53
+ * @LastEditTime: 2020-12-28 21:35:40
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -24,12 +24,12 @@ function setElemMsg( el: HTMLElement, msg: string, fixed?:boolean ) {
 
   if ( fixed ) {
     const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
-      return elem.classList.contains( 'poptip-validate-err' );
+      return elem.classList.contains( 'poptip-err-fixed' );
     } );
     if ( msg ) {
       if ( isEmpty( errorNode ) ) {
         const divElem = createElem();
-        divElem.classList.add( 'poptip-validate-err' );
+        divElem.classList.add( 'poptip-err-fixed' );
         divElem.setAttribute( 'aria-controls', msg );
         divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
         el.appendChild( divElem );
