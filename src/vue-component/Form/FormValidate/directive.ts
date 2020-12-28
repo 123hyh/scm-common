@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2020-12-28 20:40:36
+ * @LastEditTime: 2020-12-28 21:30:53
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -20,29 +20,39 @@ const createElem = () => document.createElement( 'div' );
  * @param el 
  * @param msg 
  */
-function setElemMsg( el: HTMLElement, msg: string ) {
-  const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
-    return elem.classList.contains( 'poptip-validate-err' );
-  } );
+function setElemMsg( el: HTMLElement, msg: string, fixed?:boolean ) {
 
-  if ( msg ) {
-    if ( isEmpty( errorNode ) ) {
-      const divElem = createElem();
-      divElem.classList.add( 'poptip-validate-err' );
-      divElem.setAttribute( 'aria-controls', msg );
-      divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
-      el.appendChild( divElem );
+  if ( fixed ) {
+    const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
+      return elem.classList.contains( 'poptip-validate-err' );
+    } );
+    if ( msg ) {
+      if ( isEmpty( errorNode ) ) {
+        const divElem = createElem();
+        divElem.classList.add( 'poptip-validate-err' );
+        divElem.setAttribute( 'aria-controls', msg );
+        divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
+        el.appendChild( divElem );
+      } else {
+        ( <HTMLElement>errorNode ).style.display = 'block';
+        errorNode.setAttribute( 'aria-controls', msg );
+      }
+
     } else {
-      ( <HTMLElement>errorNode ).style.display = 'block';
-      errorNode.setAttribute( 'aria-controls', msg );
-
-    }
-
+      if ( errorNode ) {
+        ( <HTMLElement>errorNode ).style.display = 'none';
+      }
+    } 
   } else {
-    if ( errorNode ) {
-      ( <HTMLElement>errorNode ).style.display = 'none';
+    if ( msg ) {
+      el.classList.add( 'poptip-validate-err' );
+      el.setAttribute( 'aria-controls', msg );
+    } else {
+      el.classList.remove( 'poptip-validate-err' );
+      el.removeAttribute( 'aria-controls' );
     }
   }
+  
 }
 
 /**
@@ -52,7 +62,7 @@ function setElemMsg( el: HTMLElement, msg: string ) {
  * @param vnode 
  */
 function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) {
-  const { field, rules, collector } = <any>bindValue;
+  const { field, rules, collector, fixed = false } = <any>bindValue;
 
   /* 收集器 */
   const collectorInstance: Collector = collector;
@@ -64,10 +74,10 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
       value: ( <any>bindCom ).value,
       rules,
       errCb: ( msg: string ) => {
-        setElemMsg( el, msg );
+        setElemMsg( el, msg, fixed );
       },
       succCb: () => {
-        setElemMsg( el, '' );
+        setElemMsg( el, '', fixed );
       }
     };
   } );
