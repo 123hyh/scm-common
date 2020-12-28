@@ -54,7 +54,6 @@
     "ts-node": "^9.1.0",
     "typescript": "^4.1.2",
     "url-loader": "^4.1.1",
-    "validate": "^5.1.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
@@ -72,6 +71,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
+    "validate": "^5.1.0",
     "vue-js-modal": "^2.0.0-rc.6"
   }
 }
