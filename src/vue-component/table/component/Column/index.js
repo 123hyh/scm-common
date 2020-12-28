@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 15:35:45
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-07 18:59:35
+ * @LastEditTime: 2020-12-28 19:02:04
  * @Description: table column 组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\component\Column\index.js
  */
@@ -67,14 +67,14 @@ export default {
         scopedSlots: ( () => {
           const slots = {};
           slots.default = props => {
-            const { row } = props;
+            const { row, column, $index } = props;
 
             /* 点击列 时 修改 可编辑状态 */
             return h(
               'span',
               [
                 this.columnSlots[ field ]
-                  ? this.columnSlots[ field ]( row )
+                  ? this.columnSlots[ field ]( row, column, $index )
                   : row[ field ]
               ]
             );
