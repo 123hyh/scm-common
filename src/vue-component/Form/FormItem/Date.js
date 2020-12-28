@@ -2,12 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:17:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-14 13:13:47
+ * @LastEditTime: 2020-12-27 17:08:41
  * @Description:
  * @FilePath: \SCM 2.0\src\components\common\Form\FormItem\Date.js
  */
 import { debounce } from 'lodash-es';
 import { DatePicker } from 'element-ui';
+import { validate } from '../FormValidate/directive';
+
 export default {
   abstract: true,
   components:{
@@ -22,6 +24,13 @@ export default {
       type: [ String, Array ],
       default: ''
     },
+
+    /* 校验收集器 */
+    collector: {
+      type: Object,
+      required: false
+    },
+
     entity: {
       type: String,
       default: ''
@@ -34,6 +43,11 @@ export default {
       }, 200 );
     }
   },
+  directives: {
+
+    /* 校验输入 */
+    validate
+  },
   render( h ) {
     const {
       field = '',
@@ -44,11 +58,22 @@ export default {
       format = 'yyyy-MM-dd',
       placeholder = '',
       startPlaceholder	= '',
-      endPlaceholder	= ''
+      endPlaceholder	= '',
+      rules = {}
     } = this.conf;
     return h(
       'el-date-picker',
       {
+        directives: [
+          field && this.collector && {
+            name: 'validate',
+            value: {
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         props: {
           value: this.value,
           disabled,

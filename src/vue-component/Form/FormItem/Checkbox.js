@@ -1,13 +1,15 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:56:32
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:07:50
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\Checkbox.js
  */
 import { debounce } from 'lodash-es';
 import { CheckboxGroup, Checkbox } from 'element-ui';
+import { validate } from '../FormValidate/directive';
+
 export default {
   abstract: true,
   components:{
@@ -26,7 +28,18 @@ export default {
     entity: {
       type: String,
       default: ''
+    },
+
+    /* 校验收集器 */
+    collector: {
+      type: Object,
+      required: false
     }
+  },
+  directives: {
+
+    /* 校验输入 */
+    validate
   },
   methods: {
     get emit() {
@@ -40,7 +53,8 @@ export default {
       field = '',
       disabled = false,
       placeholder = '',
-      options = []
+      options = [],
+      rules = {}
     } = this.conf;
     return h(
       'el-checkbox-group',
@@ -49,6 +63,16 @@ export default {
           value: this.value,
           disabled
         },
+        directives: [
+          field && this.collector && {
+            name: 'validate',
+            value: {
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         attrs: {
           placeholder: this.entity
             ? this.$t( `${ this.entity }.${ placeholder }` )

@@ -1,13 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 16:36:25
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:57:02
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:11:10
  * @Description: 文本域
  * @FilePath: \customs\src\components\common\Form\FormItem\Textarea.js
  */
 import { debounce } from 'lodash-es';
 import { Input } from 'element-ui';
+import { validate } from '../FormValidate/directive';
 
 export default {
   abstract: true,
@@ -23,10 +24,21 @@ export default {
       type: String,
       default: ''
     },
+
+    /* 校验收集器 */
+    collector: {
+      type: Object,
+      required: false
+    },
     entity: {
       type: String,
       default: ''
     }
+  },
+  directives: {
+
+    /* 校验输入 */
+    validate
   },
   methods: {
     get emit() {
@@ -40,11 +52,22 @@ export default {
       field,
       disabled = false,
       clearable = false,
-      placeholder = ''
+      placeholder = '',
+      rules = {}
     } = this.conf;
     return h(
       'el-input',
       {
+        directives: [
+          field && this.collector && {
+            name: 'validate',
+            value: {
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         props: {
           value: this.value,
           type: 'textarea',

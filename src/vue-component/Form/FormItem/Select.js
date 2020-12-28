@@ -1,13 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 11:12:25
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:10:26
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
 import { debounce } from 'lodash-es';
 import { Select, Option } from 'element-ui';
+import { validate } from '../FormValidate/directive';
 
 export default {
   abstract: true,
@@ -23,10 +24,21 @@ export default {
     value: {
       type: [ String, Number, Array, Boolean ]
     },
+
+    /* 校验收集器 */
+    collector: {
+      type: Object,
+      required: false
+    },
     entity: {
       type: String,
       default: ''
     }
+  },
+  directives: {
+
+    /* 校验输入 */
+    validate
   },
   methods: {
     get emit() {
@@ -42,12 +54,22 @@ export default {
       clearable = false,
       multiple = false,
       placeholder = '',
-
-      options = []
+      options = [],
+      rules = {}
     } = this.conf;
     return h(
       'el-select',
       {
+        directives: [
+          field && this.collector && {
+            name: 'validate',
+            value: {
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         props: {
           value: this.value,
           filterable: true,

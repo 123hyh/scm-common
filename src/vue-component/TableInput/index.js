@@ -1,11 +1,12 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-25 16:04:50
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 15:42:18
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
+
 import './style/index.scss';
 
 const schema = [
@@ -74,6 +75,10 @@ export default {
     formData: {
       type: Object,
       default: () => ( {} )
+    },
+    collector:{
+      type:Object,
+      required:false
     }
   },
   render( h ) {
@@ -96,7 +101,8 @@ export default {
               props: {
                 size: 'small',
                 schema: item,
-                formData: this.formData
+                formData: this.formData,
+                collector: this.collector
               },
               on:{
                 ...this.$listeners

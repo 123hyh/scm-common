@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 14:05:47
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 23:12:35
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
@@ -42,6 +42,17 @@ module.exports = {
               {
                 title: '日期时间',
                 path:'/filters/date/'
+              }
+            ]
+          },
+          {
+            title:'指令',
+            path: '/directives/',
+            initialOpenGroupIndex: 0,
+            children:[
+              {
+                title:'表单校验指令',
+                path:'/directives/validate/'
               }
             ]
           },
@@ -91,6 +102,10 @@ module.exports = {
                     path: '/commonComponent/pagination/',
                   },
                 ],
+              },
+              {
+                title:'表格Input',
+                path:'/commonComponent/TableInput/'
               },
               {
                 title: '模态窗',

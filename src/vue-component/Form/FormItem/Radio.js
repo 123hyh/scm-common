@@ -1,13 +1,14 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-11-26 09:56:44
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 17:09:34
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\Radio.js
  */
 import { debounce } from 'lodash-es';
 import { RadioGroup, Radio } from 'element-ui';
+import { validate } from '../FormValidate/directive';
 
 export default {
   abstract: true,
@@ -23,10 +24,21 @@ export default {
     value: {
       type: [ String, Number, Boolean ]
     },
+
+    /* 校验收集器 */
+    collector: {
+      type: Object,
+      required: false
+    },
     entity: {
       type: String,
       default: ''
     }
+  },
+  directives: {
+
+    /* 校验输入 */
+    validate
   },
   methods: {
     get emit() {
@@ -40,11 +52,22 @@ export default {
       field = '',
       disabled = false,
       placeholder = '',
-      options = []
+      options = [],
+      rules = {}
     } = this.conf;
     return h(
       'el-radio-group',
       {
+        directives: [
+          field && this.collector && {
+            name: 'validate',
+            value: {
+              collector: this.collector,
+              field,
+              rules
+            }
+          }
+        ].filter( Boolean ),
         props: {
           value: this.value,
           disabled
