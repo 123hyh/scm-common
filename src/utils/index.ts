@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-11 11:18:07
+ * @LastEditTime: 2020-12-28 20:23:08
  * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
@@ -28,4 +28,24 @@ export { forEachObject } from './object';
 
 export function isEmpty( data: any ) {
   return data === undefined || data === null || data === '' || Number.isNaN( data );
+}
+
+
+/**
+ * 指定dom节点 向下查找指定节点
+ * @description: 
+ * @param { HTMLElement } node 开始查找的节点
+ * @param {(node: HTMLElement) => boolean} condition 条件回调方法
+ * @return {HTMLElement | undefined}
+ */
+export function findDomNode( node:Element, conditionCb:( elem:Element )=> boolean ) {
+  return [ ...node.children ].reduce<Array<Element>>( ( prev, item ) => {
+    const target = conditionCb( item );
+    if ( target ) {
+      prev.push( item );
+    } else {
+      prev.push( ...findDomNode( item, conditionCb ) );
+    }
+    return prev;
+  }, [] );
 }

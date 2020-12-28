@@ -3,12 +3,12 @@ $color: #fff;
 $triangle: 8px;
 $distance: -12px;
 .poptip-validate-err {
-  position: relative;
+  position: fixed;
   z-index: 101;
   &::before,
   &::after {
-    visibility: hidden;
-    opacity: 0;
+  /*   visibility: hidden;
+    opacity: 0; */
     transform: translate3d(0, 0, 0);
     transition: all 0.3s ease 0.2s;
     box-sizing: border-box;
@@ -21,7 +21,7 @@ $distance: -12px;
     border-style: solid;
     border-width: $triangle $triangle 0 $triangle;
     border-color: $poptipBg transparent transparent transparent;
-    left: calc(2% - #{$triangle});
+    left: calc( #{$triangle});
     top: 0px;
     transform: translateX(0%) translateY($distance);
   }
