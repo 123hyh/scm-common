@@ -13,7 +13,7 @@ import {
   /* 指令 */ 
   validate,
   /* 收集器 */
-  useCollertor 
+  useCollector 
 } from 'scm-common/src/vue-component/Form/FormValidate/directive.ts';
 ```
 ::: tip
@@ -59,7 +59,7 @@ export default{
     /**
      * 收集器
      * */
-    collertor: useCollertor(),
+    collertor: useCollector(),
     /**
      * 校验规则（参考 validate 包）
      * */

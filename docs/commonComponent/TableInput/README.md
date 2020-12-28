@@ -39,7 +39,7 @@
 
 <script>
 import TableInput from 'scm-common/src/vue-component/TableInput/index.js';
-import { useCollertor } from 'scm-common/src/vue-component/Form/FormValidate/directive';
+import { useCollector } from 'scm-common/src/vue-component/Form/FormValidate/directive';
 import { isEmpty } from 'scm-common/src/utils';
 export default {
   components: {
@@ -49,7 +49,7 @@ export default {
     /**
      * 收集器
      * */
-    collector: useCollertor(),
+    collector: useCollector(),
     schema: [
       [
         {

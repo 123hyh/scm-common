@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2020-12-27 17:12:36
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-28 11:28:54
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \scm_frontend_common\src\example\FormValidate\directive.ts
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
  */
 import { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
@@ -103,6 +103,6 @@ export const validate: DirectiveOptions = {
 /**
  * 收集器
  */
-export function useCollertor() {
+export function useCollector() { 
   return new Collector();
 }

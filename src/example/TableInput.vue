@@ -21,14 +21,14 @@
 
 <script>
 import TableInput from '../vue-component/TableInput/index';
-import { useCollertor } from '../vue-component/Form/FormValidate/directive';
+import { useCollector } from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
 export default {
   components: {
     TableInput
   },
   data: () => ( {
-    collector: useCollertor(),
+    collector: useCollector(),
     schema: [
       [
         {
