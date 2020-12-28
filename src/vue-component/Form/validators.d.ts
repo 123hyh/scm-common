@@ -2,9 +2,9 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 13:58:44
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-03 14:08:19
+ * @LastEditTime: 2020-12-28 11:42:27
  * @Description: 
- * @FilePath: \customs\src\components\common\Form\validators.d.ts
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\validators.d.ts
  */
 import { Rules, ValidateSource, ValidateOption } from 'async-validator'
 
@@ -31,3 +31,13 @@ export declare const checkInteger: () => validator
  */
 
 export declare const checkIntegerDecimal: (decimal = 2) => validator
+
+/**
+ * 小数正则表达式
+ */
+export declare const decimalRegExp: (decimal = 2) => RegExp
+
+/**
+ * 整数正则表达式
+ */
+export declare const integerRegExp: () => RegExp
