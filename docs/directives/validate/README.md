@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-27 17:26:39
- * @LastEditTime: 2020-12-27 23:28:22
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-28 21:41:20
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\docs\directives\validate\README.md
 -->
@@ -31,6 +31,7 @@ import {
 | collertor | object | 是 | - | 收集器 |
 | rules | object | 是 | - | 表单的校验规则（参考 validate 规则） |
 | field | string | 是 | - | 字段名 |
+| fixed | boolean | 否 | - | 启用固定定位样式（在el-table中启用，避免层叠bug） |
 
 - ## collertor: 校验收集器
 
@@ -45,7 +46,8 @@ import {
     <ElInput v-validate="{
       collertor: collertor,
       rules,
-      field:'name'
+      field:'name',
+      fixed:false
     }"/>
     <button @click.stop="handlerValidate">校验</button>
   </div>
