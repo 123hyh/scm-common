@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-11-05 11:38:41
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 11:38:21
+ * @LastEditTime: 2020-12-28 11:39:27
  * @Description: 表单自定义校验方法
  * @FilePath: \scm_frontend_common\src\vue-component\Form\validators.js
  */
@@ -27,7 +27,7 @@ function isEmpty( value ) {
 export function checkInteger() {
   return debounce( function checkInteger( rules, value, callback ) {
     const { required = false } = rules;
-    const reg = /^-?[1-9]\d*$/;
+    const reg = integerRegExp();
     if ( required ) {
       callback( !reg.test( value ) ? new Error( '请输入整数' ) : undefined );
     } else {
@@ -43,7 +43,7 @@ export function checkInteger() {
  * @return {*}
  */
 export function checkIntegerDecimal( decimal = 2 ) {
-  const reg = new RegExp( `^([-+]?[0-9]+[\\d]*(.[0-9]{1,${ decimal }})?)$` );
+  const reg = decimalRegExp( decimal );
   function check( value, callback ) {
     if ( !/\d+/.test( value ) ) {
       callback( new Error( '请输入数字' ) );
