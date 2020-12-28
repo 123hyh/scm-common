@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 14:29:48
+ * @LastEditTime: 2020-12-28 14:59:41
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -83,7 +83,7 @@ export default {
         ),
 
         /* 插槽 */
-        visible && type === 'slot' && this.$scopedSlots[ field ](),
+        visible && type === 'slot' && this.$scopedSlots[ field ] && this.$scopedSlots[ field ](),
         visible && type === 'label' && label
       ].filter( Boolean )
     ) : undefined;
