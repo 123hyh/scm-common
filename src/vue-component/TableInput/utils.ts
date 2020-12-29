@@ -2,10 +2,11 @@
  * @Author: huangyuhui
  * @Date: 2020-12-29 14:57:03
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 15:09:09
- * @Description: 
+ * @LastEditTime: 2020-12-29 15:11:34
+ * @Description: 表格输入组件 schema 方法
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\utils.ts
  */
+
 /**
  * 挑选 表格输入schemaItem 自行判断方法
  * @param {function} conditionFn 条件回调，每次传入item
