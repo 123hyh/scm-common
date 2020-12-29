@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 17:29:09
+ * @LastEditTime: 2020-12-29 17:37:42
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -113,7 +113,7 @@ function generateCombination( h, options ) {
     props:{
       label
     }
-  }, generateOption( h, children  ) );
+  }, children.map( item => generateOption( h, item  ) ) );
 }
 function generateOption( h, item ) {
   const { label, value, disabled = false } = item;
