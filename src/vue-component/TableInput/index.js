@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 15:42:18
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-29 14:58:12
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -115,31 +115,46 @@ export default {
   }
 };
 
-/**
- * 查找 tableInput Schema 的 字段
- * @description: 
- * @param {*}
- * @return {*}
- */
-export function pickTableInputSchemaItem( fields = [], tableInputSchema = [] ) {
-  const fieldSets = new Set( fields );
-  function handler( schema = [], results = {} ) {
-    return schema.reduce( ( prev, item ) => {
-      const type = Object.prototype.toString.call( item ).slice( 8, -1 );
-      if ( type === 'Array' ) {
-        prev = { ...prev, ...handler( item ) };
-      } else if ( type === 'Object' && fieldSets.has( item.field )  ) {
-        const { field } = item;
-        const prevItem = prev[ field ];
-        if ( prevItem ) {
-          prev[ field ] = [ prevItem, item ];
-        } else {
-          prev[ field ] = item;
-        }
-      }
-      return prev;
-    }, results );
-  }
-  return handler( tableInputSchema );
-}
+// /**
+//  * 挑选 表格输入schemaItem 自行判断方法
+//  * @param {function} conditionFn 条件回调，每次传入item
+//  * @param {object[][]} tableInputSchema  表格输入schema
+//  */
+// export function selfPickTableInputSchemaItem( conditionFn, tableInputSchema = [] ) {
+//   if ( typeof conditionFn !== 'function' ) {
+//     throw new Error( 'selfPickTableInputSchemaItem方法 的conditionFn 参数比传入回调函数' );
+//   } 
+//   function handler( schema = [], results = {} ) {
+//     return schema.reduce( ( prev, item ) => {
+//       const type = Object.prototype.toString.call( item ).slice( 8, -1 );
+//       if ( type === 'Array' ) {
+//         prev = { ...prev, ...handler( item ) };
+//       } else if ( type === 'Object' && conditionFn( item ) ) {
+//         const { field } = item;
+//         const prevItem = prev[ field ];
+//         if ( prevItem ) {
+//           prev[ field ] = [ prevItem, item ];
+//         } else {
+//           prev[ field ] = item;
+//         }
+//       }
+//       return prev;
+//     }, results );
+//   }
+//   return handler( tableInputSchema );
+// }
 
+// /**
+//  * 查找 tableInput Schema 的 字段
+//  * @description: 
+//  * @param { string[] } fields 需要查找的字段集合
+//  * @param { object[][] } tableInputSchema 表格输入组件的schema
+//  * @return {*}
+//  */
+// export function pickTableInputSchemaItem( fields = [], tableInputSchema = [] ) {
+//   const fieldSets = new Set( fields );
+//   return selfPickTableInputSchemaItem( ( item ) => {
+//     return fieldSets.has( item.field );
+//   }, tableInputSchema );
+// }
+export * from './utils';
