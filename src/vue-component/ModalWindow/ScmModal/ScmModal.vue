@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-25 23:50:08
- * @LastEditTime: 2020-12-26 19:47:08
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-29 14:22:25
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\ScmModal.vue
+ * @FilePath: \scm_frontend_common\src\vue-component\ModalWindow\ScmModal\ScmModal.vue
 -->
 
 <template>
@@ -126,7 +126,7 @@ export default {
                 mHeight - fHeight - hHeight
               }px - ${this.getMarginY( header )} - ${this.getMarginY( footer )})`;
             }
-          }, 10 )
+          }, 100 )
         );
         setTimeout( () => {
           const target = this.$refs.scmModal.$refs.modal;
