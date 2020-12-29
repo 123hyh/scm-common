@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2020-12-28 21:35:40
+ * @LastEditTime: 2020-12-29 10:15:32
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -123,8 +123,9 @@ export const validate: DirectiveOptions = {
 
     addRules( el, bind.value, vnode );
   },
-  unbind() {
-
+  unbind( el, bind, vnode ) {
+    const { collector, field } = bind.value;
+    collector.unValidate( field );
   }
 };
 
