@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 17:26:02
+ * @LastEditTime: 2020-12-29 18:21:21
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -72,6 +72,7 @@ export default {
           options: [
             {
               label:'测试组1',
+              disabled: true,
               options:[
                 { value: 0,
                   label: '男' }

@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 17:37:42
+ * @LastEditTime: 2020-12-29 18:21:04
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -108,10 +108,11 @@ export default {
 };
 
 function generateCombination( h, options ) {
-  const { label, options:children } = options;
+  const { label, options:children, disabled = false } = options;
   return h( 'ElOptionGroup', {
     props:{
-      label
+      label,
+      disabled
     }
   }, children.map( item => generateOption( h, item  ) ) );
 }
