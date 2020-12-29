@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 20:36:13
+ * @LastEditTime: 2020-12-29 17:26:02
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -71,12 +71,18 @@ export default {
           type: 'select',
           options: [
             {
-              value: 0,
-              label: '女'
+              label:'测试组1',
+              options:[
+                { value: 0,
+                  label: '男' }
+              ]
             },
             {
-              label: '男',
-              value: 1
+              label:'测试组2',
+              options:[
+                { value: 1,
+                  label: '女' }
+              ]
             }
           ]
         }

@@ -1,19 +1,20 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 17:10:26
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2020-12-29 17:29:09
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
 import { debounce } from 'lodash-es';
-import { Select, Option } from 'element-ui';
+import { Select, OptionGroup, Option } from 'element-ui';
 import { validate } from '../FormValidate/directive';
 
 export default {
   abstract: true,
-  components:{
+  components: {
     ElSelect: Select,
+    ElOptionGroup: OptionGroup,
     ElOption: Option
   },
   props: {
@@ -80,7 +81,7 @@ export default {
         },
         attrs: {
           placeholder: this.entity
-            ? this.$t( `${ this.entity }.${ placeholder }` )
+            ? this.$t( `${this.entity}.${placeholder}` )
             : placeholder,
           name: field,
           id: field
@@ -95,20 +96,36 @@ export default {
         }
       },
       options.map(
-        ( { label, value, disabled = false } ) => {
-          return h(
-            'el-option',
-            {
-              props: {
-                label,
-                value,
-                disabled
-              },
-              key: value
-            }
-          );
+        ( item ) => {
+          const isCombination = Array.isArray( item?.options );
+          return isCombination ? 
+            generateCombination( h.bind( this ), item ) :
+            generateOption( h.bind( this ), item );
         }
       )
     );
   }
 };
+
+function generateCombination( h, options ) {
+  const { label, options:children } = options;
+  return h( 'ElOptionGroup', {
+    props:{
+      label
+    }
+  }, generateOption( h, children  ) );
+}
+function generateOption( h, item ) {
+  const { label, value, disabled = false } = item;
+  return h(
+    'el-option',
+    {
+      props: {
+        label,
+        value,
+        disabled
+      },
+      key: value
+    }
+  );
+}
