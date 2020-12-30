@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-10-16 16:00:46
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 15:12:43
+ * @LastEditTime: 2020-12-30 17:40:07
  * @Description: 路由 tabs 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Tbas\index.js
  */
@@ -26,7 +26,7 @@ export default {
      */
     list: {
       type: Array,
-      required: true
+      default: () => ( [] )
     }
   },
   render( h ) {
@@ -35,49 +35,51 @@ export default {
       {
         class: [ 'scm-tabs-wrapper' ]
       },
-      this.list.map( ( { label = '', path = '', disabled = false, reg } = {}, index ) => {
-        return h(
-          'li',
-          {
-            class: [
-              'scm-tabs-item',
-              disabled ? 'is-disabled' : '',
+      this.$scopedSlots.default ?
+        this.$scopedSlots.default() :
+        this.list.map( ( { label = '', path = '', disabled = false, reg } = {}, index ) => {
+          return h(
+            'li',
+            {
+              class: [
+                'scm-tabs-item',
+                disabled ? 'is-disabled' : '',
 
-              /* 如果 有 reg 参数 则匹配该参数 否则 匹配 path */
-              { 'is-active': getType( reg ) === 'RegExp' && reg.test( path ) || this.$route.path === path }
-            ],
-            key: path + index,
-            on: {
-              click: e => {
-                e.stopPropagation();
-                if ( disabled !== true ) {
-                  this.$emit( 'click', path );
+                /* 如果 有 reg 参数 则匹配该参数 否则 匹配 path */
+                { 'is-active': getType( reg ) === 'RegExp' && reg.test( path ) || this.$route.path === path }
+              ],
+              key: path + index,
+              on: {
+                click: e => {
+                  e.stopPropagation();
+                  if ( disabled !== true ) {
+                    this.$emit( 'click', path );
+                  }
                 }
               }
-            }
-          },
-          [
-            ( () => {
-              const generate = ( label ) => this.$t ? this.$t( label ) : label;
-              return disabled
-                ? generate( label )
-                : h(
-                  'router-link',
-                  {
-                    class: [ 'scm-tabs-item-link' ],
-                    props: {
-                      to: path,
-                      
-                      /* 修复replace 引发的bug */
-                      replace: path !== this.$route.path 
-                    }
-                  },
-                  generate( label )
-                );
-            } )()
-          ]
-        );
-      } )
+            },
+            [
+              ( () => {
+                const generate = ( label ) => this.$t ? this.$t( label ) : label;
+                return disabled
+                  ? generate( label )
+                  : h(
+                    'router-link',
+                    {
+                      class: [ 'scm-tabs-item-link' ],
+                      props: {
+                        to: path,
+
+                        /* 修复replace 引发的bug */
+                        replace: path !== this.$route.path
+                      }
+                    },
+                    generate( label )
+                  );
+              } )()
+            ]
+          );
+        } )
     );
   }
 };
