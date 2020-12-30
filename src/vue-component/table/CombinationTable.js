@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-30 19:20:55
+ * @LastEditTime: 2020-12-30 19:39:14
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -238,8 +238,12 @@ export default {
             }
           }
         ),
-        h( 'div',
-          [ /* 工具栏 */
+        h( 
+          'div',
+          { class:[ 'scm-combination-table-content-wrap' ] },
+          [
+
+            /* 工具栏 */
             h(
               'ToolBar',
               {
@@ -325,46 +329,46 @@ export default {
                   }
                 }
               }
-            ) ]
-        ),
-       
+            ),
 
-        /* 统计插槽 */
-        this.$scopedSlots.summary && this.$scopedSlots.summary(),
+            /* 统计插槽 */
+            this.$scopedSlots.summary && this.$scopedSlots.summary(),
 
-        /* 分页组件 */
-        typeof this.total === 'number' && h(
-          'Pagination',
-          {
-            ref: 'pagination',
-            props: {
-              refreshKey: paginationKey,
-              total: this.total
-            },
-            on: {
+            /* 分页组件 */
+            typeof this.total === 'number' && h(
+              'Pagination',
+              {
+                ref: 'pagination',
+                props: {
+                  refreshKey: paginationKey,
+                  total: this.total
+                },
+                on: {
 
-              /* 分页变化事件 */
-              change: data => {
+                  /* 分页变化事件 */
+                  change: data => {
                 
-                /* 1、清空 表格选中数据 */
-                this.selections = [];
+                    /* 1、清空 表格选中数据 */
+                    this.selections = [];
 
-                /* 2、重置表格滚动条高度 */
-                this._resetTableContainer();
-                const result = {
-                  ...data,
-                  sortData: sortMap.get( this._uid )
-                };
-                if ( this.$refs.QueryBar ) {
-                  result.formData = this.$refs.QueryBar.formData;
+                    /* 2、重置表格滚动条高度 */
+                    this._resetTableContainer();
+                    const result = {
+                      ...data,
+                      sortData: sortMap.get( this._uid )
+                    };
+                    if ( this.$refs.QueryBar ) {
+                      result.formData = this.$refs.QueryBar.formData;
+                    }
+                    this.$emit(
+                      'pageChange',
+                      result
+                    );
+                  }
                 }
-                this.$emit(
-                  'pageChange',
-                  result
-                );
               }
-            }
-          }
+            )
+          ].filter( Boolean )
         )
       ].filter( Boolean )
     );
