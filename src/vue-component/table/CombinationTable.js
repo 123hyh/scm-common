@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 14:17:38
+ * @LastEditTime: 2020-12-30 19:20:55
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -238,94 +238,96 @@ export default {
             }
           }
         ),
+        h( 'div',
+          [ /* 工具栏 */
+            h(
+              'ToolBar',
+              {
+                props: {
+                  schema: this.newColumn
+                },
+                scopedSlots: {
+                  // eslint-disable-next-line camelcase
+                  tool_bar: this.$scopedSlots.tool_bar
+                },
+                on: {
+                  refresh: () => {
+                    this.refreshComponent();
+                    this.$emit( 'refresh' );
+                  },
 
-        /* 工具栏 */
-        h(
-          'ToolBar',
-          {
-            props: {
-              schema: this.newColumn
-            },
-            scopedSlots: {
-              // eslint-disable-next-line camelcase
-              tool_bar: this.$scopedSlots.tool_bar
-            },
-            on: {
-              refresh: () => {
-                this.refreshComponent();
-                this.$emit( 'refresh' );
-              },
-
-              /* 工具栏 修改表格 schema  */
-              updateSchema: ( data = [] ) => {
-                if ( this.entityName ) {
-                  this.dbResult?.setItem( this.entityName, data );
-                }
-                this.newColumn = data;
-              }
-            }
-          }
-        ),
-
-        /* 表格 */
-        this.isLoadDbData && h(
-          'BaseTable',
-          {
-            ref: 'BaseTable',
-            key: baseTableKey,
-            scopedSlots: {
-
-              /* 每个字段都拥有插槽 */
-              ...forEachObject(
-                this.$scopedSlots,
-                // eslint-disable-next-line consistent-return
-                ( key, value ) => {
-                  const reg = /^table_/;
-                  if ( reg.test( key ) ) {
-                    return {
-                      [ key.replace( reg, '' ) ]: value
-                    };
+                  /* 工具栏 修改表格 schema  */
+                  updateSchema: ( data = [] ) => {
+                    if ( this.entityName ) {
+                      this.dbResult?.setItem( this.entityName, data );
+                    }
+                    this.newColumn = data;
                   }
                 }
-              )
-            },
-            attrs: this.$attrs,
-            props: {
-              ...this.$attrs,
-              schema: {
-                ...this.tableSchema,
-                column: this.newColumn
-              },
-              list: this.list
-            },
-            on: {
-              sortChange: [
-                data => {
-
-                  /* 点击排序重置分页 */
-                  this.refreshComponent( [ 'Pagination' ] );
-
-                  /* 缓存当前 排序参数 */
-                  sortMap.set( this._uid, data );
-
-                  const result = { ...data };
-                  if ( this.$refs.QueryBar ) {
-                    result.formData = this.$refs.QueryBar.formData;
-                  }
-                  this.$emit( 'sortChange', result );
-                }
-              ],
-              rowClick: ( ...args ) => this.$emit( 'rowClick', ...args ),
-              rowDoubleClick: ( ...args ) => this.$emit( 'rowDoubleClick', ...args ),
-              selectionChange: ( ...args ) => this.$emit( 'selectionChange', ...args ),
-              selectAll: ( ...args ) => this.$emit( 'selectAll', ...args ),
-              select: ( ...args ) => this.$emit( 'select', ...args ),
-              updateColumn: ( ...data ) => {
-                this.$emit( 'updateColumn', ...data );
               }
-            }
-          }
+            ),
+
+            /* 表格 */
+            this.isLoadDbData && h(
+              'BaseTable',
+              {
+                ref: 'BaseTable',
+                key: baseTableKey,
+                scopedSlots: {
+
+                  /* 每个字段都拥有插槽 */
+                  ...forEachObject(
+                    this.$scopedSlots,
+                    // eslint-disable-next-line consistent-return
+                    ( key, value ) => {
+                      const reg = /^table_/;
+                      if ( reg.test( key ) ) {
+                        return {
+                          [ key.replace( reg, '' ) ]: value
+                        };
+                      }
+                    }
+                  )
+                },
+                attrs: this.$attrs,
+                props: {
+                  ...this.$attrs,
+                  schema: {
+                    ...this.tableSchema,
+                    column: this.newColumn
+                  },
+                  list: this.list
+                },
+                on: {
+                  sortChange: [
+                    data => {
+
+                      /* 点击排序重置分页 */
+                      this.refreshComponent( [ 'Pagination' ] );
+
+                      /* 缓存当前 排序参数 */
+                      sortMap.set( this._uid, data );
+
+                      const result = { ...data };
+                      if ( this.$refs.QueryBar ) {
+                        result.formData = this.$refs.QueryBar.formData;
+                      }
+                      this.$emit( 'sortChange', result );
+                    }
+                  ],
+                  rowClick: ( ...args ) => this.$emit( 'rowClick', ...args ),
+                  rowDoubleClick: ( ...args ) => this.$emit( 'rowDoubleClick', ...args ),
+                  selectionChange: ( ...args ) => this.$emit( 'selectionChange', ...args ),
+                  selectAll: ( ...args ) => this.$emit( 'selectAll', ...args ),
+                  select: ( ...args ) => this.$emit( 'select', ...args ),
+                  updateColumn: ( ...data ) => {
+                    this.$emit( 'updateColumn', ...data );
+                  }
+                }
+              }
+            ) ]
         ),
+       
 
         /* 统计插槽 */
         this.$scopedSlots.summary && this.$scopedSlots.summary(),
