@@ -1,13 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-25 23:14:15
- * @LastEditTime: 2020-12-26 19:38:01
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-30 18:01:40
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\Modal.vue
 -->
 <template>
   <div>
+    <ElTbas/>
     <ScmModal
       :visible="visible"
       :width="800"
@@ -42,8 +43,10 @@
 import ScmModal from '@/vue-component/ModalWindow/ScmModal';
 import CombinationTable from './CombinationTable.vue';
 import { Button } from 'element-ui';
+import Tbas from '@/vue-component/Tbas';
 export default {
   components: {
+    ElTbas:Tbas,
     ScmModal,
     ElButton: Button,
     CombinationTable

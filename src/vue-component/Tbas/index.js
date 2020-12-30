@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-10-16 16:00:46
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-30 17:40:07
+ * @LastEditTime: 2020-12-30 18:02:08
  * @Description: 路由 tabs 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Tbas\index.js
  */
@@ -33,7 +33,7 @@ export default {
     return h(
       'ul',
       {
-        class: [ 'scm-tabs-wrapper' ]
+        class: [ 'scm-tabs-wrapper' ] 
       },
       this.$scopedSlots.default ?
         this.$scopedSlots.default() :
