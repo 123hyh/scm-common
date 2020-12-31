@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 18:21:04
+ * @LastEditTime: 2020-12-31 12:34:49
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -54,6 +54,7 @@ export default {
       disabled = false,
       clearable = false,
       multiple = false,
+      loading = false,
       placeholder = '',
       options = [],
       rules = {}
@@ -77,7 +78,8 @@ export default {
           popperAppendToBody: false,
           multiple,
           disabled,
-          clearable
+          clearable,
+          loading
         },
         attrs: {
           placeholder: this.entity
