@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 14:59:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-02 16:15:12
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -83,7 +83,7 @@ export default {
         ),
 
         /* 插槽 */
-        visible && type === 'slot' && this.$scopedSlots[ field ] && this.$scopedSlots[ field ](),
+        visible && type === 'slot' && this.$scopedSlots[ field ] && this.$scopedSlots[ field ]( this.schema ),
         visible && type === 'label' && label
       ].filter( Boolean )
     ) : undefined;
