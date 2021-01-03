@@ -1,0 +1,9 @@
+.customer-tooltip-directive_err{
+  background: #ff3131  !important;
+  &>.popper__arrow{
+    border-top-color:#ff3131 !important;
+    &:after{
+      border-top-color:#ff3131 !important
+    }
+  }
+}
