@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:17:47
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-04 19:28:36
+ * @LastEditTime: 2021-01-04 19:42:39
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Date.js
  */
@@ -59,8 +59,7 @@ export default {
       placeholder = '',
       startPlaceholder	= '',
       endPlaceholder	= '',
-      rules = {},
-      defaultTime
+      rules = {}
     } = this.conf;
     return h(
       'el-date-picker',
@@ -76,7 +75,6 @@ export default {
           }
         ].filter( Boolean ),
         props: {
-          'default-time': defaultTime,
           value: this.value,
           disabled,
           clearable,

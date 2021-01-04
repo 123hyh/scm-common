@@ -23,10 +23,6 @@ type DateType = {
   dateType?: 'year' | 'month' | 'date' | 'week' | 'datetime' | 'datetimerange' | 'daterange',
   valueFormat?: DateValueType,
   format?: DateValueType,
-  /**
-   * 默认显示时间
-   */
-  defaultTime?:string[] | number[] |  string | number 
 }
 
 export declare type FormSchema = {
