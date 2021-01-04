@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-10 16:34:26
+ * @LastEditTime: 2021-01-04 10:25:44
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
@@ -174,7 +174,7 @@ export default {
                     if ( 
                       this.selections.some( item => item === row ) === false 
                     ) {
-                      if ( this.schema.selection.isMultiple === true ) {
+                      if ( this?.schema?.selection?.isMultiple === true ) {
                         this.selections.push( row );
                       } else {
                         this.selections = [ row ];
