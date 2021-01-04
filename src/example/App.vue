@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2020-12-27 15:32:37
+ * @LastEditTime: 2021-01-03 23:45:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -47,6 +47,12 @@
       >
       <ScmModal/>
     </TabPane>
+    <TabPane
+      label="tip指令"
+      name="tip"
+      >
+      <TooltipDirective/>
+    </TabPane>
   </Tabs>
 </template>
 
@@ -57,6 +63,7 @@ import CombinationTable from './CombinationTable.vue';
 import Print from './Print.vue';
 import TableInput  from './TableInput.vue';
 import FormValidate from './FormValidate/index.vue';
+import TooltipDirective from './TooltipDirective.vue';
 export default {
   components:{
     Tabs,
@@ -68,11 +75,12 @@ export default {
     // FormValidate,
     FormValidate,
     TableInput,
-    ScmModal: () => import( './Modal.vue' )
+    ScmModal: () => import( './Modal.vue' ),
+    TooltipDirective
   },
   data() {
     return {
-      activeName:'validate'
+      activeName:'tip'
     };
   }
 };
