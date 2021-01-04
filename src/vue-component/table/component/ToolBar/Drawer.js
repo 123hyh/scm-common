@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-25 13:38:01
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 13:52:42
+ * @LastEditTime: 2021-01-04 19:04:43
  * @Description: 工具栏 抽屉 - 用于 表格字段修改
  * @FilePath: \scm_frontend_common\src\vue-component\table\component\ToolBar\Drawer.js
  */
@@ -199,6 +199,20 @@ export default {
                 }
               },
               getScmMsg( 'button.cancel' )
+            ),
+
+            /* 重置 */
+            h(
+              'el-button',
+              {
+                on: {
+                  click: e => {
+                    e.stopPropagation();
+                    this.$emit( 'resetTableSchema' );
+                  }
+                }
+              },
+              getScmMsg( 'button.reset' )
             ),
 
             /* 保存 */

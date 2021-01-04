@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:24:41
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-15 13:42:42
+ * @LastEditTime: 2021-01-04 19:18:03
  * @Description: 工具栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\component\ToolBar\index.js
  */
@@ -48,7 +48,6 @@ export default {
     }
   },
   render( h ) {
-    const i18n$T = this?.$t?.bind( this );
     return h(
       'div',
       {
@@ -135,6 +134,14 @@ export default {
             },
             on: {
               'update:visible': () => {
+                this.drawerVisible = false;
+              },
+
+              /**
+               * 点击重置事件
+               */
+              resetTableSchema:() => {
+                this.$emit( 'resetTableSchema' );
                 this.drawerVisible = false;
               },
 

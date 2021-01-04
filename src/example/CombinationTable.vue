@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2020-12-26 20:07:15
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-04 19:01:32
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
@@ -12,6 +12,7 @@
     class="combination-table"
     >  
     <CombinationTable
+      entityName="combination-table"
       clickRowSelected
       :queryBarSchema="queryBarSchema"
       :tableSchema="tableSchema"

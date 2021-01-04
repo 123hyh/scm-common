@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-30 19:39:14
+ * @LastEditTime: 2021-01-04 19:17:55
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -13,6 +13,7 @@ import BaseTable from './BaseTable.js';
 import { forEachObject } from '../utils';
 import { useIndexedDb } from '../indexedDb';
 import { cloneDeepWith } from 'lodash-es';
+import { Message } from 'element-ui';
 function addSuffix( str ) {
   const date = Date.now();
   return `${date}_combinationTable_${str}`;
@@ -258,6 +259,15 @@ export default {
                   refresh: () => {
                     this.refreshComponent();
                     this.$emit( 'refresh' );
+                  },
+
+                  /**
+                   * 重置 schema
+                   */
+                  resetTableSchema:() => {
+                    this.dbResult?.removeItem( this.entityName );
+                    Message.success( '重置成功' );
+                    this.newColumn = this.tableSchema?.column ?? [];
                   },
 
                   /* 工具栏 修改表格 schema  */
