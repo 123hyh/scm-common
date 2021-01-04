@@ -1,10 +1,10 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:17:47
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 17:08:41
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-01-04 19:28:36
  * @Description:
- * @FilePath: \SCM 2.0\src\components\common\Form\FormItem\Date.js
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Date.js
  */
 import { debounce } from 'lodash-es';
 import { DatePicker } from 'element-ui';
@@ -59,7 +59,8 @@ export default {
       placeholder = '',
       startPlaceholder	= '',
       endPlaceholder	= '',
-      rules = {}
+      rules = {},
+      defaultTime
     } = this.conf;
     return h(
       'el-date-picker',
@@ -75,6 +76,7 @@ export default {
           }
         ].filter( Boolean ),
         props: {
+          'default-time': defaultTime,
           value: this.value,
           disabled,
           clearable,
