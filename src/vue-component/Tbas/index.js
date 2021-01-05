@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-10-16 16:00:46
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-05 15:59:03
+ * @LastEditTime: 2021-01-05 16:20:07
  * @Description: 路由 tabs 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Tbas\index.js
  */
@@ -46,7 +46,7 @@ export default {
                 disabled ? 'is-disabled' : '',
 
                 /* 如果 有 reg 参数 则匹配该参数 否则 匹配 path */
-                { 'is-active': getType( reg ) === 'RegExp' &&  this.$route.path === path }
+                { 'is-active': ( getType( reg ) === 'RegExp' && reg.test( this.$route.path ) ) || this.$route.path === path }
               ],
               key: path + index,
               on: {
