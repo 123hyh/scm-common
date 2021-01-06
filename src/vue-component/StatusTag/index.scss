@@ -1,0 +1,92 @@
+$succ: #52c41a;
+$def: #d9d9d9;
+$err: #ff4d4f;
+$wran: #faad14;
+$pick: #eb2f96;
+/* 状态显示 点 */
+.scm-badge-status-dot {
+  position: relative;
+  margin-right: 5px;
+  top: -1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.scm-badge-status-success {
+  background-color: $succ;
+}
+.scm-badge-status-default {
+  background-color: $def;
+}
+.scm-badge-status-error {
+  background-color: $err;
+}
+.scm-badge-status-warning {
+  background-color: $wran;
+}
+.scm-badge-status-pink {
+  background: $pick;
+}
+
+.scm-badge-status-red {
+  background: #f5222d;
+}
+.scm-badge-status-volcano {
+  background: #fa541c;
+}
+.scm-badge-status-orange {
+  background: #fa8c16;
+}
+.scm-badge-status-yellow {
+  background: #fadb14;
+}
+.scm-badge-status-gold {
+  background: #faad14;
+}
+.scm-badge-status-cyan {
+  background: #13c2c2;
+}
+.scm-badge-status-lime {
+  background: #a0d911;
+}
+.scm-badge-status-green {
+  background: #52c41a;
+}
+.scm-badge-status-blue {
+  background: #1890ff;
+}
+.scm-badge-status-geekblue {
+  background: #2f54eb;
+}
+.scm-badge-status-purple {
+  background: #722ed1;
+}
+
+.scm-badge-status-processing {
+  position: relative;
+  background-color: #1890ff;
+  &::after {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #1890ff;
+    border-radius: 50%;
+    animation: antStatusProcessing 1.2s ease-in-out infinite;
+    content: "";
+  }
+}
+@keyframes antStatusProcessing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
