@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-25 13:38:01
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-04 19:04:43
+ * @LastEditTime: 2021-01-06 18:46:23
  * @Description: 工具栏 抽屉 - 用于 表格字段修改
  * @FilePath: \scm_frontend_common\src\vue-component\table\component\ToolBar\Drawer.js
  */
@@ -225,9 +225,15 @@ export default {
                 on: {
                   click: e => {
                     e.stopPropagation();
+
+                    /* 删除 width 0 避免宽度坍塌 */
+                    let data = cloneDeepWith( this.$refs.tree.children ).
+                      map( item => ( { 
+                        ...item, width:item.width <= 0 ? undefined : item.width
+                      } ) );
                     this.$emit(
                       'updateSchema',
-                      cloneDeepWith( this.$refs.tree.children )
+                      data
                     );
                   }
                 }

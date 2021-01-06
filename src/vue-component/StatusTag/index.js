@@ -2,14 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2021-01-06 14:19:47
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-06 15:44:15
+ * @LastEditTime: 2021-01-06 15:50:21
  * @Description: 状态 组件
- * @FilePath: \customer\src\components\common\StatusTag\index.js
+ * @FilePath: \scm_frontend_common\src\vue-component\StatusTag\index.js
  */
 
 import './index.scss';
 
-const calsss = {
+const CLASS_NAME = {
   default:'default',
   success:'success',
   process:'processing',
@@ -26,7 +26,7 @@ export default {
     const h = parent.$createElement;
     return [
       h( 'span', {
-        class:[ 'scm-badge-status-dot',  `scm-badge-status-${calsss[ type ]}` ]
+        class:[ 'scm-badge-status-dot',  `scm-badge-status-${CLASS_NAME[ type ]}` ]
       } ),
       context.scopedSlots.default()
     ];
