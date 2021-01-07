@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 14:21:55
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-04 10:25:44
+ * @LastEditTime: 2021-01-07 11:09:59
  * @Description: 基础表格组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\BaseTable.js
  */
@@ -51,7 +51,7 @@ export default {
     /* 点击行 是否触发选择状态 */
     clickRowSelected: Boolean
   },
- 
+  
   methods: {
 
     /**
@@ -279,7 +279,7 @@ export default {
                         }
                       }
                     } )
-                    : h( '' );
+                    : h( 'div' );
                 },
                 default: props => {
                   return this.schema.selection.isMultiple ?? true

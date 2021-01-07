@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-07 10:00:33
+ * @LastEditTime: 2021-01-07 11:24:59
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -39,14 +39,13 @@ export default {
      */
     async initDbData() {
       if ( this.entityName ) {
+
+        /* 先清空 */
+        this.column = [];
         this.dbResult = Object.freeze( await useIndexedDb( 'CombinationTable' ) );
         const db = await this.dbResult;
         const result = await db.getItem( this.entityName );
-        if ( result ) {
-          this.column = result;
-        } else {
-          this.column = this.tableSchema.column;
-        }
+        this.column = result ? result : this.tableSchema.column;
       } else {
         this.column = this.tableSchema.column;
       }
@@ -65,7 +64,7 @@ export default {
     },
 
     /* 刷新组件 */
-    refreshComponent( updateKeys = [ 'QueryBar', 'BaseTable', 'Pagination' ] ) {
+    refreshComponent( updateKeys = [ 'QueryBar', 'BaseTable', 'Pagination' ] ) { 
       const refreshData = this.$data._refreshMap;
 
       /* 在刷新表格时 把当前组件 的 sortData 数据清理 */
@@ -140,7 +139,7 @@ export default {
       dbResult: null,
 
       /* 读取完 db 标识 */
-      isLoadDbData: false,
+      isLoadDbData: true,
 
       /* 刷新标识 */
       _refreshMap:{

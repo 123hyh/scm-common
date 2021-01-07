@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-01-03 23:45:47
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-07 11:23:39
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
 -->
@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      activeName:'tip'
+      activeName:'table'
     };
   }
 };
