@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-07 11:28:59
+ * @LastEditTime: 2021-01-07 11:31:43
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -139,7 +139,7 @@ export default {
       dbResult: null,
 
       /* 读取完 db 标识 */
-      isLoadDbData: true,
+      isLoadDbData: false,
 
       /* 刷新标识 */
       _refreshMap:{
