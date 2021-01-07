@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-04 19:17:55
+ * @LastEditTime: 2021-01-07 10:00:33
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -267,7 +267,10 @@ export default {
                   resetTableSchema:() => {
                     this.dbResult?.removeItem( this.entityName );
                     Message.success( '重置成功' );
-                    this.newColumn = this.tableSchema?.column ?? [];
+                    this.newColumn = [];
+                    this.$nextTick( () => {
+                      this.newColumn = this.tableSchema?.column ?? [];
+                    } );
                   },
 
                   /* 工具栏 修改表格 schema  */
@@ -275,7 +278,10 @@ export default {
                     if ( this.entityName ) {
                       this.dbResult?.setItem( this.entityName, data );
                     }
-                    this.newColumn = data;
+                    this.newColumn = [];
+                    this.$nextTick( () => {
+                      this.newColumn = data;
+                    } );
                   }
                 }
               }
