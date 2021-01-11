@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2021-01-11 18:59:33
+ * @LastEditTime: 2021-01-11 20:09:32
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -10,18 +10,18 @@ import { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
 import { VNode } from 'vue/types/umd';
 import { Collector } from './collector';
-
-// import './style/index.scss';
-import { tooltip } from  '../../../directives';
-const createElem = () => document.createElement( 'div' );
+import { tooltip } from '../../../directives';
 
 /**
  * 设置元素属性和添加样式
  * @param el 
  * @param msg 
  */
-function setElemMsg( el: HTMLElement, data: {field:string, msg?:string}, fixed?:boolean ) {
-  ( <any>tooltip ).update( el, { value:{ value: !!data.msg, content:data.msg }, arg:data.field } );
+function setElemMsg( el: HTMLElement, data: { field: string, msg?: string }, vnode:VNode ) {
+  ( <any>tooltip ).update( el, 
+    { value: { value: !!data.msg, content: data.msg }, arg: data.field },
+    vnode
+  );
 }
 
 /**
@@ -44,11 +44,11 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
       rules,
       errCb: ( msg: string ) => {
 
-        setElemMsg( el, { field, msg }  );
+        setElemMsg( el, { field, msg }, vnode );
       },
       succCb: () => {
 
-        setElemMsg( el, { field, msg:'' }  );
+        setElemMsg( el, { field, msg: '' }, vnode );
       }
     };
   } );
@@ -56,12 +56,12 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
 
 
 export const validate: DirectiveOptions = {
-  bind( el, bind ) {
-    ( <any>tooltip ).bind( el, { value:bind.value, arg:bind.value.field } );
+  bind( el, bind, vnode ) {
+    ( <any>tooltip ).bind( el, { value: bind.value, arg: bind.value.field }, vnode );
   },
   inserted( el, bind, vnode ) {
     const { field, collector: collector } = bind.value;
-    ( <any>tooltip ).inserted( el, { value: bind.value, arg:field } );
+    ( <any>tooltip ).inserted( el, { value: bind.value, arg: field }, vnode );
 
     addRules( el, bind.value, vnode );
 
@@ -86,15 +86,17 @@ export const validate: DirectiveOptions = {
     } );
 
   },
+  // eslint-disable-next-line max-params
   update( el, bind, vnode ) {
+
     const { rules, field } = bind.value;
-    ( <any>tooltip ).update( el, { value: bind.value, arg:field } );
+    ( <any>tooltip ).update( el, { value: bind.value, arg: field }, vnode );
 
     /* 1、清空上次校验结果 */
     if ( Array.isArray( rules ) ) {
-      rules.length === 0 && setElemMsg( el, { field:bind.value.field, msg:'' } );
+      rules.length === 0 && setElemMsg( el, { field: bind.value.field, msg: '' }, vnode );
     } else if ( typeof rules === 'object' ) {
-      Object.keys( rules ).length === 0 && setElemMsg( el, { field:bind.value.field, msg:'' } );
+      Object.keys( rules ).length === 0 && setElemMsg( el, { field: bind.value.field, msg: '' }, vnode );
     }
 
     addRules( el, bind.value, vnode );
@@ -102,7 +104,7 @@ export const validate: DirectiveOptions = {
   unbind( el, bind, vnode ) {
 
     const { collector, field } = bind.value;
-    ( <any>tooltip ).unbind( el, { value: bind.value, arg:field } );
+    ( <any>tooltip ).unbind( el, { value: bind.value, arg: field }, vnode );
     collector.unValidate( field );
   }
 };

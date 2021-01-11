@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 22:01:32
- * @LastEditTime: 2021-01-11 19:31:17
+ * @LastEditTime: 2021-01-11 19:53:16
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\collector.ts
@@ -21,7 +21,7 @@ abstract class CollectorMeth {
     const values = Object.create( null );
     const rulesObj: any = Object.create( null );
     const errCbs: any = Object.create( null );
-    const succCbs:any = Object.create( null );
+    const succCbs: any = Object.create( null );
 
     forEachObject(
       this.validates,
@@ -29,8 +29,8 @@ abstract class CollectorMeth {
         key,
         rulesCb: () => {
           value: any,
-           rules: SchemaDefinition,
-          succCb:()=>void,
+          rules: SchemaDefinition,
+          succCb: () => void,
           errCb: ( ...args: any[] ) => void
         } ) => {
         if ( set.has( key ) ) {
@@ -53,7 +53,7 @@ abstract class CollectorMeth {
     /* 通知成功信息 */
     forEachObject( succCbs, ( () => {
       const errFields = new Set( errs.map( ( { path } ) => path ) );
-      return ( key:string, cb:()=>void ) => {
+      return ( key: string, cb: () => void ) => {
         if ( errFields.has( key ) === false ) {
           cb();
         }
@@ -72,7 +72,7 @@ abstract class CollectorMeth {
     return true;
   }
 
-  resetValidate( fields:string[] = [] ) {
+  resetValidate( fields: string[] = [] ) {
     const set = new Set( fields.length ? fields : Object.keys( this.validates ) );
     forEachObject(
       this.validates,
@@ -80,8 +80,8 @@ abstract class CollectorMeth {
         key,
         rulesCb: () => {
           value: any,
-           rules: SchemaDefinition,
-          succCb:()=>void,
+          rules: SchemaDefinition,
+          succCb: () => void,
           errCb: ( ...args: any[] ) => void
         } ) => {
         if ( set.has( key ) ) {
