@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 22:01:32
- * @LastEditTime: 2020-12-27 15:33:24
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-11 19:31:17
+ * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
- * @FilePath: \scm_frontend_common\src\example\FormValidate\collector.ts
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\collector.ts
  */
 import { forEachObject } from '../../../utils/index';
 import Schema, { SchemaDefinition } from 'validate';
@@ -70,6 +70,26 @@ abstract class CollectorMeth {
   unValidate( field: string ): boolean {
     delete this.validates[ field ];
     return true;
+  }
+
+  resetValidate( fields:string[] = [] ) {
+    const set = new Set( fields.length ? fields : Object.keys( this.validates ) );
+    forEachObject(
+      this.validates,
+      (
+        key,
+        rulesCb: () => {
+          value: any,
+           rules: SchemaDefinition,
+          succCb:()=>void,
+          errCb: ( ...args: any[] ) => void
+        } ) => {
+        if ( set.has( key ) ) {
+          const { value, rules, errCb, succCb } = rulesCb();
+          succCb();
+        }
+      } );
+    debugger;
   }
 }
 export class Collector extends CollectorMeth {

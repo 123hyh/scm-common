@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-26 21:53:31
- * @LastEditTime: 2020-12-27 17:21:18
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-11 19:34:17
+ * @LastEditors: huangyuhui
  * @Description: 表单校验组件
- * @FilePath: \scm_frontend_common\src\example\FormValidate\example.vue
+ * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\example.vue
 -->
 <template>
   <div class="test-form-validate">
@@ -83,6 +83,9 @@
     <button @click.stop="clearRules">
       清空校验
     </button>
+    <button @click.stop="clearRulesMsg">
+      清空校验信息
+    </button>
   </div>
 </template>
 
@@ -118,6 +121,16 @@ export default {
     }, 2000 );
   },
   methods: {
+
+    /**
+     * 清空校验信息
+     * @description: 
+     * @param {*}
+     * @return {*}
+     */
+    clearRulesMsg() {
+      this.collector.resetValidate( [ 'name' ] );
+    },
 
     /**
      * 校验

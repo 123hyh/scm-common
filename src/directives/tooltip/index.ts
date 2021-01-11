@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-03 20:22:10
- * @LastEditTime: 2021-01-11 19:09:25
+ * @LastEditTime: 2021-01-11 19:38:54
  * @LastEditors: huangyuhui
  * @Description: tooltip 指令
  * @FilePath: \scm_frontend_common\src\directives\tooltip\index.ts
@@ -64,6 +64,9 @@ export const tooltip: DirectiveOptions = {
     comInstance.setValue( value, content );
     const parentElem = el.parentElement;
     comInstance.$el.appendChild( el );
+
+    // parentElem?.replaceChild( comInstance.$el, el );
+
     parentElem?.appendChild( comInstance.$el );
   },
   update( el, bind ) {
