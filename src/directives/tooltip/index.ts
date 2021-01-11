@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-01-03 20:22:10
- * @LastEditTime: 2021-01-03 23:40:09
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-11 19:09:25
+ * @LastEditors: huangyuhui
  * @Description: tooltip 指令
- * @FilePath: \scm_frontend_common\src\example\TooltipDirective.js
+ * @FilePath: \scm_frontend_common\src\directives\tooltip\index.ts
  */
 import './index.scss';
 import { Tooltip } from 'element-ui';
@@ -19,6 +19,11 @@ const toolTipCom = () => Vue.extend( {
     content: '',
     value: false
   } ),
+  deactivated() {
+
+    /* 隐藏 tip */
+    this.value = false;
+  },
   methods: {
     setValue( value:boolean, content:string = '' ) {
       this.value = value;

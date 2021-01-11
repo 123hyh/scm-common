@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2021-01-11 15:34:49
+ * @LastEditTime: 2021-01-11 18:59:33
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -10,7 +10,6 @@ import { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
 import { VNode } from 'vue/types/umd';
 import { Collector } from './collector';
-import { findDomNode, isEmpty } from '../../../utils';
 
 // import './style/index.scss';
 import { tooltip } from  '../../../directives';
@@ -22,41 +21,7 @@ const createElem = () => document.createElement( 'div' );
  * @param msg 
  */
 function setElemMsg( el: HTMLElement, data: {field:string, msg?:string}, fixed?:boolean ) {
-
   ( <any>tooltip ).update( el, { value:{ value: !!data.msg, content:data.msg }, arg:data.field } );
-
-  // return; 
-  // if ( fixed ) {
-  //   const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
-  //     return elem.classList.contains( 'poptip-err-fixed' );
-  //   } );
-  //   if ( msg ) {
-  //     if ( isEmpty( errorNode ) ) {
-  //       const divElem = createElem();
-  //       divElem.classList.add( 'poptip-err-fixed' );
-  //       divElem.setAttribute( 'aria-controls', msg );
-  //       divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
-  //       el.appendChild( divElem );
-  //     } else {
-  //       ( <HTMLElement>errorNode ).style.display = 'block';
-  //       errorNode.setAttribute( 'aria-controls', msg );
-  //     }
-
-  //   } else {
-  //     if ( errorNode ) {
-  //       ( <HTMLElement>errorNode ).style.display = 'none';
-  //     }
-  //   } 
-  // } else {
-  //   if ( msg ) {
-  //     el.classList.add( 'poptip-validate-err' );
-  //     el.setAttribute( 'aria-controls', msg );
-  //   } else {
-  //     el.classList.remove( 'poptip-validate-err' );
-  //     el.removeAttribute( 'aria-controls' );
-  //   }
-  // }
-  
 }
 
 /**
