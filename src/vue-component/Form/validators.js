@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-11-05 11:38:41
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 11:39:27
+ * @LastEditTime: 2021-01-11 17:12:46
  * @Description: 表单自定义校验方法
  * @FilePath: \scm_frontend_common\src\vue-component\Form\validators.js
  */
@@ -53,7 +53,7 @@ export function checkIntegerDecimal( decimal = 2 ) {
       callback();
     }
   }
-  return debounce( function checkIntegerDecimal( rules, value, callback ) {
+  return  function checkIntegerDecimal( rules, value, callback ) {
     const { required = false } = rules;
     if ( required ) {
       check( value, callback );
@@ -64,7 +64,7 @@ export function checkIntegerDecimal( decimal = 2 ) {
         check( value, callback );
       }
     }
-  }, 150 );
+  }
 }
 
 /**
