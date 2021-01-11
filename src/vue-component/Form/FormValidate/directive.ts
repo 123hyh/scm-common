@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2020-12-29 10:15:32
+ * @LastEditTime: 2021-01-11 15:34:49
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -11,8 +11,9 @@ import { DirectiveBinding } from 'vue/types/options';
 import { VNode } from 'vue/types/umd';
 import { Collector } from './collector';
 import { findDomNode, isEmpty } from '../../../utils';
-import './style/index.scss';
 
+// import './style/index.scss';
+import { tooltip } from  '../../../directives';
 const createElem = () => document.createElement( 'div' );
 
 /**
@@ -20,38 +21,41 @@ const createElem = () => document.createElement( 'div' );
  * @param el 
  * @param msg 
  */
-function setElemMsg( el: HTMLElement, msg: string, fixed?:boolean ) {
+function setElemMsg( el: HTMLElement, data: {field:string, msg?:string}, fixed?:boolean ) {
 
-  if ( fixed ) {
-    const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
-      return elem.classList.contains( 'poptip-err-fixed' );
-    } );
-    if ( msg ) {
-      if ( isEmpty( errorNode ) ) {
-        const divElem = createElem();
-        divElem.classList.add( 'poptip-err-fixed' );
-        divElem.setAttribute( 'aria-controls', msg );
-        divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
-        el.appendChild( divElem );
-      } else {
-        ( <HTMLElement>errorNode ).style.display = 'block';
-        errorNode.setAttribute( 'aria-controls', msg );
-      }
+  ( <any>tooltip ).update( el, { value:{ value: !!data.msg, content:data.msg }, arg:data.field } );
 
-    } else {
-      if ( errorNode ) {
-        ( <HTMLElement>errorNode ).style.display = 'none';
-      }
-    } 
-  } else {
-    if ( msg ) {
-      el.classList.add( 'poptip-validate-err' );
-      el.setAttribute( 'aria-controls', msg );
-    } else {
-      el.classList.remove( 'poptip-validate-err' );
-      el.removeAttribute( 'aria-controls' );
-    }
-  }
+  // return; 
+  // if ( fixed ) {
+  //   const [ errorNode ] = findDomNode( el, ( elem: Element ) => {
+  //     return elem.classList.contains( 'poptip-err-fixed' );
+  //   } );
+  //   if ( msg ) {
+  //     if ( isEmpty( errorNode ) ) {
+  //       const divElem = createElem();
+  //       divElem.classList.add( 'poptip-err-fixed' );
+  //       divElem.setAttribute( 'aria-controls', msg );
+  //       divElem.style.transform = `translateY( -${el.offsetHeight - 12}px)`;
+  //       el.appendChild( divElem );
+  //     } else {
+  //       ( <HTMLElement>errorNode ).style.display = 'block';
+  //       errorNode.setAttribute( 'aria-controls', msg );
+  //     }
+
+  //   } else {
+  //     if ( errorNode ) {
+  //       ( <HTMLElement>errorNode ).style.display = 'none';
+  //     }
+  //   } 
+  // } else {
+  //   if ( msg ) {
+  //     el.classList.add( 'poptip-validate-err' );
+  //     el.setAttribute( 'aria-controls', msg );
+  //   } else {
+  //     el.classList.remove( 'poptip-validate-err' );
+  //     el.removeAttribute( 'aria-controls' );
+  //   }
+  // }
   
 }
 
@@ -74,10 +78,12 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
       value: ( <any>bindCom ).value,
       rules,
       errCb: ( msg: string ) => {
-        setElemMsg( el, msg, fixed );
+
+        setElemMsg( el, { field, msg }  );
       },
       succCb: () => {
-        setElemMsg( el, '', fixed );
+
+        setElemMsg( el, { field, msg:'' }  );
       }
     };
   } );
@@ -85,8 +91,12 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
 
 
 export const validate: DirectiveOptions = {
+  bind( el, bind ) {
+    ( <any>tooltip ).bind( el, { value:bind.value, arg:bind.value.field } );
+  },
   inserted( el, bind, vnode ) {
     const { field, collector: collector } = bind.value;
+    ( <any>tooltip ).inserted( el, { value: bind.value, arg:field } );
 
     addRules( el, bind.value, vnode );
 
@@ -112,19 +122,22 @@ export const validate: DirectiveOptions = {
 
   },
   update( el, bind, vnode ) {
-    const { rules } = bind.value;
+    const { rules, field } = bind.value;
+    ( <any>tooltip ).update( el, { value: bind.value, arg:field } );
 
     /* 1、清空上次校验结果 */
     if ( Array.isArray( rules ) ) {
-      rules.length === 0 && setElemMsg( el, '' );
+      rules.length === 0 && setElemMsg( el, { field:bind.value.field, msg:'' } );
     } else if ( typeof rules === 'object' ) {
-      Object.keys( rules ).length === 0 && setElemMsg( el, '' );
+      Object.keys( rules ).length === 0 && setElemMsg( el, { field:bind.value.field, msg:'' } );
     }
 
     addRules( el, bind.value, vnode );
   },
   unbind( el, bind, vnode ) {
+
     const { collector, field } = bind.value;
+    ( <any>tooltip ).unbind( el, { value: bind.value, arg:field } );
     collector.unValidate( field );
   }
 };
