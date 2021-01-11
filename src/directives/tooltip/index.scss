@@ -1,6 +1,7 @@
 .customer-tooltip-directive_err{
   background: #ff3131  !important;
   min-width: 70px !important;
+  margin-bottom: 5px !important;
   &>.popper__arrow{
     border-top-color:#ff3131 !important;
     &:after{
