@@ -23,10 +23,9 @@
       & > [class^="el-date-"] {
         width: 100%;
       }
-      & > [class^="el-checkbox"],
-      & > [class^="el-radio"],
-      & > [class^="el-switch"],
-      &>.el-tooltip >div {
+      [class="el-checkbox-group"],
+      [class="el-radio-group"],
+      [class^="el-switch"] {
         width: 100%;
         min-height: 32px;
         display: flex;
