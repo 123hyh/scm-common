@@ -20,12 +20,13 @@
       .el-select {
         width: 100%;
       }
-       [class^="el-date-"] {
+      & > [class^="el-date-"] {
         width: 100%;
       }
-        [class^="el-checkbox"],
-        [class^="el-radio"],
-        [class^="el-switch"] {
+      & > [class^="el-checkbox"],
+      & > [class^="el-radio"],
+      & > [class^="el-switch"],
+      &>.el-tooltip >div {
         width: 100%;
         min-height: 32px;
         display: flex;

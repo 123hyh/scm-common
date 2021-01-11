@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 18:21:21
+ * @LastEditTime: 2021-01-11 16:12:14
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -60,8 +60,11 @@ export default {
           label: '年龄'
         },
         {
-          type: 'string',
-          field: 'age'
+          type: 'checkbox',
+          field: 'age',
+          options:[
+            { label:1, value:1 }
+          ]
         },
         {
           type: 'label',
@@ -87,6 +90,10 @@ export default {
             }
           ]
         }
+      ],
+      [
+        { label:'多选', type:'label' },
+        { type:'radio', field:'xxx', options:[ { label:1, value:1 } ] }
       ]
     ]
   } )
