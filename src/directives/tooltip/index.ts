@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-03 20:22:10
- * @LastEditTime: 2021-01-11 20:07:22
+ * @LastEditTime: 2021-01-12 11:23:58
  * @LastEditors: huangyuhui
  * @Description: tooltip 指令
  * @FilePath: \scm_frontend_common\src\directives\tooltip\index.ts
@@ -28,6 +28,9 @@ const toolTipCom = () => Vue.extend( {
     setValue( value:boolean, content:string = '' ) {
       this.value = value;
       this.content = content;
+    },
+    destory() {
+      this.$destroy();
     }
   },
   render( h ) {
@@ -84,6 +87,9 @@ export const tooltip: DirectiveOptions = {
     if ( bind.arg === undefined ) {
       return console.error( '钩子 --- 「unbind」请传入指令 arg参数，参数为field' );
     }
+    const comInstance = cache.get( `${( <any>vnode.context )._uid}_${bind.arg}` );
+    comInstance.setValue( false, '' );
+    comInstance.destory();
     cache.delete( `${( <any>vnode.context )._uid}_${bind.arg}` );
   }
 };
