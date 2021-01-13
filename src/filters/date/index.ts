@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:14:51
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-10 18:28:36
+ * @LastEditTime: 2021-01-13 14:16:47
  * @Description: 
  * @FilePath: \scm_frontend_common\src\filters\date\index.ts
  */
@@ -26,6 +26,9 @@ export const formatDate = ( () => {
   ] );
   return function formatDate( value: string | number | Date, fmt = 'yyyy-MM-dd hh:mm:ss' ) {
     if ( value === '' || value === undefined || value === null ) return '';
+    if ( typeof value === 'string' ) {
+      value = value.replace( /-/g, '/' );
+    }
     const date = new Date( value );
 
     const normalData: any = {
