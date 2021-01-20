@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
  * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-28 20:23:08
+ * @LastEditTime: 2021-01-20 15:38:14
  * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
@@ -49,3 +49,4 @@ export function findDomNode( node:Element, conditionCb:( elem:Element )=> boolea
     return prev;
   }, [] );
 }
+export * from './designPatterns';
