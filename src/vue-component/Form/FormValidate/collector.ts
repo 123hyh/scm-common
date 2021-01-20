@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 22:01:32
- * @LastEditTime: 2021-01-11 19:53:16
+ * @LastEditTime: 2021-01-20 10:43:34
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\collector.ts
@@ -89,7 +89,6 @@ abstract class CollectorMeth {
           succCb();
         }
       } );
-    debugger;
   }
 }
 export class Collector extends CollectorMeth {
