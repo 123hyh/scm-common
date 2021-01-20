@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-03 20:22:10
- * @LastEditTime: 2021-01-12 11:23:58
+ * @LastEditTime: 2021-01-20 14:30:48
  * @LastEditors: huangyuhui
  * @Description: tooltip 指令
  * @FilePath: \scm_frontend_common\src\directives\tooltip\index.ts
@@ -77,7 +77,6 @@ export const tooltip: DirectiveOptions = {
     if ( bind.arg === undefined ) {
       return console.error( '钩子 --- 「update」请传入指令 arg参数，参数为field' );
     }
-    console.log( ( <any>vnode.context )._uid );
     const comInstance = cache.get( `${( <any>vnode.context )._uid}_${bind.arg}` );
     const { value, content } = bind.value;
     comInstance.setValue( value, content );
