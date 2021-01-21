@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2021-01-04 19:01:32
+ * @LastEditTime: 2021-01-21 11:21:44
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -33,7 +33,9 @@
       </template>
       <!-- 操作插槽 -->
       <template #table_operation="row">
-        <button>修改{{ row.id }}</button>
+        <button v-ripple.mouseover.500="'rgba(255, 255, 255, 0.35)'">
+          修改{{ row.id }}
+        </button>
       </template>
     <!-- 操作栏插槽 -->
     </CombinationTable>
@@ -50,13 +52,17 @@
 import  CombinationTable from '@/vue-component/table/CombinationTable';
 console.log( CombinationTable );
 import { loading } from '../directives/index';
+import ripple from '../directives/ripple';
 export default {
   components: {
     CombinationTable,
     BaseTable:CombinationTable.BaseTable
   },
   directives:{
-    loading:loading
+    loading:loading,
+
+    /* 测试指令 */
+    ripple
   },
   data() {
     return {

@@ -49,4 +49,4 @@ export function findDomNode( node:Element, conditionCb:( elem:Element )=> boolea
     return prev;
   }, [] );
 }
-export { when,useLiabilityChain } from './designPatterns';
+export { when, useLiabilityChain } from './designPatterns';
