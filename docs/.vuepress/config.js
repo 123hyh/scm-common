@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 23:12:35
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-01-21 11:26:50
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
@@ -53,6 +53,10 @@ module.exports = {
               {
                 title:'表单校验指令',
                 path:'/directives/validate/'
+              },
+              {
+                title:'水波纹',
+                path:'/directives/ripple/'
               }
             ]
           },
