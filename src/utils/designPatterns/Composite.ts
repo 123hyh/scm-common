@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2021-01-21 18:01:05
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-21 19:01:33
+ * @LastEditTime: 2021-01-21 19:05:30
  * @Description: 组合模式
  * @FilePath: \scm_frontend_common\src\utils\designPatterns\Composite.ts
  */
@@ -29,6 +29,7 @@ class Composite {
     for ( const commondItem of this.composites ) {
       commondItem.exec();
     }
+    return this;
   }
 
 

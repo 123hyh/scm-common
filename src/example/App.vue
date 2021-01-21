@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-01-21 18:52:46
+ * @LastEditTime: 2021-01-21 19:06:38
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -64,7 +64,6 @@ import Print from './Print.vue';
 import TableInput  from './TableInput.vue';
 import FormValidate from './FormValidate/index.vue';
 import TooltipDirective from './TooltipDirective.vue';
-import { useCombinationCommond } from '../utils/designPatterns/Combination';
 export default {
   components:{
     Tabs,
