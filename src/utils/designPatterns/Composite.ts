@@ -2,9 +2,9 @@
  * @Author: huangyuhui
  * @Date: 2021-01-21 18:01:05
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-21 18:53:33
+ * @LastEditTime: 2021-01-21 19:01:33
  * @Description: 组合模式
- * @FilePath: \scm_frontend_common\src\utils\designPatterns\Combination.ts
+ * @FilePath: \scm_frontend_common\src\utils\designPatterns\Composite.ts
  */
 import { remove } from 'lodash-es';
 
@@ -40,6 +40,7 @@ class Composite {
    */
   remove( item: BaseComposites | BaseFn ) {
     remove( this.composites,  citem  => citem === item );
+    return this;
   }
 
   /**
@@ -64,4 +65,4 @@ class Composite {
  * @param {*}
  * @return {*}
  */
-export const useComposites = () => new Composite();
+export const useComposite = () => new Composite();
