@@ -11,7 +11,10 @@ $color: #343434;
     margin-bottom: 1em !important;
     display: flex !important;
     align-items: center;
-    @media (min-width: 1366px) {
+    @media (max-width: 899px) {
+      flex: 0 1 100%;
+    }
+    @media (min-width: 900px) {
       flex: 0 1 33.333%;
     }
     @media (min-width: 1600px) {
