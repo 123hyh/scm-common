@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2021-01-21 11:21:44
+ * @LastEditTime: 2021-01-25 14:15:49
  * @LastEditors: huangyuhui
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -10,41 +10,44 @@
   <div
     v-loading="loading"
     class="combination-table"
-    >  
-    <CombinationTable
-      entityName="combination-table"
-      clickRowSelected
-      :queryBarSchema="queryBarSchema"
-      :tableSchema="tableSchema"
-      :list="list"
-      :selectionMethod="selectionMethod"
-      :total="100"
-      :border="true"
-      @sortChange="hanlderSort"
-      @refresh="hanlderRefresh"
-      @rowClick="hanlderClickRow"
-      @rowDoubleClick="hanlderDblclickRow"
-      @select="handlerSelectionChange"
-      @selectAll="handlerSelectAll"
-      >
-      <!-- 字段插槽 -->
-      <template #table_field_name="row">
-        <span>【{{ row.name }}】 - 插槽</span>
-      </template>
-      <!-- 操作插槽 -->
-      <template #table_operation="row">
-        <button v-ripple.mouseover.500="'rgba(255, 255, 255, 0.35)'">
-          修改{{ row.id }}
-        </button>
-      </template>
-    <!-- 操作栏插槽 -->
-    </CombinationTable>
+    > 
+    <div class="aside"/>
+    <div class="content-table">
+      <CombinationTable
+        entityName="combination-table"
+        clickRowSelected
+        :queryBarSchema="queryBarSchema"
+        :tableSchema="tableSchema"
+        :list="list"
+        :selectionMethod="selectionMethod"
+        :total="100"
+        :border="true"
+        @sortChange="hanlderSort"
+        @refresh="hanlderRefresh"
+        @rowClick="hanlderClickRow"
+        @rowDoubleClick="hanlderDblclickRow"
+        @select="handlerSelectionChange"
+        @selectAll="handlerSelectAll"
+        >
+        <!-- 字段插槽 -->
+        <template #table_field_name="row">
+          <span>【{{ row.name }}】 - 插槽</span>
+        </template>
+        <!-- 操作插槽 -->
+        <template #table_operation="row">
+          <button v-ripple.mouseover.500="'rgba(255, 255, 255, 0.35)'">
+            修改{{ row.id }}
+          </button>
+        </template>
+        <!-- 操作栏插槽 -->
+      </CombinationTable>
 
-    <BaseTable
-      border
-      :schema="tableSchema"
-      :list="list"
-      />
+      <BaseTable
+        border
+        :schema="tableSchema"
+        :list="list"
+        />
+    </div>
   </div>
 </template>
 
@@ -74,43 +77,45 @@ export default {
       queryBarSchema:[
         {
           field:'name',
+          label:'姓名1',
+          type: 'date',
+          dateType:'daterange',
+          format:'yyyy-MM-dd',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名2',
+          type: 'select',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名3',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名4',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name',
+          label:'姓名5',
+          type: 'string',
+          clearable: true
+        },
+        {
+          field:'name6',
           label:'姓名',
           type: 'string',
           clearable: true
         },
         {
           field:'name',
-          label:'姓名',
-          type: 'string',
-          clearable: true
-        },
-        {
-          field:'name',
-          label:'姓名',
-          type: 'string',
-          clearable: true
-        },
-        {
-          field:'name',
-          label:'姓名',
-          type: 'string',
-          clearable: true
-        },
-        {
-          field:'name',
-          label:'姓名',
-          type: 'string',
-          clearable: true
-        },
-        {
-          field:'name',
-          label:'姓名',
-          type: 'string',
-          clearable: true
-        },
-        {
-          field:'name',
-          label:'姓名',
+          label:'姓名7',
           type: 'string',
           clearable: true
         },
@@ -269,5 +274,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss' scoped>
+.combination-table{
+  display: flex;
+  .aside{
+    width: 180px;
+    height: 100%;
+  }
+  .content-table{
+    width: calc(100% - 180px);
+  }
+}
 </style>
