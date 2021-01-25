@@ -15,6 +15,7 @@ $containerBgColor: #ffffff;
   /* 表单区 */
   .query-bar-form-block {
     width: 100%;
+    /* gap: 10px; */
     @include layout;
     align-items: flex-start;
     .el-form-item {
@@ -23,20 +24,34 @@ $containerBgColor: #ffffff;
       }
       &.el-form-item {
         margin-bottom: 10px;
+        margin-right: 0;
+        display: flex;
+        @media (min-width: 1366px) {
+          flex: 0 0 33.33%;
+        }
+        @media (max-width: 1365px) {
+          flex: 0 0 100%;
+        }
+        > .el-form-item__label {
+          flex-basis: 5em;
+        }
+        > .el-form-item__content {
+          flex-grow: 1;
+        }
       }
       &.form-item-date {
         @include layout;
         .el-form-item__content {
+          width: calc(100% - 5em);
           .el-date-editor {
-            width: auto;
+            width: 100%;
             padding: 0px 10px;
           }
           height: 40px;
-          width: 260px;
         }
       }
-      &.form-item-select .el-form-item__content {
-        width: 180px;
+      &.form-item-select .el-form-item__content .el-select {
+        width: 100%;
       }
     }
   }
@@ -48,7 +63,7 @@ $containerBgColor: #ffffff;
   .more-btn-wrap {
     align-self: flex-start;
   }
-  @mixin baseButtonStyle{
+  @mixin baseButtonStyle {
     $bgColor: #0086fa;
     [type="button"]:not(.collapse-button) {
       padding: 9px 20px;
@@ -73,12 +88,13 @@ $containerBgColor: #ffffff;
       background-color: $bgColor;
     }
   }
-  .query-operation{
+  .query-operation {
     flex-grow: 1;
     text-align: right;
     @include baseButtonStyle;
   }
-  .collapse-button{
+  .collapse-button {
+    font-size: 14px;
     display: inline-flex;
     flex-direction: row-reverse;
   }

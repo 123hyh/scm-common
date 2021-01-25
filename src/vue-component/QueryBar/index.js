@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-26 21:41:18
+ * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-01-25 14:01:21
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -185,12 +185,13 @@ export default {
           /* 1、收集溢出元素 */
           children?.forEach( ( () => {
             let prevTop = null;
-            return item => {
+            return ( item, index ) => {
               const top = item.offsetTop;
+              const nextTop = children[ index + 1 ]?.offsetTop;
               if (
                 prevTop &&
-                top > prevTop &&
-                item.classList.contains( 'query-operation' ) === false
+                ( top > prevTop  || nextTop > top ) && 
+                item.classList.contains( 'query-operation' ) === false 
               ) {
                 overflowElems.push( item );
               } else {
@@ -254,6 +255,7 @@ export default {
     }
   },
   mounted() {
+
     const handler = debounce( () => {
       if ( this.hideMore === true ) {
         this.handlerHide();
