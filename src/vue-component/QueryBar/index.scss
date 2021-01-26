@@ -3,7 +3,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
-$radiusSize: 1px;
+$radiusSize: 3px;
 $containerBgColor: #ffffff;
 .scm_query-bar-container {
   @include layout;
@@ -26,6 +26,9 @@ $containerBgColor: #ffffff;
         margin-bottom: 10px;
         margin-right: 0;
         display: flex;
+        box-sizing: border-box;
+        border: 1px solid #d9d9d9;
+        border-radius: $radiusSize;
         @media (max-width: 900px) {
           flex: 0 0 100%;
         }
@@ -44,9 +47,16 @@ $containerBgColor: #ffffff;
         
         > .el-form-item__label {
           flex-basis: 5em;
+          color: #d9d9d9;
         }
         > .el-form-item__content {
           flex-grow: 1;
+          >[class^='el-']{
+            border: none
+          }
+          .el-input__inner{
+            border: none
+          }
         }
       }
       &.form-item-date {
@@ -57,7 +67,6 @@ $containerBgColor: #ffffff;
             width: 100%;
             padding: 0px 10px;
           }
-          height: 40px;
         }
       }
       &.form-item-select .el-form-item__content .el-select {
