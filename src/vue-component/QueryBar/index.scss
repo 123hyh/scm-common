@@ -10,7 +10,7 @@ $containerBgColor: #ffffff;
   flex-wrap: nowrap;
   box-sizing: border-box;
   align-items: flex-start;
-  padding: 10px 0;
+  padding: 20px;
   background-color: $containerBgColor;
   /* 表单区 */
   .query-bar-form-block {
@@ -23,7 +23,7 @@ $containerBgColor: #ffffff;
         border-radius: $radiusSize;
       }
       &.el-form-item {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         margin-right: 0;
         display: flex;
         box-sizing: border-box;
