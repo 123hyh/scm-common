@@ -9,50 +9,42 @@
 <template>
   <Tabs
     v-model="activeName"
-    type="border-card"
     >
     <TabPane
-      name="form"
+      name="CombinationForm"
       label="表单"
-      >
-      <CombinationForm/>
-    </TabPane>
+      />
     <TabPane
-      name="table"
+      name="CombinationTable"
       label="表格"
-      >
-      <CombinationTable/>
-    </TabPane>
+      />
     <TabPane
-      name="print"
+      name="ScmPint"
       label="打印"
-      >
-      <ScmPint/>
-    </TabPane>
+      />
     <TabPane
       label="表单校验"
-      name="validate"
-      >
-      <FormValidate/>
-    </TabPane>
+      name="FormValidate"
+      />
     <TabPane
       label="表格输入"
-      name="tableinput"
-      >
-      <TableInput/>
-    </TabPane>
+      name="TableInput"
+      />
     <TabPane
       label="模态窗"
       name="ScmModal"
-      >
-      <ScmModal/>
-    </TabPane>
+      />
     <TabPane
       label="tip指令"
       name="tip"
-      >
-      <TooltipDirective/>
-    </TabPane>
+      />
+    <TabPane
+      label="测试umy"
+      name="UmyUiCom"
+      />
+    <keep-alive>
+      <component :is="activeName"/>
+    </keep-alive>
   </Tabs>
 </template>
 
@@ -64,6 +56,7 @@ import Print from './Print.vue';
 import TableInput  from './TableInput.vue';
 import FormValidate from './FormValidate/index.vue';
 import TooltipDirective from './TooltipDirective.vue';
+import UmyUiCom from './UmyUi.vue';
 export default {
   components:{
     Tabs,
@@ -71,6 +64,7 @@ export default {
     CombinationForm,
     CombinationTable,
     ScmPint:Print,
+    UmyUiCom,
 
     // FormValidate,
     FormValidate,

@@ -14,11 +14,17 @@ import ColumnComponent from './component/Column/index.js';
 import OperationComponent from './component/Column/Operation.js'; 
 import { forEachObject } from '../utils';
 import { Table, TableColumn, Checkbox, Radio } from 'element-ui';
+import { 
+  UTable,
+  UTableColumn
+} from 'umy-ui';
 
 export default {
   name: 'ScmTable',
   inheritAttrs: false,
   components: {
+    UTable: UTable,
+    UTableColumn: UTableColumn,
     ElTable: Table,
     ElTableColumn: TableColumn,
     ElCheckbox: Checkbox,
@@ -123,10 +129,15 @@ export default {
 
         /* 表格 */
         h(
-          'el-table',
+          'UTable',
           {
             ref:'Table',
             props: {
+
+              /* 开启虚拟表格 */
+              'use-virtual': true,
+              showBodyOverflow:'title',
+              showHeaderOverflow:'title',
               size: getSize(),
               data: this.list,
               border: false,
@@ -207,7 +218,7 @@ export default {
             /* 索引列 */
             this.schema.index &&
             this.schema.index.visible !== false &&
-            h( 'el-table-column', {
+            h( 'UTableColumn', {
               props: {
                 fixed: 'left',
                 type: 'index',
@@ -218,24 +229,9 @@ export default {
                 width: this?.schema?.index?.width
               }
             } ),
-
-            /* 多选列 */
-            /* this.schema.selection && this.schema.selection.visible !== false && h(
-              'el-table-column',
-              {
-                props: {
-                  align: this.schema.selection.align ?? 'center',
-                  fixed: 'left',
-                  type: 'selection',
-                  label: this.schema.selection?.label,
-                  width: this.schema.selection?.width
-                }
-              }
-            ), */
-            /* 自定义多选列 */
             this.schema.selection &&
             this.schema.selection.visible !== false &&
-            h( 'el-table-column', {
+            h( 'UTableColumn', {
               props: {
                 align: this.schema.selection.align ?? 'center',
                 fixed: 'left',
@@ -343,7 +339,7 @@ export default {
             /* 张开 */
             this.schema.expand &&
             this.schema.expand.visible !== false &&
-            h( 'el-table-column', {
+            h( 'UTableColumn', {
               props: {
                 type: 'expand',
                 fixed: 'left',

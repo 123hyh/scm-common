@@ -24,6 +24,14 @@ module.exports = {
         "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
       }
+    ],
+    [
+      "component",
+      {
+        "libraryName": "umy-ui",
+        "styleLibraryName": "theme-chalk"
+      },
+      'umy'
     ]
   ].filter(Boolean)
 }

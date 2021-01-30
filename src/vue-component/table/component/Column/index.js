@@ -6,18 +6,18 @@
  * @Description: table column 组件
  * @FilePath: \scm_frontend_common\src\vue-component\table\component\Column\index.js
  */
-import { Popover, TableColumn, Tooltip } from 'element-ui';
-
+import {  TableColumn, Tooltip } from 'element-ui';
+import { UTableColumn } from 'umy-ui';
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
-
+let keyCounter = 0;
 
 export default {
   abstract: true,
   name: 'SCMTableColumn',
   components: {
-    Popover,
     ElTableColumn: TableColumn,
-    ElTooltip: Tooltip
+    ElTooltip: Tooltip,
+    UxTableColumn: UTableColumn
   },
   props: {
 
@@ -33,13 +33,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-
-      /* 是否处于编辑状态 */
-      editble: false
-    };
-  },
   render( h ) {
     const {
       field,
@@ -53,13 +46,14 @@ export default {
 
     } = this.columnSchema;
     return h(
-      'ElTableColumn',
+      'UxTableColumn',
       {
         props: {
           align,
           prop: field,
+          key: `${field}_${keyCounter++}`,
           fixed: typeof fixed === 'string' && fixed !== '' ? fixed : undefined,
-          sortable: sortable ? 'custom' : sortable,
+          sortable: sortable,
           label: getText( label, this?.$t?.bind( this ) ),
           'show-overflow-tooltip': true,
           width
@@ -109,6 +103,7 @@ export default {
           children.length &&
           children.map( item => {
             return h( 'SCMTableColumn', {
+              key:`${item.field}_${keyCounter++}`,
               props: {
                 columnSchema: item,
                 columnSlots: this.columnSlots

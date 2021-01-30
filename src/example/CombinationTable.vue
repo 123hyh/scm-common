@@ -42,11 +42,11 @@
         <!-- 操作栏插槽 -->
       </CombinationTable>
 
-      <BaseTable
+      <!--  <BaseTable
         border
         :schema="tableSchema"
         :list="list"
-        />
+        /> -->
     </div>
   </div>
 </template>
@@ -58,8 +58,9 @@ import { loading } from '../directives/index';
 import ripple from '../directives/ripple';
 export default {
   components: {
-    CombinationTable,
-    BaseTable:CombinationTable.BaseTable
+    CombinationTable
+
+    // BaseTable:CombinationTable.BaseTable
   },
   directives:{
     loading:loading,
@@ -159,7 +160,7 @@ export default {
             width: 150
           },
           {
-            field: 'name5 ',
+            field: 'name5',
             label: '业务',
             width: 150
           },
