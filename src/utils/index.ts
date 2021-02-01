@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-22 18:56:05
+ * @LastEditTime: 2021-02-01 13:39:18
  * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
@@ -13,7 +13,7 @@
  * @description: 
  * @param {*}
  * @return {*}
- */ 
+ */
 export { default as camelCaseKeys } from './object/camelCaseKeys/index';
 
 export { forEachObject } from './object';
@@ -38,7 +38,7 @@ export function isEmpty( data: any ) {
  * @param {(node: HTMLElement) => boolean} condition 条件回调方法
  * @return {HTMLElement | undefined}
  */
-export function findDomNode( node:Element, conditionCb:( elem:Element )=> boolean ) {
+export function findDomNode( node: Element, conditionCb: ( elem: Element ) => boolean ) {
   return [ ...node.children ].reduce<Array<Element>>( ( prev, item ) => {
     const target = conditionCb( item );
     if ( target ) {
@@ -68,3 +68,79 @@ export const isSupportWebp = () => {
 };
 
 export { when, useLiabilityChain, useComposite } from './designPatterns';
+
+type FunType = ( ...args: any[] ) => void ;
+
+/**
+ * 链式修改数据
+ * @description: 
+ * @param {*}
+ * @return {*}
+ */
+class SetChain<T> {
+  
+  #reactiveData: T | null = null;
+
+  #_handler:FunType| null= null;
+
+
+  /**
+   * 设置集合
+   * @description: 
+   * @param {T} data
+   * @return {*}
+   */
+  data( data:T ) {
+    this.#reactiveData = data;
+    return this;
+  }
+
+
+  /**
+   * 设置值的回调
+   * @description: 
+   * @param {*}
+   * @return {*}
+   */
+  setHandler( handler = () => void 1 ) {
+    this.#_handler = handler;
+    return this;
+  }
+
+
+  /**
+   * 设置值
+   * @description: 
+   * @param {string} key
+   * @param {any} value
+   * @return {*}
+   */
+  set( key:string, value:any ) {
+    ( this.#_handler as FunType )( this.#reactiveData, key, value );
+    return this;
+  }
+
+
+  /**
+   * 结束当前 设置链
+   * @description: 
+   * @param {*}
+   * @return {*}
+   */
+  end() {
+    this.#_handler = null;
+    this.#reactiveData = null;
+    return this;
+  } 
+}
+
+/**
+ * 链式修改数据集合
+ * @description:
+ * @example useSetChain().data( [object] ).setHandler( (...) => ... ).set( [key], [value] ).end()
+ * @param {*}
+ * @return {*}
+ */
+export function useSetChain<T>() {
+  return new SetChain<T>();
+}
