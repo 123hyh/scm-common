@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
  * @LastEditors: huangyuhui
- * @LastEditTime: 2021-02-01 13:39:18
+ * @LastEditTime: 2021-02-19 15:20:41
  * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
@@ -90,8 +90,8 @@ class SetChain<T> {
    * @param {T} data
    * @return {*}
    */
-  data( data:T ) {
-    this.#reactiveData = data;
+  data( rawData:T ) {
+    this.#reactiveData = rawData;
     return this;
   }
 
@@ -143,4 +143,46 @@ class SetChain<T> {
  */
 export function useSetChain<T>() {
   return new SetChain<T>();
+}
+
+type keyAlias = {
+
+  /**
+   * 父级id的 key
+   */
+  parentId: string
+}
+
+/**
+ * 生成树
+ * @param list 
+ * @param parentId 
+ */
+export function normalTree<T extends Array<any>>( list: T, { parentId }: keyAlias = { parentId: 'pid' } ) {
+
+  const pMap = new Map<string | number | undefined, any>();
+  const idMap = new Map<string | number, any>();
+
+  for ( let item of list ) {
+    item = JSON.parse( JSON.stringify( item ) );
+    if ( pMap.has( item[ parentId ] ) ) {
+      const prev = pMap.get( item[ parentId ] );
+      prev.push( item );
+    } else {
+      pMap.set( item[ parentId ], [ item ] );
+    }
+
+    idMap.set( item.id, item );
+  }
+
+  function _normal() {
+    for ( const [ id, value ] of idMap ) {
+      const children = pMap.get( id );
+      if ( children ) {
+        value.children = children;
+      }
+    }
+  }
+  _normal();
+  return pMap.get( undefined );
 }
