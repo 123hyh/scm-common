@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-03 15:33:33
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-12 07:58:47
+ * @LastEditTime: 2021-03-04 23:25:57
  * @Description: 
  * @FilePath: \scm_frontend_common\scripts\development.js
  */
@@ -13,6 +13,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const resolve = dir => path.resolve(process.cwd(), dir)
 const vueOptionsMerge = require('./vue.options')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const devOptions =  vueOptionsMerge( {
   entry: {
@@ -108,7 +109,12 @@ const devOptions =  vueOptionsMerge( {
       title:'webpack App',
       template: resolve('./src/example/index.html'),
       chunks: ['example']
-    })
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`您的应用程序正在这里运行:  http://localhost:${9000}\n`],
+      },
+    }),
   ]
 })
 
