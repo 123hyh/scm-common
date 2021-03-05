@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2021-03-05 10:44:31
+ * @LastEditTime: 2021-03-05 18:30:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
@@ -42,8 +42,9 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
   collectorInstance.addValidate( field, () => {
     return {
 
-      // value 如果有传入则使用传入的，否则使用 当前绑定组件
-      value: hashData ? data : ( <any>bindCom ).value,
+      // value: 如果有传入 data 则使用传入的，否则使用 当前绑定组件
+      value: hashData ? data : ( <any>bindCom )?.value,
+      customerData: data,
       rules,
       errCb: ( msg: string ) => {
 
@@ -64,6 +65,7 @@ export const validate: DirectiveOptions = {
   },
   inserted( el, bind, vnode ) {
     const { field, collector: collector } = bind.value;
+  
     ( <any>tooltip ).inserted( el, { value: bind.value, arg: field }, vnode );
 
     addRules( el, bind.value, vnode );
@@ -75,7 +77,7 @@ export const validate: DirectiveOptions = {
     const validate = () => collectorInstance.validate( [ field ] );
 
     /* 2、注册事件 */
-    bindCom?.$on( 'input', () => {
+    bindCom?.$on( 'input', ( ) => {
       validate();
     } );
     bindCom?.$on( 'blur', () => {
@@ -92,8 +94,9 @@ export const validate: DirectiveOptions = {
   },
   // eslint-disable-next-line max-params
   update( el, bind, vnode ) {
-
+  
     const { rules, field } = bind.value;
+  
     ( <any>tooltip ).update( el, { value: bind.value, arg: field }, vnode );
 
     /* 1、清空上次校验结果 */

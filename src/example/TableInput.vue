@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-05 10:42:09
+ * @LastEditTime: 2021-03-05 18:26:48
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -11,6 +11,7 @@
     <TableInput
       :schema="schema"
       :collector="collector"
+      @change="handlerChange"
       >
       <template #age>
         <input type="text">
@@ -20,10 +21,14 @@
           v-validate="{
             collector:collector,
             field:schema.field,
-            data:customerData.v,
+            data:customerData,
             rules:{
-              required: true,
-              message:'必填'
+              use:{
+                required(v,ctx){
+                  const x = JSON.parse(v)
+                  return true
+                }
+              }
             }
           }"
           >
@@ -135,10 +140,17 @@ export default {
       ]
     ]
   } ),
+
   methods:{
     async handlerValidate() {
       await this.collector.validate();
       debugger;
+    },
+    handlerChange( { field, data } ) {
+      if ( field === 'customerName' ) {
+        debugger;
+
+      }
     }
   }
 };

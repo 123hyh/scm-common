@@ -1,16 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2020-12-26 22:01:32
- * @LastEditTime: 2021-01-20 10:43:34
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-03-05 18:28:20
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\collector.ts
  */
 import { forEachObject } from '../../../utils/index';
 import Schema, { SchemaDefinition } from 'validate';
+import { cloneDeep } from 'lodash-es';
 
 abstract class CollectorMeth {
-  private validates: { [props: string]: () => { value: any, rules: SchemaDefinition } }
+  private validates: {
+    [props: string]: () => { value: any; rules: SchemaDefinition };
+  };
 
   constructor() {
     this.validates = Object.create( null );
@@ -28,11 +31,12 @@ abstract class CollectorMeth {
       (
         key,
         rulesCb: () => {
-          value: any,
-          rules: SchemaDefinition,
-          succCb: () => void,
-          errCb: ( ...args: any[] ) => void
-        } ) => {
+          value: any;
+          rules: SchemaDefinition;
+          succCb: () => void;
+          errCb: ( ...args: any[] ) => void;
+        }
+      ) => {
         if ( set.has( key ) ) {
           const { value, rules, errCb, succCb } = rulesCb();
           rulesObj[ key ] = rules;
@@ -43,26 +47,35 @@ abstract class CollectorMeth {
       }
     );
     const post = new Schema( rulesObj );
-    const errs = post.validate( values );
+
+    //  (引用类型需克隆，否则会被清空的 bug，object 类型数据需 转为json 字符串，否则无法 传入到自定义校验方法中)
+    const errs = post.validate( objToJson( cloneDeep( values ) ) );
 
     /* 通知错误信息 */
-    errs.length && errs.forEach( err => {
-      errCbs[ err.path ]( ( <any>err ).message );
-    } );
+    errs.length &&
+      errs.forEach( ( err ) => {
+        errCbs[ err.path ]( ( <any>err ).message );
+      } );
 
     /* 通知成功信息 */
-    forEachObject( succCbs, ( () => {
-      const errFields = new Set( errs.map( ( { path } ) => path ) );
-      return ( key: string, cb: () => void ) => {
-        if ( errFields.has( key ) === false ) {
-          cb();
-        }
-      };
-    } )() );
+    forEachObject(
+      succCbs,
+      ( () => {
+        const errFields = new Set( errs.map( ( { path } ) => path ) );
+        return ( key: string, cb: () => void ) => {
+          if ( errFields.has( key ) === false ) {
+            cb();
+          }
+        };
+      } )()
+    );
     return errs.length === 0 ? Promise.resolve( true ) : Promise.reject( false );
   }
 
-  addValidate( field: string, rulesCb: () => { value: any, rules: SchemaDefinition } ): boolean {
+  addValidate(
+    field: string,
+    rulesCb: () => { value: any; rules: SchemaDefinition }
+  ): boolean {
     this.validates[ field ] = rulesCb;
     return true;
   }
@@ -79,21 +92,42 @@ abstract class CollectorMeth {
       (
         key,
         rulesCb: () => {
-          value: any,
-          rules: SchemaDefinition,
-          succCb: () => void,
-          errCb: ( ...args: any[] ) => void
-        } ) => {
+          value: any;
+          rules: SchemaDefinition;
+          succCb: () => void;
+          errCb: ( ...args: any[] ) => void;
+        }
+      ) => {
         if ( set.has( key ) ) {
           const { value, rules, errCb, succCb } = rulesCb();
           succCb();
         }
-      } );
+      }
+    );
   }
 }
 export class Collector extends CollectorMeth {
-
   constructor() {
     super();
   }
+}
+
+/**
+ * 对象 转 json 字符串
+ * @description:
+ * @param {T} obj
+ * @return {*}
+ */
+function objToJson<T>( obj: T ) {
+  forEachObject( obj, ( key, value ) => {
+    const isObjType =
+      Object.prototype.toString.
+        call( value ).
+        slice( 8, -1 ).
+        toLocaleLowerCase() === 'object';
+    if ( isObjType ) {
+      ( obj as { [prop: string]: any } )[ key ] = JSON.stringify( value );
+    }
+  } );
+  return obj;
 }
