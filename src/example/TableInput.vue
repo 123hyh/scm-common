@@ -1,8 +1,8 @@
 <!--
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-11 16:12:14
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-03-05 10:42:09
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -15,20 +15,47 @@
       <template #age>
         <input type="text">
       </template>
+      <template #customerValidate="schema">
+        <div
+          v-validate="{
+            collector:collector,
+            field:schema.field,
+            data:customerData.v,
+            rules:{
+              required: true,
+              message:'必填'
+            }
+          }"
+          >
+          <input
+            v-model="customerData.v"
+            type="text"
+            >
+        </div>
+      </template>
     </TableInput>
+    <button @click.stop="handlerValidate">
+      校验
+    </button>
   </div>
 </template>
 
 <script>
 import TableInput from '../vue-component/TableInput/index';
-import { useCollector } from '../vue-component/Form/FormValidate/directive';
+import { useCollector, validate } from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
 export default {
   components: {
     TableInput
   },
+  directives:{
+    validate
+  },
   data: () => ( {
     collector: useCollector(),
+    customerData:{
+      v:''
+    },
     schema: [
       [
         {
@@ -94,9 +121,26 @@ export default {
       [
         { label:'多选', type:'label' },
         { type:'radio', field:'xxx', options:[ { label:1, value:1 } ] }
+      ],
+      [
+        {
+          label:'自定义校验',
+          type:'label'
+        },
+        {
+          type:'slot',
+          field:'customerValidate'
+
+        }
       ]
     ]
-  } )
+  } ),
+  methods:{
+    async handlerValidate() {
+      await this.collector.validate();
+      debugger;
+    }
+  }
 };
 </script>
 

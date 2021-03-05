@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-27 09:42:26
- * @LastEditTime: 2021-01-11 20:09:32
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-03-05 10:44:31
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormValidate\directive.ts
  */
@@ -31,7 +31,8 @@ function setElemMsg( el: HTMLElement, data: { field: string, msg?: string }, vno
  * @param vnode 
  */
 function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) {
-  const { field, rules, collector, fixed = false } = <any>bindValue;
+  const { field, rules, collector, data, fixed = false } = <any>bindValue;
+  const hashData = Object.prototype.hasOwnProperty.call( bindValue, 'data' );
 
   /* 收集器 */
   const collectorInstance: Collector = collector;
@@ -40,7 +41,9 @@ function addRules( el: HTMLElement, bindValue: DirectiveBinding, vnode: VNode ) 
   /* 1、添加校验 */
   collectorInstance.addValidate( field, () => {
     return {
-      value: ( <any>bindCom ).value,
+
+      // value 如果有传入则使用传入的，否则使用 当前绑定组件
+      value: hashData ? data : ( <any>bindCom ).value,
       rules,
       errCb: ( msg: string ) => {
 
@@ -68,6 +71,7 @@ export const validate: DirectiveOptions = {
     /* 收集器 */
     const collectorInstance: Collector = collector;
     const bindCom = vnode.componentInstance;
+   
     const validate = () => collectorInstance.validate( [ field ] );
 
     /* 2、注册事件 */
