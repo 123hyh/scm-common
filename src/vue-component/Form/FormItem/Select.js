@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:33:24
+ * @LastEditTime: 2021-03-08 18:42:02
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -90,7 +90,7 @@ export default {
         },
         on: {
 
-          /* 排除某些 事件 */
+          /* 排除事件 */
           ...omitObjBy( this.$listeners, [ 'input', 'change' ] ),
           input: [  
             this.$listeners.input,

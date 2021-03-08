@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 17:59:01
+ * @LastEditTime: 2021-03-08 19:00:06
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -14,10 +14,8 @@
       :collector="collector"
       @change="handlerChange"
       @input="handlerInput"
-      @clear="(...args)=>{
-        console.log(args)
-        debugger
-      }"
+      @clear="handlerClear"
+      @remove-tag="handlerRemoveTag"
       >
       <template #age>
         <input type="text">
@@ -53,21 +51,24 @@
 
 <script>
 import TableInput from '../vue-component/TableInput/index';
-import { useCollector, validate } from '../vue-component/Form/FormValidate/directive';
+import {
+  useCollector,
+  validate
+} from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
 
 export default {
   components: {
     TableInput
   },
-  directives:{
+  directives: {
     validate
   },
   data: () => ( {
-    formData:{},
+    formData: {},
     collector: useCollector(),
-    customerData:{
-      v:''
+    customerData: {
+      v: ''
     },
     schema: [
       [
@@ -77,6 +78,7 @@ export default {
         },
         {
           type: 'string',
+          clearable: true,
           field: 'customerName',
           rules: {
             required: true,
@@ -101,9 +103,7 @@ export default {
         {
           type: 'checkbox',
           field: 'age',
-          options:[
-            { label:1, value:1 }
-          ]
+          options: [ { label: 1, value: 1 } ]
         },
         {
           type: 'label',
@@ -111,46 +111,48 @@ export default {
         },
         {
           type: 'select',
-          field:'sex',
+          field: 'sex',
           clearable: true,
           options: [
             {
-              label:'测试组1',
+              label: '测试组1',
               disabled: true,
-              options:[
-                { value: 0,
-                  label: '男' }
-              ]
+              options: [ { value: 0, label: '男' } ]
             },
             {
-              label:'测试组2',
-              options:[
-                { value: 1,
-                  label: '女' }
-              ]
+              label: '测试组2',
+              options: [ { value: 1, label: '女' } ]
             }
           ]
         }
       ],
       [
-        { label:'多选', type:'label' },
-        { type:'radio', field:'xxx', options:[ { label:1, value:1 } ] }
+        { label: '多选', type: 'label' },
+        { type: 'radio', field: 'xxx', options: [ { label: 1, value: 1 } ] },
+        {
+          type: 'select',
+          multiple: true,
+          options: [
+            { label: '多选1', value: 1 },
+            { label: '多选2', value: 2 }
+          ],
+          field: 'multiple-t'
+        }
       ],
       [
         {
-          label:'自定义校验',
-          type:'label'
+          label: '自定义校验',
+          type: 'label'
         },
         {
-          type:'slot',
-          field:'customerValidate'
-
+          type: 'slot',
+          field: 'customerValidate'
         }
       ]
     ]
   } ),
 
-  methods:{
+  methods: {
     async handlerValidate() {
       await this.collector.validate();
       debugger;
@@ -159,17 +161,36 @@ export default {
       debugger;
       if ( field === 'customerName' ) {
         debugger;
-
       }
     },
 
     /**
      * 表单输入事件变化
-     * @description: 
+     * @description:
      * @param {*} v
      * @return {*}
      */
     handlerInput( v ) {
+      debugger;
+    },
+
+    /**
+     * 清空选项值
+     * @description: 
+     * @param {*} v
+     * @return {*}
+     */
+    handlerClear( v ) {
+      debugger;
+    },
+
+    /**
+     * 移除选中的下拉 tag
+     * @description: 
+     * @param {*}
+     * @return {*}
+     */
+    handlerRemoveTag( v ) {
       debugger;
     }
   }
