@@ -1,15 +1,15 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-31 12:34:49
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-03-08 18:33:24
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
 import { debounce } from 'lodash-es';
 import { Select, OptionGroup, Option } from 'element-ui';
 import { validate } from '../FormValidate/directive';
-
+import { omitObjBy } from '../../../utils';
 export default {
   abstract: true,
   components: {
@@ -89,7 +89,10 @@ export default {
           id: field
         },
         on: {
-          input: [
+
+          /* 排除某些 事件 */
+          ...omitObjBy( this.$listeners, [ 'input', 'change' ] ),
+          input: [  
             this.$listeners.input,
             val => {
               this.emit( val );
