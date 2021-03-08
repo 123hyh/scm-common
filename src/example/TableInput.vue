@@ -2,16 +2,22 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-05 18:26:48
+ * @LastEditTime: 2021-03-08 17:59:01
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
 <template>
   <div class="test-table-input">
     <TableInput
+      :formData="formData"
       :schema="schema"
       :collector="collector"
       @change="handlerChange"
+      @input="handlerInput"
+      @clear="(...args)=>{
+        console.log(args)
+        debugger
+      }"
       >
       <template #age>
         <input type="text">
@@ -49,6 +55,7 @@
 import TableInput from '../vue-component/TableInput/index';
 import { useCollector, validate } from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
+
 export default {
   components: {
     TableInput
@@ -57,6 +64,7 @@ export default {
     validate
   },
   data: () => ( {
+    formData:{},
     collector: useCollector(),
     customerData:{
       v:''
@@ -75,7 +83,6 @@ export default {
             length: { min: 3, max: 4 },
             use: {
               checkInt( v ) {
-                debugger;
                 const isPass = isEmpty( v ) || /^[0-9]+$/.test( v );
                 return isPass;
               }
@@ -104,6 +111,8 @@ export default {
         },
         {
           type: 'select',
+          field:'sex',
+          clearable: true,
           options: [
             {
               label:'测试组1',
@@ -147,10 +156,21 @@ export default {
       debugger;
     },
     handlerChange( { field, data } ) {
+      debugger;
       if ( field === 'customerName' ) {
         debugger;
 
       }
+    },
+
+    /**
+     * 表单输入事件变化
+     * @description: 
+     * @param {*} v
+     * @return {*}
+     */
+    handlerInput( v ) {
+      debugger;
     }
   }
 };
