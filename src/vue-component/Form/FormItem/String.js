@@ -2,14 +2,15 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 16:36:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:59:44
+ * @LastEditTime: 2021-03-10 17:44:24
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\String.js
  */
 import { debounce } from 'lodash-es';
 import { Input } from 'element-ui';
 import { validate } from '../FormValidate/directive';
-import { omitObjBy } from '../../../utils';
+import { mergeCustomEvents } from './utils';
+
 export default {
   abstract: true,
   components:{
@@ -86,15 +87,7 @@ export default {
           name: field,
           id: field
         },
-        on: {
-          ...omitObjBy( this.$listeners, [ 'input', 'change' ] ),
-          input: [
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on:mergeCustomEvents.call( this )
       }
     );
   }

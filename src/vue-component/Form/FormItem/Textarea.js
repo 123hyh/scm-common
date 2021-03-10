@@ -2,13 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 16:36:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 17:11:10
+ * @LastEditTime: 2021-03-10 17:57:55
  * @Description: 文本域
  * @FilePath: \customs\src\components\common\Form\FormItem\Textarea.js
  */
 import { debounce } from 'lodash-es';
 import { Input } from 'element-ui';
 import { validate } from '../FormValidate/directive';
+import { mergeCustomEvents } from './utils';
 
 export default {
   abstract: true,
@@ -82,14 +83,7 @@ export default {
           name: field,
           id: field
         },
-        on: {
-          input: [
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on: mergeCustomEvents.call( this )
       }
     );
   }

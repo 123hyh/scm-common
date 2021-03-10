@@ -1,14 +1,15 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:17:47
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-04 19:42:39
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-03-10 17:53:42
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Date.js
  */
 import { debounce } from 'lodash-es';
 import { DatePicker } from 'element-ui';
 import { validate } from '../FormValidate/directive';
+import { mergeCustomEvents } from './utils';
 
 export default {
   abstract: true,
@@ -97,14 +98,7 @@ export default {
           name: field,
           id: field
         },
-        on: {
-          input: [
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on: mergeCustomEvents.call( this )
       }
     );
   }

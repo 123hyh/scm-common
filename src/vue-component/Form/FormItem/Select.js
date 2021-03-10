@@ -2,14 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:42:02
+ * @LastEditTime: 2021-03-10 17:40:43
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
 import { debounce } from 'lodash-es';
 import { Select, OptionGroup, Option } from 'element-ui';
 import { validate } from '../FormValidate/directive';
-import { omitObjBy } from '../../../utils';
+import { mergeCustomEvents } from './utils';
 export default {
   abstract: true,
   components: {
@@ -88,17 +88,7 @@ export default {
           name: field,
           id: field
         },
-        on: {
-
-          /* 排除事件 */
-          ...omitObjBy( this.$listeners, [ 'input', 'change' ] ),
-          input: [  
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on: mergeCustomEvents.call( this )
       },
       options.map(
         ( item ) => {

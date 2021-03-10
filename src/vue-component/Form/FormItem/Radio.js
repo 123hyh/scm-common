@@ -2,13 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 17:09:34
+ * @LastEditTime: 2021-03-10 17:52:52
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\Radio.js
  */
 import { debounce } from 'lodash-es';
 import { RadioGroup, Radio } from 'element-ui';
 import { validate } from '../FormValidate/directive';
+import { mergeCustomEvents } from './utils';
 
 export default {
   abstract: true,
@@ -79,14 +80,7 @@ export default {
           name: field,
           id: field
         },
-        on: {
-          input: [
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on: mergeCustomEvents.call( this )
       },
       options.map( ( { label, value, disabled = false } ) => {
         return h(

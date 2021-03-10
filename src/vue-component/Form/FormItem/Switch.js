@@ -2,12 +2,14 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:13:26
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-14 13:16:23
+ * @LastEditTime: 2021-03-10 17:55:56
  * @Description:
  * @FilePath: \SCM 2.0\src\components\common\Form\FormItem\Switch.js
  */
 import { debounce } from 'lodash-es';
 import { Switch } from 'element-ui';
+import { mergeCustomEvents } from './utils';
+
 export default {
   abstract: true,
   components:{
@@ -46,14 +48,7 @@ export default {
         attrs: {
           name: field
         },
-        on: {
-          input: [
-            this.$listeners.input,
-            val => {
-              this.emit( val );
-            }
-          ]
-        }
+        on: mergeCustomEvents.call( this )
       }
     );
   }
