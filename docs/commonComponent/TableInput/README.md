@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-27 23:10:54
- * @LastEditTime: 2020-12-27 23:42:06
+ * @LastEditTime: 2021-03-10 18:42:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\docs\commonComponent\TableInput\README.md
@@ -29,23 +29,60 @@
   <TableInput
     :schema="schema"
     :collector="collector"
+    :formData="formData"
     >
       <!-- 字段插槽 -->
     <template #age>
       <input type="text">
     </template>
+    
+      <!-- 字段插槽 - 自定义校验 -->
+    <template #xxx="_schema">
+      <input v-validate="{
+        collector: collector,
+        field: _schema.field,
+        data: formData.xxx,
+        rules:{
+          required: true,
+          message:'必填'
+        }
+      }" 
+      type="text">
+    </template>
+    
   </TableInput>
 </template>
 
 <script>
 import TableInput from 'scm-common/src/vue-component/TableInput/index.js';
-import { useCollector } from 'scm-common/src/vue-component/Form/FormValidate/directive';
+import { useCollector,validate } from 'scm-common/src/vue-component/Form/FormValidate/directive';
 import { isEmpty } from 'scm-common/src/utils';
 export default {
   components: {
     TableInput
   },
+  directives: {
+    /* 校验指令 */
+    validate
+  },
+  mounted(){
+    this.handlerValidate()
+  },
+  methods:{
+    /**
+     * 校验 表格输入组件 的所有数据
+     * @description: 
+     * @param {*}
+     * @return {*}
+     */
+    async handlerValidate() {
+      const x = await this.collector.validate();
+    },
+  },
   data: () => ( {
+    formData: {
+      xxx: 1
+    },
     /**
      * 收集器
      * */
@@ -66,7 +103,18 @@ export default {
         },
         {
           type: 'string',
+          /**
+           * 字段名 - 对应表单字段
+           **/
           field: 'customerName',
+          /**
+           * 该选项 为 type 属性所对应的 组件中的 事件(可查看 element-ui 的组件事件)
+           **/
+          customEvent:{
+            input:(v)=>{
+              ....
+            }
+          },
           /**
            * 校验规则
            * */
