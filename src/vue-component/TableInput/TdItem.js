@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:57:21
+ * @LastEditTime: 2021-03-10 18:04:42
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -13,7 +13,7 @@ import DateItem from '../Form/FormItem/Date.js';
 import RadioItem from '../Form/FormItem/Radio.js';
 import CheckboxItem from '../Form/FormItem/Checkbox.js';
 import SwitchItem from '../Form/FormItem/Switch';
-import { omitObjBy, when } from '../../utils';
+
 const aliasComName = {
   string: 'StringItem',
   select: 'SelectItem',
@@ -52,12 +52,8 @@ export default {
     }
   },
   render( h ) {
-    const { clear, ...listeners } = omitObjBy(
-      this.$listeners,
-      [ 'change', 'input' ]
-    );
     const {
-      schema: { field, type, visible = true, label, rules },
+      schema: { field, type, visible = true, label, customEvent = {} },
       formData
     } = this;
     return visible
@@ -82,34 +78,14 @@ export default {
                   collector: this.collector
                 },
                 on: {
-
-                  // 这些事件不处理
-
-                  ...omitObjBy(
-                    this.$listeners,
-                    [ 'change', 'input' ]
-                  ),
-                  
-                  clear:() => {
-                    clear && clear( { field } );
-                  },
-                  'remove-tag':( v ) => {
-                    when( listeners[ 'remove-tag' ], () => {
-                      this.$emit( 'remove-tag', { field, value:v } );
-                    } );
-                  },
                   input: [
 
                     // 设置 formData 中 的值
                     ( v ) => {
                       this.$set( this.formData, field, v );
-                    },
-                    ( v ) => {
-                      this.$listeners.input &&
-                        typeof this.$listeners.input === 'function' &&
-                        this.$listeners.input( { field, value: v } );
                     }
-                  ].filter( Boolean )
+                  ].filter( Boolean ),
+                  customEvent: () => customEvent
                 }
               } ),
 
@@ -129,10 +105,17 @@ export default {
       const unwatch = this.$watch(
         `formData.${field}`,
         ( value, prev ) => {
+          const sendData = { field, value }; 
           if ( typeof value === 'object' ) {
-            this.$emit( 'change', { field, value } );
+            this.$emit( 'change', sendData );
+
+            /* 该事件用于 代替 上面的 change (语义错误) */
+            this.$emit( 'watchFormDataChange', sendData );
           } else {
-            value !== prev && this.$emit( 'change', { field, value } );
+            if ( value !== prev ) {
+              this.$emit( 'change', sendData );
+              this.$emit( 'watchFormDataChange', sendData );
+            }
           }
         },
         {
