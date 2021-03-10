@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:22:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 19:00:06
+ * @LastEditTime: 2021-03-10 17:56:44
  * @Description: 表格输入
  * @FilePath: \scm_frontend_common\src\example\TableInput.vue
 -->
@@ -20,20 +20,20 @@
       <template #age>
         <input type="text">
       </template>
-      <template #customerValidate="schema">
+      <template #customerValidate="_schema">
         <div
           v-validate="{
-            collector:collector,
-            field:schema.field,
-            data:customerData,
-            rules:{
-              use:{
-                required(v,ctx){
-                  const x = JSON.parse(v)
-                  return true
-                }
-              }
-            }
+            collector: collector,
+            field: _schema.field,
+            data: customerData,
+            rules: {
+              use: {
+                required(v, ctx) {
+                  const x = JSON.parse(v);
+                  return true;
+                },
+              },
+            },
           }"
           >
           <input
@@ -56,7 +56,29 @@ import {
   validate
 } from '../vue-component/Form/FormValidate/directive';
 import { isEmpty } from '../utils';
-
+const events = () => ( {
+  'remove-tag': function ( v ) {
+    console.log( 'remove-tag' );
+  },
+  'visible-change': ( V ) => {
+    console.log( 'visible-change' );
+  },
+  blur: ( v ) => {
+    console.log( 'blur' );
+  },
+  focus: ( v ) => {
+    console.log( 'focus' );
+  },
+  clear: ( v ) => {
+    console.log( 'clear' );
+  },
+  change( v ) {
+    console.log( 'change' );
+  },
+  input( v ) {
+    console.log( 'input' );
+  }
+} );
 export default {
   components: {
     TableInput
@@ -94,7 +116,8 @@ export default {
               checkInt: '必需整数',
               required: '必填'
             }
-          }
+          },
+          customEvent: events()
         },
         {
           type: 'label',
@@ -103,6 +126,7 @@ export default {
         {
           type: 'checkbox',
           field: 'age',
+          customEvent: events(),
           options: [ { label: 1, value: 1 } ]
         },
         {
@@ -127,16 +151,37 @@ export default {
         }
       ],
       [
-        { label: '多选', type: 'label' },
-        { type: 'radio', field: 'xxx', options: [ { label: 1, value: 1 } ] },
+        { label: '单选', type: 'label' },
+        {
+          type: 'radio',
+          field: 'singleChoice',
+          options: [
+            { label: '1', value: '1' },
+            { label: '2', value: '2' }
+          ],
+          customEvent: events()
+        },
         {
           type: 'select',
           multiple: true,
+          clearable: true,
           options: [
             { label: '多选1', value: 1 },
             { label: '多选2', value: 2 }
           ],
-          field: 'multiple-t'
+          field: 'multiple-t',
+          customEvent: events()
+        },
+        {
+          type:'date',
+          valueFormat:'yyyy/MM/dd',
+          field:'date',
+          customEvent: events()
+        },
+        {
+          type:'switch',
+          field:'switch_value',
+          customEvent: events()
         }
       ],
       [
@@ -155,14 +200,8 @@ export default {
   methods: {
     async handlerValidate() {
       await this.collector.validate();
-      debugger;
     },
-    handlerChange( { field, data } ) {
-      debugger;
-      if ( field === 'customerName' ) {
-        debugger;
-      }
-    },
+    handlerChange( { field, data } ) {},
 
     /**
      * 表单输入事件变化
@@ -170,29 +209,23 @@ export default {
      * @param {*} v
      * @return {*}
      */
-    handlerInput( v ) {
-      debugger;
-    },
+    handlerInput( v ) {},
 
     /**
      * 清空选项值
-     * @description: 
+     * @description:
      * @param {*} v
      * @return {*}
      */
-    handlerClear( v ) {
-      debugger;
-    },
+    handlerClear( v ) {},
 
     /**
      * 移除选中的下拉 tag
-     * @description: 
+     * @description:
      * @param {*}
      * @return {*}
      */
-    handlerRemoveTag( v ) {
-      debugger;
-    }
+    handlerRemoveTag( v ) {}
   }
 };
 </script>
