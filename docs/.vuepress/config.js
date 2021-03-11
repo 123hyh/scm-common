@@ -1,12 +1,13 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-21 11:26:50
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-03-10 18:47:02
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
 module.exports = {
+  base:'/',
   title: 'SCM 2.0 Frontend Docs',
   description: '版本 1.1',
   lineNumbers:true,
