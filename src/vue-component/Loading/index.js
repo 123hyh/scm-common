@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-11 16:42:48
- * @LastEditTime: 2021-03-11 17:14:59
+ * @LastEditTime: 2021-03-11 17:28:21
  * @LastEditors: Please set LastEditors
  * @Description: loading 组件
  * @FilePath: \scm-common\src\vue-component\Loading\index.js
@@ -33,7 +33,7 @@ export default {
           color: '#0086fa',
           loader: 'dots',
           blur:'20px',
-          'background-color':'#f0f0f0',
+          'background-color':'#f3f6f9',
           'is-full-page': false
         }
       },
