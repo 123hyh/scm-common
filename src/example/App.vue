@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-03-08 18:06:19
+ * @LastEditTime: 2021-03-11 16:47:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -40,6 +40,10 @@
         label="tip指令"
         name="TooltipDirective"
         />
+      <TabPane
+        label="loading组件"
+        name="Loading"
+        />
     </Tabs>
     <component :is="activeName"/>
   </div>
@@ -53,6 +57,7 @@ import Print from './Print.vue';
 import TableInput  from './TableInput.vue';
 import FormValidate from './FormValidate/index.vue';
 import TooltipDirective from './TooltipDirective.vue';
+import Loading from './Loading.vue';
 export default {
   components:{
     Tabs,
@@ -65,11 +70,12 @@ export default {
     FormValidate,
     TableInput,
     ScmModal: () => import( './Modal.vue' ),
-    TooltipDirective
+    TooltipDirective,
+    Loading
   },
   data() {
     return {
-      activeName:'TableInput'
+      activeName:'Loading'
     };
   }
 };
