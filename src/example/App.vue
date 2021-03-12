@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-03-11 16:47:32
+ * @LastEditTime: 2021-03-12 21:57:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -44,6 +44,10 @@
         label="loading组件"
         name="Loading"
         />
+      <TabPane
+        label="KeepAlive组件"
+        name="KeepAlive"
+        />
     </Tabs>
     <component :is="activeName"/>
   </div>
@@ -58,6 +62,7 @@ import TableInput  from './TableInput.vue';
 import FormValidate from './FormValidate/index.vue';
 import TooltipDirective from './TooltipDirective.vue';
 import Loading from './Loading.vue';
+import KeepAlive from './KeepAlive/index.vue';
 export default {
   components:{
     Tabs,
@@ -71,7 +76,8 @@ export default {
     TableInput,
     ScmModal: () => import( './Modal.vue' ),
     TooltipDirective,
-    Loading
+    Loading,
+    KeepAlive
   },
   data() {
     return {
