@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-03-12 21:57:39
+ * @LastEditTime: 2021-03-13 09:41:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -81,7 +81,7 @@ export default {
   },
   data() {
     return {
-      activeName:'Loading'
+      activeName:'KeepAlive'
     };
   }
 };

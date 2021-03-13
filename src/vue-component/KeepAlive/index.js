@@ -1,11 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-03-12 21:55:35
- * @LastEditTime: 2021-03-12 22:27:23
+ * @LastEditTime: 2021-03-13 14:06:57
  * @LastEditors: Please set LastEditors
  * @Description: 缓存组件 
  * @FilePath: \scm-common\src\vue-component\KeepAlive\index.js
  */
+import Vue from 'vue';
+
 function remove( arr, item ) {
   if ( arr.length ) {
     const index = arr.indexOf( item );
@@ -100,7 +102,26 @@ function pruneCacheEntry( cache, key, keys, current ) {
   cache[ key ] = null;
   remove( keys, key );
 }
-  
+
+
+
+/**
+ * 获取缓存组件中 的 key
+ * @param {*} com  vue 组件
+ * @returns 
+ */
+export const getCacheKey = vueCom => {
+  if ( vueCom instanceof Vue ) {
+    return getComponentKey( vueCom.$vnode ); 
+  } else {
+    console.error( '入参必须为 Vue 组件' );
+  }
+};
+
+/**
+ * 缓存 组件
+ * @description 如果 删除当前缓存的 key 时 必须在删除后 切换组件（否则出现bug）
+ */
 export default {
   name: 'AKeepAlive',
   abstract: true,
@@ -126,19 +147,19 @@ export default {
       }
     }
   },
-  
+
   created() {
     this.cache = Object.create( null );
     this.keys = [];
   },
-  
+
   destroyed() {
     // eslint-disable-next-line guard-for-in
     for ( const key in this.cache ) {
       pruneCacheEntry( this.cache, key, this.keys );
     }
   },
-  
+
   mounted() {
     this.$watch( 'include', val => {
       pruneCache( this, ( name ) => matches( val, name ) );
@@ -150,14 +171,13 @@ export default {
       pruneCache( this, ( name, key ) => !matches( val, key ) );
     } );
   },
-  
+
   render() {
-    debugger;
     const slot = this.$slots.default;
     const vnode = getFirstComponentChild( slot );
     const componentOptions = vnode && vnode.componentOptions;
     if ( componentOptions ) {
-  
+
       // check pattern
       const name = getComponentName( componentOptions );
       const componentKey = getComponentKey( vnode );
@@ -189,6 +209,7 @@ export default {
         remove( keys, key );
         keys.push( key );
       } else {
+        console.log( '放进 cache' );
         cache[ key ] = vnode;
         keys.push( key );
   
@@ -197,7 +218,7 @@ export default {
           pruneCacheEntry( cache, keys[ 0 ], keys, this._vnode );
         }
       }
-  
+      console.log( '启用缓存' );
       vnode.data.keepAlive = true;
     }
     return vnode || ( slot && slot[ 0 ] );

@@ -7,7 +7,10 @@
  * @FilePath: \scm-common\src\example\KeepAlive\B.vue
 -->
 <template>
-  <h2>B</h2>
+  <div>
+    <h2>B</h2>
+    <input type="text">
+  </div>
 </template>
 
 <script>

@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-29 09:55:53
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-10 18:47:02
+ * @LastEditTime: 2021-03-13 13:46:06
  * @Description: 
  * @FilePath: \scm_frontend_common\docs\.vuepress\config.js
  */
@@ -119,6 +119,10 @@ module.exports = {
               {
                 title: 'tabs 页签',
                 path: '/commonComponent/tabs/'
+              },
+              {
+                title:'keep-alive 缓存组件',
+                path:'/commonComponent/KeepAlive/'
               }
             ],
           },
