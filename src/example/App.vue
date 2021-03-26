@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-03-13 09:41:20
+ * @LastEditTime: 2021-03-19 10:22:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -63,6 +63,7 @@ import FormValidate from './FormValidate/index.vue';
 import TooltipDirective from './TooltipDirective.vue';
 import Loading from './Loading.vue';
 import KeepAlive from './KeepAlive/index.vue';
+import { amountToUpperCase } from '@/filters/number/index';
 export default {
   components:{
     Tabs,

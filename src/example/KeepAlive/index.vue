@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 21:56:17
- * @LastEditTime: 2021-03-13 10:51:47
+ * @LastEditTime: 2021-03-26 14:30:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm-common\src\example\KeepAlive\index.vue
@@ -40,14 +40,21 @@
         <button @click.stop="() => updateCache( ['BCom'])">
           清空 key 为 BCom 组件
         </button>
+        <button @click.stop="() => onRefresh()">
+          刷新
+        </button>
       </div>
     </div>
-    <AKeepAlive :clearCaches="clearCaches">
+    <AKeepAlive v-model="clearCaches">
       <component
         :is="activeName"
+        v-if="refreshd === false"
         ref="com"
         :key="activeName"
         />
+      <div v-else>
+        正在刷新~
+      </div>
     </AKeepAlive>
   </div>
 </template>
@@ -68,12 +75,16 @@ export default {
     return {
       cName: '',
       activeName: '',
-      clearCaches: []
+      clearCaches: [],
+      refreshd: false
     };
   },
   methods:{
+
+    /**
+     * 清空某个组件缓存
+     */
     updateCache( keys = [] ) {
-      console.log( this.$children );
       keys  = new Set( keys );
       const clearCaches = [];
       
@@ -92,6 +103,18 @@ export default {
           this.clearCaches = []; 
         } 
       );
+    },
+
+    /**
+     * 刷新当前组件
+     */
+    onRefresh() {
+      const key = getCacheKey( this.$refs.com ); 
+      this.refreshd = true;
+      this.clearCaches = [ key ];
+      setTimeout( () => {
+        this.refreshd  = false; 
+      }, 5000 );
     }
   }
 };

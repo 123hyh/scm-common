@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-12 21:55:35
- * @LastEditTime: 2021-03-13 14:06:57
+ * @LastEditTime: 2021-03-26 14:35:46
  * @LastEditors: Please set LastEditors
  * @Description: 缓存组件 
  * @FilePath: \scm-common\src\vue-component\KeepAlive\index.js
@@ -107,7 +107,7 @@ function pruneCacheEntry( cache, key, keys, current ) {
 
 /**
  * 获取缓存组件中 的 key
- * @param {*} com  vue 组件
+ * @param { object } vueCom  vue 组件
  * @returns 
  */
 export const getCacheKey = vueCom => {
@@ -209,7 +209,6 @@ export default {
         remove( keys, key );
         keys.push( key );
       } else {
-        console.log( '放进 cache' );
         cache[ key ] = vnode;
         keys.push( key );
   
@@ -218,7 +217,6 @@ export default {
           pruneCacheEntry( cache, keys[ 0 ], keys, this._vnode );
         }
       }
-      console.log( '启用缓存' );
       vnode.data.keepAlive = true;
     }
     return vnode || ( slot && slot[ 0 ] );
