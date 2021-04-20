@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-18 12:17:27
- * @LastEditTime: 2021-03-19 10:27:39
+ * @LastEditTime: 2021-04-20 10:04:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm-common\src\filters\number\index.ts
@@ -34,4 +34,17 @@ export function amountToUpperCase( amount: number | string ) {
     replace( /(亿)万|壹(拾)/g, '$1$2' ).
     replace( /^元零?|零分/g, '' ).
     replace( /元$/g, '元整' );
+}
+
+/**
+ *  数字 千分位处理
+ *  1234567 -> 1,234,567 
+ * @description 移动端 Number.toLocaleString 处理存在兼容性
+ */
+export  function thousands( value = '' )  {
+  value = value === null ? '' : value;
+
+  const [ integer, decimal ] = ( value + '' ).split( '.' );
+  const regexp = /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g;
+  return `${integer.replace( regexp, '$&,' )}${decimal ? ( '.' + decimal ) : ''}`;
 }
