@@ -110,6 +110,7 @@ $containerBgColor: #ffffff;
     }
   }
   .query-operation {
+    padding-top: 10px;
     flex-grow: 1;
     text-align: right;
     @include baseButtonStyle;
