@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-22 14:56:57
+ * @LastEditTime: 2021-04-22 16:15:32
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -92,7 +92,6 @@ const schema = [
   }
 ];
 
-import yuxStorage from 'yux-storage';
 
 export function useForm() {
 
@@ -101,8 +100,7 @@ export default {
   name: 'SCM_Form',
   data() {
     return {
-      _formData:{},
-      currentSchema:[]
+      _formData:{}
     };
   },
   computed:{
@@ -111,38 +109,10 @@ export default {
       get() {
         return cloneDeepWith( this.$data._formData );
       }
-    },
-    currentEntityName() {
-      return isEmpty( this.entityName ) === false ? `${this.entityName}_form-group` : '';
-    },
-    newSchema() {
-      
-      const s = this.currentSchema;
-      return s.length && s.length === this.schema.length  ? 
-        s 
-        : this.schema;
     }
   },
   methods:{
 
-    /**
-     * 初始化 schema
-     */
-    initailizeSchema() {
-      if ( isEmpty( this.currentEntityName ) === false ) {
-        yuxStorage.getItem( 
-          this.currentEntityName,
-          ( err, val = [] ) => {
-            if (
-              err === false && 
-               isEmpty( val ) === false 
-            ) {
-              this.currentSchema = val;
-            }
-          } 
-        );
-      }
-    },
 
     /**
      * 重置表单数据
@@ -160,14 +130,6 @@ export default {
     entity: {
       type: String,
       default: ''
-    },
-
-    /**
-     * 用于保存实体的name
-     */
-    entityName:{
-      type: String,
-      required: false
     },
 
     /* 查询栏配置 */
@@ -194,15 +156,12 @@ export default {
     ElFormItem: FormItem,
     VDraggable:Draggable
   },
-  mounted() {
-    this.initailizeSchema();
-  },
   render( h ) {
 
     /* 获取 当前 组件 的 form model  */
 
     const model = this.$data._formData;
-    const FormItems = cloneDeepWith( this.newSchema ).reduce(
+    const FormItems = cloneDeepWith( this.schema ).reduce(
       ( prev, currentItemConf ) => {
         const {
           label,
@@ -287,24 +246,10 @@ export default {
                 'VDraggable', 
                 {
                   props:{
-                    list: this.newSchema
+                    list: this.schema
                   },
                   on:{
-                    end: () => {
-
-                      // 保存到 indexedDB
-                      if ( isEmpty( this.currentEntityName ) === false ) {
-                        yuxStorage.setItem( 
-                          this.currentEntityName,
-                          this.newSchema,
-                          err  => {
-                            if ( err ) {
-                              console.log( err );
-                            }
-                          } 
-                        );
-                      }
-                    }
+                    end: this.$emit.bind( this, 'draggableEnd', this.schema )
                   }
                 },
                 [

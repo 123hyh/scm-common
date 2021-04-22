@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-22 14:43:29
+ * @LastEditTime: 2021-04-22 16:28:38
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -12,6 +12,13 @@ import SCMForm from '../Form/index';
 import { Button, Link } from 'element-ui';
 import { getScmMsg } from '../../locale';
 import { getSize } from '../index';
+import { findDomNode, isEmpty } from '../../utils';
+import yuxStorage from 'yux-storage';
+
+/**
+ * 查询栏表单容器 className
+ */
+const containerClassName = 'query-bar-form-block';
 
 export default {
   name: 'SCM_QueryBar',
@@ -33,6 +40,28 @@ export default {
       get() {
         return this.$refs.form.resetFormData;
       }
+    },
+    currentEntityName() {
+      return isEmpty( this.entityName ) === false ? `${this.entityName}_$$_query_bar_com` : '';
+    },
+
+    /**
+     * 是否开启拖拽
+     * @returns
+     */
+    draggabled() {
+      return isEmpty( this.currentEntityName ) === false;
+    },
+
+    /**
+     * 新的 schema （从 db 获取 ）
+     * @returns 
+     */
+    newSchema() {
+      const s = this.currentSchema;
+      return s.length && s.length === this.schema.length  ? 
+        s 
+        : this.schema;
     }
   },
   props: {
@@ -62,7 +91,9 @@ export default {
       /**
        * 是否存在更多查询，用于隐藏 更多按钮
        */
-      hasMore: true
+      hasMore: true,
+      currentSchema:[],
+      schemaLoaded: false
     };
   },
   render( h ) {
@@ -81,14 +112,17 @@ export default {
           {
             ref: 'form',
             props: {
-              schema: this.schema,
-              draggabledClassName: 'query-bar-form-block',
+              schema: this.newSchema,
+              draggabledClassName: this.draggabled ?  containerClassName : '',
               entityName:`${this.entityName}_query_bar`
             },
-            style:{
-              width:'100%'
+            class: [ this.draggabled ? '' : containerClassName ],
+            style: {
+              width: this.draggabled ?  '100%' : '',
+              visibility: this.draggabled ?  this.schemaLoaded ? 'visible' : 'hidden' : 'visible'
             },
             on: {
+              draggableEnd: this.draggableEnd.bind( this ),
               change: data => {
                 this.formDataChange( data );
               }
@@ -170,16 +204,64 @@ export default {
   },
   methods: {
 
+    /**
+     * 初始化 schema
+     */
+    initailizeSchema() {
+      if ( this.draggabled ) {
+        yuxStorage.getItem( 
+          this.currentEntityName,
+          ( err, val = [] ) => {
+            if (
+              err === false && 
+               isEmpty( val ) === false 
+            ) {
+              this.currentSchema = val;
+            }
+            this.schemaLoaded = true;
+          } 
+        );
+       
+      }
+    },
+
+    draggableEnd( schema = [] ) {
+
+      // 保存到 indexedDB
+      if ( this.draggabled && isEmpty( schema ) === false ) {
+        yuxStorage.setItem( 
+          this.currentEntityName,
+          schema,
+          err  => {
+            if ( err ) {
+              console.log( err );
+            }
+          } 
+        );
+      }
+    },
+
     /* 显示 form Item 溢出元素 */
     handlerShow() {
       const formRef = this.$refs.form.$el;
-      const children = formRef?.children;
+      const children = this.getFormItems( formRef );
       children?.forEach( item => {
         const top = item.offsetTop;
         if ( top === 0 && item.style.display === 'none' ) {
           item.style.display = '';
         }
       } );
+    },
+    getFormItems( formElem ) {
+      return  this.draggabled ? 
+        ( () => {
+          const [ fistNode ] = findDomNode( 
+            formElem,
+            e => e.classList.contains( containerClassName )
+          );
+          return fistNode?.children;
+        } )() :
+        formElem.children;
     },
 
     /* 隐藏 form 溢出元素 */
@@ -190,7 +272,11 @@ export default {
       return function () {
         this.$nextTick( () => {
           const formElem = this.$refs.form.$el;
-          const children = formElem.children;
+
+          // 拖拽改变 了容器 
+          const children = this.getFormItems( formElem );
+
+          if ( isEmpty( children ) )  return; 
 
           /* 暂存 溢出的Elem */
           let overflowElems = [];
@@ -266,6 +352,9 @@ export default {
         100
       );
     }
+  },
+  created() {
+    this.initailizeSchema();
   },
   mounted() {
 
