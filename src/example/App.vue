@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 16:16:25
- * @LastEditTime: 2021-03-19 10:22:41
+ * @LastEditTime: 2021-04-22 16:47:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\App.vue
@@ -82,7 +82,7 @@ export default {
   },
   data() {
     return {
-      activeName:'KeepAlive'
+      activeName:'CombinationTable'
     };
   }
 };

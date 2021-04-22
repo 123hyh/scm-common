@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-22 16:28:38
+ * @LastEditTime: 2021-04-22 17:15:39
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -219,9 +219,14 @@ export default {
               this.currentSchema = val;
             }
             this.schemaLoaded = true;
+            this.$nextTick( () => {
+
+              /* 首次加载先隐藏一次 */
+              this.handlerHide();
+            } );
+            
           } 
         );
-       
       }
     },
 
@@ -275,7 +280,6 @@ export default {
 
           // 拖拽改变 了容器 
           const children = this.getFormItems( formElem );
-
           if ( isEmpty( children ) )  return; 
 
           /* 暂存 溢出的Elem */
@@ -283,17 +287,18 @@ export default {
 
           /* 1、收集溢出元素 */
           children?.forEach( ( () => {
+            let firstRowTop = null;
             let prevTop = null;
             return ( item, index ) => {
               const top = item.offsetTop;
-              const nextTop = children[ index + 1 ]?.offsetTop;
               if (
                 prevTop &&
-                ( top > prevTop  || nextTop > top ) && 
+                ( top > prevTop  || top > firstRowTop ) && 
                 item.classList.contains( 'query-operation' ) === false 
               ) {
                 overflowElems.push( item );
               } else {
+                firstRowTop = top;
                 prevTop = top;
               }
             };
@@ -351,6 +356,13 @@ export default {
         },
         100
       );
+    },
+    get debounceHandlerHide() {
+      return debounce( function () {
+        if ( this.hideMore === true ) {
+          this.handlerHide();
+        }
+      }, 100 );
     }
   },
   created() {
@@ -358,15 +370,9 @@ export default {
   },
   mounted() {
 
-    const handler = debounce( () => {
-      if ( this.hideMore === true ) {
-        this.handlerHide();
-      }
-    }, 100 );
-    const unWatch = this.$watch( 'hideMore', handler );
+    const unWatch = this.$watch( 'hideMore', this.debounceHandlerHide );
 
-    /* 首次加载先隐藏一次 */
-    this.handlerHide();
+  
     this.$once( 'hook:beforeDestroy', unWatch );
   }
 };

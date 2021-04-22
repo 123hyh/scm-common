@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2021-01-25 14:15:49
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-04-22 16:48:29
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
 -->
@@ -76,7 +76,7 @@ export default {
       ],
       queryBarSchema:[
         {
-          field:'name',
+          field:'name1',
           label:'姓名1',
           type: 'date',
           dateType:'daterange',
@@ -84,25 +84,25 @@ export default {
           clearable: true
         },
         {
-          field:'name',
+          field:'name2',
           label:'姓名2',
           type: 'select',
           clearable: true
         },
         {
-          field:'name',
+          field:'name3',
           label:'姓名3',
           type: 'string',
           clearable: true
         },
         {
-          field:'name',
+          field:'name4',
           label:'姓名4',
           type: 'string',
           clearable: true
         },
         {
-          field:'name',
+          field:'name5',
           label:'姓名5',
           type: 'string',
           clearable: true
@@ -114,13 +114,13 @@ export default {
           clearable: true
         },
         {
-          field:'name',
+          field:'name7',
           label:'姓名7',
           type: 'string',
           clearable: true
         },
         {
-          field:'name',
+          field:'name8',
           label:'姓名',
           type: 'string',
           clearable: true
@@ -134,7 +134,7 @@ export default {
         },
         column: [
           {
-            field: 'name',
+            field: 'name1.1',
             label: '备案号',
             width: 150
           },
