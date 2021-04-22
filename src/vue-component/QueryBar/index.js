@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-25 14:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-22 14:43:29
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -12,6 +12,7 @@ import SCMForm from '../Form/index';
 import { Button, Link } from 'element-ui';
 import { getScmMsg } from '../../locale';
 import { getSize } from '../index';
+
 export default {
   name: 'SCM_QueryBar',
   components: {
@@ -40,6 +41,14 @@ export default {
     schema: {
       type: Array,
       required: true
+    },
+
+    /**
+     * 用于保存实体的name
+     */
+    entityName:{
+      type: String,
+      required: false
     }
   },
   data() {
@@ -71,9 +80,13 @@ export default {
           'SCMForm',
           {
             ref: 'form',
-            class: [ 'query-bar-form-block' ],
             props: {
-              schema: this.schema
+              schema: this.schema,
+              draggabledClassName: 'query-bar-form-block',
+              entityName:`${this.entityName}_query_bar`
+            },
+            style:{
+              width:'100%'
             },
             on: {
               change: data => {

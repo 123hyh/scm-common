@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-23 23:43:05
+ * @LastEditTime: 2021-04-22 14:56:57
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -16,6 +16,8 @@ import CheckboxItem from './FormItem/Checkbox';
 import { Form, FormItem } from 'element-ui';
 import { getSize } from '../index.ts';
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
+import Draggable from 'vuedraggable';
+import { isEmpty } from '../../utils';
 
 
 
@@ -90,6 +92,7 @@ const schema = [
   }
 ];
 
+import yuxStorage from 'yux-storage';
 
 export function useForm() {
 
@@ -98,7 +101,8 @@ export default {
   name: 'SCM_Form',
   data() {
     return {
-      _formData:{}
+      _formData:{},
+      currentSchema:[]
     };
   },
   computed:{
@@ -107,9 +111,38 @@ export default {
       get() {
         return cloneDeepWith( this.$data._formData );
       }
+    },
+    currentEntityName() {
+      return isEmpty( this.entityName ) === false ? `${this.entityName}_form-group` : '';
+    },
+    newSchema() {
+      
+      const s = this.currentSchema;
+      return s.length && s.length === this.schema.length  ? 
+        s 
+        : this.schema;
     }
   },
   methods:{
+
+    /**
+     * 初始化 schema
+     */
+    initailizeSchema() {
+      if ( isEmpty( this.currentEntityName ) === false ) {
+        yuxStorage.getItem( 
+          this.currentEntityName,
+          ( err, val = [] ) => {
+            if (
+              err === false && 
+               isEmpty( val ) === false 
+            ) {
+              this.currentSchema = val;
+            }
+          } 
+        );
+      }
+    },
 
     /**
      * 重置表单数据
@@ -129,10 +162,26 @@ export default {
       default: ''
     },
 
+    /**
+     * 用于保存实体的name
+     */
+    entityName:{
+      type: String,
+      required: false
+    },
+
     /* 查询栏配置 */
     schema: {
       type: Array,
       default: () => ( [] )
+    },
+
+    /**
+     * 拖拽容器的类名（如果没有 则不启用 拖拽）
+     */
+    draggabledClassName:{
+      type: String,
+      default: true
     }
   },
   components: {
@@ -142,13 +191,81 @@ export default {
     DateItem,
     CheckboxItem,
     ElForm: Form,
-    ElFormItem: FormItem
+    ElFormItem: FormItem,
+    VDraggable:Draggable
+  },
+  mounted() {
+    this.initailizeSchema();
   },
   render( h ) {
 
     /* 获取 当前 组件 的 form model  */
 
     const model = this.$data._formData;
+    const FormItems = cloneDeepWith( this.newSchema ).reduce(
+      ( prev, currentItemConf ) => {
+        const {
+          label,
+          type = 'string',
+          field = '',
+          visible = true
+        } = currentItemConf;
+        // eslint-disable-next-line no-prototype-builtins
+        if ( !aliasComponents.hasOwnProperty( type ) ) {
+          return h( 'div' );
+        }
+
+        /* 控制 是否显示  */
+        visible && prev.push(
+          h(
+            'el-form-item',
+            {
+              class: [ `form-item-${ type }` ],
+              props: {
+                label: getText( label, this?.$t?.bind( this ) ),
+                for: field
+              },
+              key:field
+            },
+            [
+              h(
+                aliasComponents[ type ],
+                {
+                  props: {
+                    entity: this.entity,
+                    conf: currentItemConf,
+                    value: model[ field ]
+                  },
+                  on: {
+                    input: newVal => {
+                      // eslint-disable-next-line no-prototype-builtins
+                      if ( model.hasOwnProperty( field ) ) {
+                        model[ field ] = newVal;
+                      } else {
+                        this.$set( model, field, newVal );
+                        this.$forceUpdate();
+                      }
+                    },
+                    change: data => {
+                      this.$emit(
+                        'change',
+                        {
+                          field,
+                          data,
+                          formData: cloneDeepWith( model )
+                        }
+                      );
+                    }
+                  }
+                }
+              )
+            ]
+          )
+        );
+        return prev;
+      },
+      []
+    );
     return h(
       'el-form',
       {
@@ -159,71 +276,47 @@ export default {
           size: getSize()
         }
       },
-
+     
       /* form item */
-      [ 
-        ...cloneDeepWith( this.schema ).reduce(
-          ( prev, currentItemConf ) => {
-            const {
-              label,
-              type = 'string',
-              field = '',
-              visible = true
-            } = currentItemConf;
-            // eslint-disable-next-line no-prototype-builtins
-            if ( !aliasComponents.hasOwnProperty( type ) ) {
-              return h( 'div' );
-            }
-
-            /* 控制 是否显示  */
-            visible && prev.push(
-              h(
-                'el-form-item',
+      [
+        ...( 
+          isEmpty( this.draggabledClassName ) ? 
+            FormItems :
+            [ 
+              h( 
+                'VDraggable', 
                 {
-                  class: [ `form-item-${ type }` ],
-                  props: {
-                    label: getText( label, this?.$t?.bind( this ) ),
-                    for: field
+                  props:{
+                    list: this.newSchema
+                  },
+                  on:{
+                    end: () => {
+
+                      // 保存到 indexedDB
+                      if ( isEmpty( this.currentEntityName ) === false ) {
+                        yuxStorage.setItem( 
+                          this.currentEntityName,
+                          this.newSchema,
+                          err  => {
+                            if ( err ) {
+                              console.log( err );
+                            }
+                          } 
+                        );
+                      }
+                    }
                   }
                 },
                 [
-                  h(
-                    aliasComponents[ type ],
-                    {
-                      props: {
-                        entity: this.entity,
-                        conf: currentItemConf,
-                        value: model[ field ]
-                      },
-                      on: {
-                        input: newVal => {
-                          // eslint-disable-next-line no-prototype-builtins
-                          if ( model.hasOwnProperty( field ) ) {
-                            model[ field ] = newVal;
-                          } else {
-                            this.$set( model, field, newVal );
-                            this.$forceUpdate();
-                          }
-                        },
-                        change: data => {
-                          this.$emit(
-                            'change',
-                            {
-                              field,
-                              data,
-                              formData: cloneDeepWith( model )
-                            }
-                          );
-                        }
-                      }
-                    }
-                  )
-                ]
-              )
-            );
-            return prev;
-          },
-          []
+                  h( 'transition-group', {
+                    props:{
+                      tag:'div'
+                    },
+                    class: [ this.draggabledClassName ]
+                  },  FormItems  )
+                ] 
+              ) 
+            ] 
         ),
 
         /* 查询操作 */

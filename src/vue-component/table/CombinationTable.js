@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-07 11:31:43
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-22 14:00:37
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -218,7 +218,8 @@ export default {
             ref: 'QueryBar',
             key: queryBarKey,
             props: {
-              schema: this.queryBarSchema
+              schema: this.queryBarSchema,
+              entityName: this.entityName
             },
             on: {
               opration: data => {
