@@ -2,8 +2,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-09 13:58:39
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-26 10:26:37
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -135,6 +135,7 @@ function generateForm( params = {} ) {
           ? h(
             'el-form-item',
             {
+              key,
               class: [ 'scm-form-item', `form-item-${key}` ],
               props: {
                 label: i18n$T ? i18n$T( label ) : label,
