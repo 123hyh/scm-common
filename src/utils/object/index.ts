@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-04 16:18:16
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-28 10:23:49
+ * @LastEditTime: 2021-04-28 10:59:26
  * @Description:
  * @FilePath: \scm_frontend_common\src\utils\object\index.ts
  */
@@ -87,7 +87,10 @@ export function trimObjectSpace( fileds: string[], hasField = true ) {
   return {
     normalize: ( object: { [prop: string]: any } ) =>
       forEachObject( object, ( k, v ) => ( {
-        [ k ]: fieldsSet.has( k ) === hasField ? ( v ?? '' ).trim() : v
+        [ k ]:
+          fieldsSet.has( k ) === hasField && typeof v === 'string'
+            ? ( v ?? '' ).trim()
+            : v
       } ) )
   };
 }
