@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-04 16:18:16
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:27:08
+ * @LastEditTime: 2021-04-28 10:23:49
  * @Description:
  * @FilePath: \scm_frontend_common\src\utils\object\index.ts
  */
@@ -35,7 +35,8 @@ function _filterObject<T>(
   originalObject: { [index: string]: T },
   keys: string[],
 
-  /* 是否为忽略 */ 
+  /* 是否为忽略 */
+
   isOmit = true
 ) {
   return _omitBy<T>(
@@ -63,11 +64,30 @@ export function omitObjBy<T>(
 
 /**
  * 查找对象中的某些属性
- * @description: 
+ * @description:
  * @param {object} originalObject
  * @param {string} keys
  * @return {*}
  */
-export function findObjBy<T>( originalObject:{ [index: string]: T }, keys: string[] ) {
+export function findObjBy<T>(
+  originalObject: { [index: string]: T },
+  keys: string[]
+) {
   return _filterObject( originalObject, keys, false );
+}
+
+/**
+ * 对象 字段字符串 去空格
+ * @param fileds 操作的字段
+ * @param hasField 是否 需要 字段
+ * @returns
+ */
+export function trimObjectSpace( fileds: string[], hasField = true ) {
+  const fieldsSet = new Set( fileds );
+  return {
+    normalize: ( object: { [prop: string]: any } ) =>
+      forEachObject( object, ( k, v ) => ( {
+        [ k ]: fieldsSet.has( k ) === hasField ? ( v ?? '' ).trim() : v
+      } ) )
+  };
 }

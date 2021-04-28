@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-02 19:03:16
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-08 18:19:23
+ * @LastEditTime: 2021-04-28 10:25:17
  * @Description: 工具函数
  * @FilePath: \scm_frontend_common\src\utils\index.ts
  */
@@ -16,7 +16,7 @@
  */
 export { default as camelCaseKeys } from './object/camelCaseKeys/index';
 
-export { forEachObject, omitObjBy, findObjBy } from './object';
+export { forEachObject, omitObjBy, findObjBy, trimObjectSpace } from './object';
 
 
 /**
