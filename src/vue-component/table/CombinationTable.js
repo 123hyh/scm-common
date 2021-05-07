@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-23 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-22 14:00:37
+ * @LastEditTime: 2021-05-07 23:55:40
  * @Description: 组合表格( 查询栏 、工具、表格 、分页 )
  * @FilePath: \scm_frontend_common\src\vue-component\table\CombinationTable.js
  */
@@ -222,6 +222,13 @@ export default {
               entityName: this.entityName
             },
             on: {
+
+              /**
+               * 已加载完 查询栏事件
+               */
+              queryBarLoaded:() => {
+                this.$emit( 'queryBarLoaded' );
+              },
               opration: data => {
                 this.refreshComponent( [
                   'BaseTable',

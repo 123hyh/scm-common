@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-23 14:11:06
+ * @LastEditTime: 2021-05-07 22:19:45
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -208,6 +208,12 @@ export default {
      * 初始化 schema
      */
     initailizeSchema() {
+      const fn = () => this.$nextTick( () => {
+
+        // 通知 已加载完 查询栏
+        this.$emit( 'queryBarLoaded' );
+      } );
+      
       if ( this.draggabled ) {
         yuxStorage.getItem( 
           this.currentEntityName,
@@ -223,10 +229,13 @@ export default {
 
               /* 首次加载先隐藏一次 */
               this.handlerHide();
+              fn();
             } );
             
           } 
         );
+      } else {
+        fn();
       }
     },
 
