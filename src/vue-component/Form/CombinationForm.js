@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-26 10:26:37
+ * @LastEditTime: 2021-05-19 14:30:36
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -184,7 +184,7 @@ function generateForm( params = {} ) {
                 /* 避免无插槽然后报错 */
                 (
                   this.$scopedSlots[ `field_${key}` ] ?
-                    this.$scopedSlots[ `field_${key}` ]( data ) :
+                    this.$scopedSlots[ `field_${key}` ]( data, itemSchema ) :
                     ''
                 ) :
                 h(
