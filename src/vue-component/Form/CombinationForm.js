@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-19 14:30:36
+ * @LastEditTime: 2021-05-19 14:47:37
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -114,7 +114,8 @@ function generateForm( params = {} ) {
         )
       );
     } else {
-      const { label, rules = [], multiple = false, visible = true, tip, ...options } = itemSchema;
+      const { label, rules = [], multiple = false, visible = true, tip, customEvent, 
+        ...options } = itemSchema;
 
       /* 初始化表单数据集合 */
       ( () => {
@@ -201,7 +202,8 @@ function generateForm( params = {} ) {
                     on: {
                       input: ( value ) => {
                         data[ key ] = value;
-                      }
+                      },
+                      customEvent: () => customEvent
                     }
                   }
                 )

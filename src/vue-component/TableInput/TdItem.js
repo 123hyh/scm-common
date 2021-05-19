@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-10 18:04:42
+ * @LastEditTime: 2021-05-19 14:48:27
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -85,6 +85,8 @@ export default {
                       this.$set( this.formData, field, v );
                     }
                   ].filter( Boolean ),
+                  
+                  // 下传用户自定义表单事件
                   customEvent: () => customEvent
                 }
               } ),
