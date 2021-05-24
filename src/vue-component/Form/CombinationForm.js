@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 18:32:29
+ * @LastEditTime: 2021-05-24 18:39:54
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -394,7 +394,7 @@ export default {
     }
   },
 
-  render:( () => {
+  get render() {
     let _useComCounter = useComCounter++;
     return function render( h ) {
       const formData = this.$data._formData;
@@ -414,6 +414,6 @@ export default {
       }, _useComCounter )
       );
     };
-  } )()
+  }
 };
 

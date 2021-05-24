@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 18:25:02
+ * @LastEditTime: 2021-05-24 18:41:58
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -85,7 +85,7 @@ export default {
       required:false
     }
   },
-  render: ( () => {
+  get render() {
     let _useComCounter = useComCounter++;
     return function render( h ) {
       const currentKey = index => `${_useComCounter}-tr-${index}`;
@@ -120,7 +120,7 @@ export default {
         )
       ] );
     };
-  } )()
+  }
 };
 
 // /**
