@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 18:41:58
+ * @LastEditTime: 2021-05-24 19:04:43
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -87,6 +87,9 @@ export default {
   },
   get render() {
     let _useComCounter = useComCounter++;
+    if ( process.env.NODE_ENV === 'development' ) {
+      console.log( _useComCounter );
+    }
     return function render( h ) {
       const currentKey = index => `${_useComCounter}-tr-${index}`;
       return h( 'div', { class: [ 'table-input-wrap' ] }, [ 

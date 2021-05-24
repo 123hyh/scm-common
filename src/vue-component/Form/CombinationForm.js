@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 18:39:54
+ * @LastEditTime: 2021-05-24 19:06:17
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -396,6 +396,9 @@ export default {
 
   get render() {
     let _useComCounter = useComCounter++;
+    if ( process.env.NODE_ENV === 'development' ) {
+      console.log( _useComCounter );
+    }
     return function render( h ) {
       const formData = this.$data._formData;
       return h( 'el-form', {
