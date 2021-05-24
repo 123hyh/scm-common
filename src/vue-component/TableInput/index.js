@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 17:33:57
+ * @LastEditTime: 2021-05-24 18:25:02
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -68,9 +68,6 @@ const schema = [
 import TrItem from './TrItem.js';
 export default {
   name: 'ScmTableInput',
-  beforeCreate() {
-    useComCounter += 1;
-  },
   components: {
     TrItem
   },
@@ -88,39 +85,42 @@ export default {
       required:false
     }
   },
-  render( h ) {
-    const currentKey = index => `${useComCounter}-tr-${index}`;
-    return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
-      h(
-        'table',
-        {
-          attrs: {
-            cellpadding: '0'
+  render: ( () => {
+    let _useComCounter = useComCounter++;
+    return function render( h ) {
+      const currentKey = index => `${_useComCounter}-tr-${index}`;
+      return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
+        h(
+          'table',
+          {
+            attrs: {
+              cellpadding: '0'
+            },
+            class: [ 'table-wrap' ]
           },
-          class: [ 'table-wrap' ]
-        },
-        [
-
-          /* 标题 */
-          this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
-          ...this.schema.map( ( item, index ) =>
-            h( 'TrItem', {
-              key: currentKey( index ),
-              props: {
-                size: 'small',
-                schema: item,
-                formData: this.formData,
-                collector: this.collector
-              },
-              on:{
-                ...this.$listeners
-              },
-              scopedSlots: this.$scopedSlots
-            } )
-          ) ]
-      )
-    ] );
-  }
+          [
+  
+            /* 标题 */
+            this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
+            ...this.schema.map( ( item, index ) =>
+              h( 'TrItem', {
+                key: currentKey( index ),
+                props: {
+                  size: 'small',
+                  schema: item,
+                  formData: this.formData,
+                  collector: this.collector
+                },
+                on:{
+                  ...this.$listeners
+                },
+                scopedSlots: this.$scopedSlots
+              } )
+            ) ]
+        )
+      ] );
+    };
+  } )()
 };
 
 // /**

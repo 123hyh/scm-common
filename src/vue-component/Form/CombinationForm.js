@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-19 14:47:37
+ * @LastEditTime: 2021-05-24 18:32:29
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -26,6 +26,10 @@ import RadioItem from './FormItem/Radio';
 
 import { pickDict, getDictSchemaItem, setDictValue } from './useDict.js';
 
+/**
+ * 使用组件的次数
+ */
+let useComCounter = 0;
 
 
 /* 组件别名 map */
@@ -45,8 +49,9 @@ const aliasComponentNames = {
  * @param {objec} params.schema 表单 schema
  * @param {objec} params.data 表单数据集合
  * @param {function} params.h $createElement方法
+ * @param {string} prefixKey key 前缀
  */
-function generateForm( params = {} ) {
+function generateForm( params = {}, prefixKey ) {
   const i18n$T = this?.$t?.bind( this );
   const formData = this.$data._formData;
   const { schema = {}, data = {}, h, /* 字段前缀 */ prefix = '' } = params;
@@ -108,7 +113,7 @@ function generateForm( params = {} ) {
                     prefix ? `${prefix}.${key}` : key :
                     undefined,
                   h
-                } )
+                }, prefixKey )
             )
           ]
         )
@@ -136,7 +141,7 @@ function generateForm( params = {} ) {
           ? h(
             'el-form-item',
             {
-              key,
+              key: `${prefixKey}_${key}`,
               class: [ 'scm-form-item', `form-item-${key}` ],
               props: {
                 label: i18n$T ? i18n$T( label ) : label,
@@ -389,23 +394,26 @@ export default {
     }
   },
 
-  render( h ) {
-    const formData = this.$data._formData;
-    return h( 'el-form', {
-      class: [ 'scm-combination-form' ],
-      props: {
-        model: formData,
-        inline: true,
-        size: this.size
+  render:( () => {
+    let _useComCounter = useComCounter++;
+    return function render( h ) {
+      const formData = this.$data._formData;
+      return h( 'el-form', {
+        class: [ 'scm-combination-form' ],
+        props: {
+          model: formData,
+          inline: true,
+          size: this.size
+        },
+        ref: 'form'
       },
-      ref: 'form'
-    },
-    generateForm.call( this, {
-      schema: cloneDeepWith( this.schema ),
-      data: formData,
-      h
-    } )
-    );
-  }
+      generateForm.call( this, {
+        schema: cloneDeepWith( this.schema ),
+        data: formData,
+        h
+      }, _useComCounter )
+      );
+    };
+  } )()
 };
 
