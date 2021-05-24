@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 20:03:26
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-27 15:42:47
+ * @LastEditTime: 2021-05-24 17:35:00
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TrItem.js
  */
@@ -27,13 +27,14 @@ export default {
     }
   },
   render( h ) {
+    const currentKey = index => `${this.$vnode.key}_td_${index}`;
     return h(
       'tr',
       this.schema.map(
         ( item, index ) => h(
           'TdItem',
           {
-            key: index,
+            key: currentKey( index ),
             scopedSlots: this.$scopedSlots,
             on:{
               ...this.$listeners

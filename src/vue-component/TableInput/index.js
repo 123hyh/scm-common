@@ -1,12 +1,16 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
- * @LastEditors: huangyuhui
- * @LastEditTime: 2020-12-29 14:58:12
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-05-24 17:33:57
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
 
+/**
+ * 组件使用次数计数器
+ */
+let useComCounter = 0;
 import './style/index.scss';
 
 const schema = [
@@ -64,6 +68,9 @@ const schema = [
 import TrItem from './TrItem.js';
 export default {
   name: 'ScmTableInput',
+  beforeCreate() {
+    useComCounter += 1;
+  },
   components: {
     TrItem
   },
@@ -82,6 +89,7 @@ export default {
     }
   },
   render( h ) {
+    const currentKey = index => `${useComCounter}-tr-${index}`;
     return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
       h(
         'table',
@@ -97,7 +105,7 @@ export default {
           this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
           ...this.schema.map( ( item, index ) =>
             h( 'TrItem', {
-              key: index,
+              key: currentKey( index ),
               props: {
                 size: 'small',
                 schema: item,

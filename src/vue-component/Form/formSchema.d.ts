@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-11-29 22:12:31
- * @LastEditTime: 2021-01-04 19:30:08
- * @LastEditors: huangyuhui
+ * @LastEditTime: 2021-05-24 17:40:56
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\vue-component\Form\formSchema.d.ts
  */
@@ -35,6 +35,10 @@ export declare type FormSchema = {
     visible?: boolean,
     card?: boolean,
     rules?: RuleItem[],
+    /**
+     * 表单组件 element 事件
+     */
+    customEvent:{ [prop: string]: (...args: any[]) => void}
     properties?: { [prop: string]: FormSchema }
   }
 } 
