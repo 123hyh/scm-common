@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 19:19:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 19:04:43
+ * @LastEditTime: 2021-05-24 19:21:45
  * @Description: 
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\index.js
  */
@@ -71,6 +71,9 @@ export default {
   components: {
     TrItem
   },
+  beforeCreate() {
+    this.__useComCounter__ = useComCounter++;
+  },
   props: {
     schema: {
       type: Array,
@@ -85,44 +88,39 @@ export default {
       required:false
     }
   },
-  get render() {
-    let _useComCounter = useComCounter++;
-    if ( process.env.NODE_ENV === 'development' ) {
-      console.log( _useComCounter );
-    }
-    return function render( h ) {
-      const currentKey = index => `${_useComCounter}-tr-${index}`;
-      return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
-        h(
-          'table',
-          {
-            attrs: {
-              cellpadding: '0'
-            },
-            class: [ 'table-wrap' ]
+   
+  render( h ) {
+    const currentKey = index => `${this.__useComCounter__}-tr-${index}`;
+    return h( 'div', { class: [ 'table-input-wrap' ] }, [ 
+      h(
+        'table',
+        {
+          attrs: {
+            cellpadding: '0'
           },
-          [
+          class: [ 'table-wrap' ]
+        },
+        [
   
-            /* 标题 */
-            this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
-            ...this.schema.map( ( item, index ) =>
-              h( 'TrItem', {
-                key: currentKey( index ),
-                props: {
-                  size: 'small',
-                  schema: item,
-                  formData: this.formData,
-                  collector: this.collector
-                },
-                on:{
-                  ...this.$listeners
-                },
-                scopedSlots: this.$scopedSlots
-              } )
-            ) ]
-        )
-      ] );
-    };
+          /* 标题 */
+          this.$slots.table_caption && h( 'caption', this.$slots.table_caption  ),
+          ...this.schema.map( ( item, index ) =>
+            h( 'TrItem', {
+              key: currentKey( index ),
+              props: {
+                size: 'small',
+                schema: item,
+                formData: this.formData,
+                collector: this.collector
+              },
+              on:{
+                ...this.$listeners
+              },
+              scopedSlots: this.$scopedSlots
+            } )
+          ) ]
+      )
+    ] );
   }
 };
 

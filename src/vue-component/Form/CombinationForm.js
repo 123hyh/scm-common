@@ -3,7 +3,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-27 11:00:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-24 19:06:17
+ * @LastEditTime: 2021-05-24 19:27:37
  * @Description: 组合表单组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\CombinationForm.js
  */
@@ -393,30 +393,27 @@ export default {
       return vs;
     }
   },
-
-  get render() {
-    let _useComCounter = useComCounter++;
-    if ( process.env.NODE_ENV === 'development' ) {
-      console.log( _useComCounter );
-    }
-    return function render( h ) {
-      const formData = this.$data._formData;
-      return h( 'el-form', {
-        class: [ 'scm-combination-form' ],
-        props: {
-          model: formData,
-          inline: true,
-          size: this.size
-        },
-        ref: 'form'
+  beforeCreate() {
+    this.__useComCounter__ = useComCounter++;
+  },
+   
+  render( h ) {
+    const formData = this.$data._formData;
+    return h( 'el-form', {
+      class: [ 'scm-combination-form' ],
+      props: {
+        model: formData,
+        inline: true,
+        size: this.size
       },
-      generateForm.call( this, {
-        schema: cloneDeepWith( this.schema ),
-        data: formData,
-        h
-      }, _useComCounter )
-      );
-    };
+      ref: 'form'
+    },
+    generateForm.call( this, {
+      schema: cloneDeepWith( this.schema ),
+      data: formData,
+      h
+    }, this.__useComCounter__ )
+    );
   }
 };
 
