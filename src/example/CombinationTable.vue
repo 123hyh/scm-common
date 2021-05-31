@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2021-05-31 18:03:14
+ * @LastEditTime: 2021-05-31 18:25:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -147,6 +147,8 @@ export default {
         {
           type:'select',
           label:'测试下拉1',
+          'collapse-tags': true,
+          multiple: true,
           options:[
             {
               label:'test-1',

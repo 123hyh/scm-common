@@ -2,12 +2,13 @@
  * @Author: huangyuhui
  * @Date: 2020-12-04 16:18:16
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-28 10:59:26
+ * @LastEditTime: 2021-05-31 20:07:37
  * @Description:
  * @FilePath: \scm_frontend_common\src\utils\object\index.ts
  */
 
 import { omitBy as _omitBy } from 'lodash-es';
+
 
 /**
  * 遍历对象
@@ -93,4 +94,24 @@ export function trimObjectSpace( fileds: string[], hasField = true ) {
             : v
       } ) )
   };
+}
+
+
+/**
+ * 扁平化数组
+ * @param list 
+ * @param getChildren 
+ * @returns 
+ */
+export function flatListWhile<T>( 
+  list: T[], getChildren: ( item: T ) => T[] | undefined ) {
+  const newList: T[] = [];
+  list.forEach( ( item ) => {
+    newList.push( item );
+    const children = getChildren( item );
+    if ( Array.isArray( children ) ) {
+      newList.push( ...flatListWhile( children, getChildren ) );
+    }
+  } );
+  return newList;
 }
