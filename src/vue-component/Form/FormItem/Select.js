@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-10 17:40:43
+ * @LastEditTime: 2021-05-31 15:12:52
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -57,6 +57,8 @@ export default {
       loading = false,
       placeholder = '',
       options = [],
+      'collapse-tags': 
+      collapseTags = false,
       rules = {}
     } = this.conf;
     return h(
@@ -79,6 +81,7 @@ export default {
           multiple,
           disabled,
           clearable,
+          'collapse-tags': collapseTags,
           loading
         },
         attrs: {
