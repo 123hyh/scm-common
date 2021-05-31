@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-07 22:19:45
+ * @LastEditTime: 2021-05-31 18:13:24
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -205,6 +205,43 @@ export default {
   methods: {
 
     /**
+     * 合并持久化schema和propsschema
+     */
+    get mergeSchema() {
+      return function ( savedData = [] ) {
+
+        const _copyData = cloneDeepWith( savedData );
+
+        // 持久化的schema
+        const savedMap = new Map( savedData.map( item => ( [ item.field, item ] ) ) );
+
+        // props 下传的schema
+        const propsSchemaMap = new Map( this.schema.map( item => ( [ item.field, item ] ) ) );
+
+        // 需要新增的 schemaItems
+        const newItems = this.schema.filter( item => savedMap.has( item.field ) === false );
+
+        // 需要删除的schemaItems
+        const removeItems = savedData.filter( item => propsSchemaMap.has( item.field ) === false );
+
+        // 追加 新增的查询条件
+        _copyData.push( ...cloneDeepWith( newItems ) );
+        const newData = new Map( _copyData.map( item => ( [ item.field, item ] ) ) );
+
+        // 删除 不存在的
+        removeItems.forEach( item => {
+          newData.delete( item.field );
+        } );
+
+        // 将 propsSchemaItem 覆盖 到 新的集合中（保证响应式）
+        newData.forEach( ( _, key ) => {
+          newData.set( key, propsSchemaMap.get( key ) );
+        } );
+        this.currentSchema = [ ...newData.values() ];
+      };
+    },
+
+    /**
      * 初始化 schema
      */
     initailizeSchema() {
@@ -222,7 +259,7 @@ export default {
               err === false && 
                isEmpty( val ) === false 
             ) {
-              this.currentSchema = val;
+              this.mergeSchema( val );
             }
             this.schemaLoaded = true;
             this.$nextTick( () => {
