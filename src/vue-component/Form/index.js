@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 12:51:44
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-22 16:15:32
+ * @LastEditTime: 2021-05-30 20:41:12
  * @Description: Form 组件
  * @FilePath: \scm_frontend_common\src\vue-component\Form\index.js
  */
@@ -13,6 +13,7 @@ import SelectItem from './FormItem/Select';
 import SwitchItem from './FormItem/Switch';
 import DateItem from './FormItem/Date';
 import CheckboxItem from './FormItem/Checkbox';
+import Cascader from './FormItem/Cascader';
 import { Form, FormItem } from 'element-ui';
 import { getSize } from '../index.ts';
 const getText = ( key, i18nHandler ) => key && i18nHandler ? i18nHandler( key ) : key;
@@ -29,7 +30,8 @@ const aliasComponents = {
   select: 'SelectItem',
   switch: 'SwitchItem',
   date: 'DateItem',
-  checkbox: 'CheckboxItem'
+  checkbox: 'CheckboxItem',
+  cascader:'Cascader'
 };
 // eslint-disable-next-line no-unused-vars
 const schema = [
@@ -152,6 +154,7 @@ export default {
     SwitchItem,
     DateItem,
     CheckboxItem,
+    Cascader,
     ElForm: Form,
     ElFormItem: FormItem,
     VDraggable:Draggable

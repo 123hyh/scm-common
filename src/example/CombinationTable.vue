@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-05 18:08:05
- * @LastEditTime: 2021-04-22 16:48:29
+ * @LastEditTime: 2021-05-31 10:31:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\src\example\CombinationTable.vue
@@ -10,7 +10,7 @@
   <div
     v-loading="loading"
     class="combination-table"
-    > 
+    >
     <div class="aside"/>
     <div class="content-table">
       <CombinationTable
@@ -22,6 +22,7 @@
         :selectionMethod="selectionMethod"
         :total="100"
         :border="true"
+        @queryBarChange="handlerQueryChange"
         @sortChange="hanlderSort"
         @refresh="hanlderRefresh"
         @rowClick="hanlderClickRow"
@@ -52,76 +53,143 @@
 </template>
 
 <script>
-import  CombinationTable from '@/vue-component/table/CombinationTable';
+import CombinationTable from '@/vue-component/table/CombinationTable';
 console.log( CombinationTable );
 import { loading } from '../directives/index';
 import ripple from '../directives/ripple';
 export default {
   components: {
     CombinationTable,
-    BaseTable:CombinationTable.BaseTable
+    BaseTable: CombinationTable.BaseTable
   },
-  directives:{
-    loading:loading,
+  directives: {
+    loading: loading,
 
     /* 测试指令 */
     ripple
   },
   data() {
     return {
-      loading:false,
+      loading: false,
       list: [
         { name: '换一换', age: 18, income: 3000 },
         { name: 'mff', age: 18, income: 3500 }
       ],
-      queryBarSchema:[
+      queryBarSchema: [
         {
-          field:'name1',
-          label:'姓名1',
+          type: 'cascader',
+          field: 'cascader1',
+          clearable: true,
+          customAttrs:{
+            props:{ multiple: true },
+            'collapseTags': true
+          },
+          options: [
+            {
+              value: 1,
+              label: '东南',
+              children: [
+                {
+                  value: 2,
+                  label: '上海',
+                  children: [
+                    { value: 3, label: '普陀' },
+                    { value: 4, label: '黄埔' },
+                    { value: 5, label: '徐汇' }
+                  ]
+                },
+                {
+                  value: 7,
+                  label: '江苏',
+                  children: [
+                    { value: 8, label: '南京' },
+                    { value: 9, label: '苏州' },
+                    { value: 10, label: '无锡' }
+                  ]
+                },
+                {
+                  value: 12,
+                  label: '浙江',
+                  children: [
+                    { value: 13, label: '杭州' },
+                    { value: 14, label: '宁波' },
+                    { value: 15, label: '嘉兴' }
+                  ]
+                }
+              ]
+            },
+            {
+              value: 17,
+              label: '西北',
+              children: [
+                {
+                  value: 18,
+                  label: '陕西',
+                  children: [
+                    { value: 19, label: '西安' },
+                    { value: 20, label: '延安' }
+                  ]
+                },
+                {
+                  value: 21,
+                  label: '新疆维吾尔族自治区',
+                  children: [
+                    { value: 22, label: '乌鲁木齐' },
+                    { value: 23, label: '克拉玛依' }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          field: 'name1',
+          label: '姓名1',
           type: 'date',
-          dateType:'daterange',
-          format:'yyyy-MM-dd',
+          dateType: 'daterange',
+          format: 'yyyy-MM-dd',
           clearable: true
         },
         {
-          field:'name2',
-          label:'姓名2',
+          field: 'name2',
+          label: '姓名2',
           type: 'select',
           clearable: true
         },
         {
-          field:'name3',
-          label:'姓名3',
+          field: 'name3',
+          label: '姓名3',
           type: 'string',
           clearable: true
         },
         {
-          field:'name4',
-          label:'姓名4',
+          field: 'name4',
+          label: '姓名4',
           type: 'string',
           clearable: true
         },
         {
-          field:'name5',
-          label:'姓名5',
+          field: 'name5',
+          label: '姓名5',
           type: 'string',
           clearable: true
         },
         {
-          field:'name6',
-          label:'姓名',
+          field: 'name6',
+          label: '姓名',
           type: 'string',
           clearable: true
         },
         {
-          field:'name7',
-          label:'姓名7',
+          field: 'name7',
+          label: '姓名7',
           type: 'string',
           clearable: true
         },
         {
-          field:'name8',
-          label:'姓名',
+          field: 'name8',
+          label: '姓名',
           type: 'string',
           clearable: true
         }
@@ -129,7 +197,7 @@ export default {
       tableSchema: {
         selection: {
           width: 50,
-          label:'',
+          label: '',
           isMultiple: true
         },
         column: [
@@ -167,13 +235,13 @@ export default {
             field: 'createTime',
             label: '创建日期',
             width: 150,
-            sortable:true
+            sortable: true
           },
           {
             field: 'submitTime',
             label: '提交日期',
             width: 150,
-            sortable:true
+            sortable: true
           },
           {
             field: 'auditTime',
@@ -221,6 +289,13 @@ export default {
     },
 
     /**
+     * 查询栏变化时间
+     */
+    handlerQueryChange( ...args ) {
+      console.log( args );
+    },
+
+    /**
      * 单击表格行事件
      * @description:
      * @param {*}
@@ -231,19 +306,18 @@ export default {
     },
 
     /**
-   * 双击行事件
-   * @description: 
-   * @param {*}
-   * @return {*}
-   */  
+     * 双击行事件
+     * @description:
+     * @param {*}
+     * @return {*}
+     */
     hanlderDblclickRow( rowData ) {
       console.log( '当前双击行数据：', JSON.stringify( rowData ) );
-    
     },
 
     /**
      * 勾选事件
-     * @description: 
+     * @description:
      * @param {*} selectData
      * @return {*}
      */
@@ -253,20 +327,20 @@ export default {
 
     /**
      * 勾选方法 (禁用)
-     * @description: 
+     * @description:
      * @param {*} row
      * @return {*}
      */
     selectionMethod( row = {} ) {
-      return       row.income === 3000;
+      return row.income === 3000;
     },
 
     /**
-   * 勾选全部 checkbox
-   * @description: 
-   * @param {*}
-   * @return {*}
-   */  
+     * 勾选全部 checkbox
+     * @description:
+     * @param {*}
+     * @return {*}
+     */
     handlerSelectAll( dd ) {
       console.log( '勾选全部 checkbox: ', dd );
     }
@@ -275,13 +349,13 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.combination-table{
+.combination-table {
   display: flex;
-  .aside{
+  .aside {
     width: 180px;
     height: 100%;
   }
-  .content-table{
+  .content-table {
     width: calc(100% - 180px);
   }
 }

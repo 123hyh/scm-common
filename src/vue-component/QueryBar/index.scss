@@ -60,6 +60,9 @@ $containerBgColor: #ffffff;
             border: none
           }
         }
+        .el-cascader{
+          width: 100%
+        }
       }
       &.form-item-date {
         @include layout;
