@@ -1,8 +1,8 @@
 /*
  * @Author: huangyuhui
  * @Date: 2020-11-05 11:38:41
- * @LastEditors: huangyuhui
- * @LastEditTime: 2021-01-11 17:12:46
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-06-19 11:42:38
  * @Description: 表单自定义校验方法
  * @FilePath: \scm_frontend_common\src\vue-component\Form\validators.js
  */
@@ -81,5 +81,5 @@ export function decimalRegExp( decimal ) {
  * 整数正则
  */
 export function integerRegExp() {
-  return /^-?[1-9]\d*$/;
+  return /^-?[0-9]\d*$/;
 }
