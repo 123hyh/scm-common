@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:17:47
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-10 17:53:42
+ * @LastEditTime: 2021-06-30 14:37:50
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Date.js
  */
@@ -60,6 +60,7 @@ export default {
       placeholder = '',
       startPlaceholder	= '',
       endPlaceholder	= '',
+      appendToBody = false,
       rules = {}
     } = this.conf;
     return h(
@@ -82,7 +83,7 @@ export default {
           type: dateType,
           format,
           'value-format': valueFormat,
-          appendToBody: false,
+          appendToBody,
           'popper-class': `date-item-${ field }`,
           'start-placeholder': this.entity
             ? this.$t( `${ this.entity }.${ startPlaceholder }` )

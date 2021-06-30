@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-31 20:06:44
+ * @LastEditTime: 2021-06-30 14:40:00
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -83,6 +83,7 @@ export default {
       placeholder = '',
       options = [],
       'collapse-tags': collapseTags = false,
+      popperAppendToBody = false,
       rules = {}
     } = this.conf;
     return h(
@@ -102,7 +103,7 @@ export default {
         props: {
           value: this.value,
           filterable: true,
-          popperAppendToBody: false,
+          popperAppendToBody,
           multiple,
           disabled,
           clearable,
