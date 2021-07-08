@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-27 23:10:54
- * @LastEditTime: 2021-03-10 18:42:19
+ * @LastEditTime: 2021-07-08 17:04:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \scm_frontend_common\docs\commonComponent\TableInput\README.md
@@ -99,7 +99,11 @@ export default {
           /**
            * 行合并
            * */
-          rowspan: 2
+          rowspan: 2,
+          /**
+           * 单元格样式名称
+           * */
+          tdClassName: 'className'
         },
         {
           type: 'string',
