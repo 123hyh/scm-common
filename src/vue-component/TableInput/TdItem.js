@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-12-24 14:32:28
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-19 14:48:27
+ * @LastEditTime: 2021-07-08 16:44:38
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\TableInput\TdItem.js
  */
@@ -53,7 +53,7 @@ export default {
   },
   render( h ) {
     const {
-      schema: { field, type, visible = true, label, customEvent = {} },
+      schema: { field, type, visible = true, label, customEvent = {}, tdClassName = '' },
       formData
     } = this;
     return visible
@@ -65,7 +65,7 @@ export default {
             colspan: this.schema.colspan,
             rowspan: this.schema.rowspan
           },
-          class: [ 'td-item', type === 'label' && 'td-label' ].filter( Boolean )
+          class: [ 'td-item', type === 'label' && 'td-label', tdClassName ].filter( Boolean )
         },
         [
           type &&
