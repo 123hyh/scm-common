@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-10 17:52:52
+ * @LastEditTime: 2021-07-12 20:28:31
  * @Description:
  * @FilePath: \customs\src\components\common\Form\FormItem\Radio.js
  */
@@ -89,6 +89,9 @@ export default {
             props: {
               label: value,
               disabled
+            },
+            attrs:{
+              'data-value': value
             },
             key: value
           },

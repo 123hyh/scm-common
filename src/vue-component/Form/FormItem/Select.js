@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-22 10:05:04
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-06-30 14:40:00
+ * @LastEditTime: 2021-07-12 20:26:37
  * @Description:
  * @FilePath: \scm_frontend_common\src\vue-component\Form\FormItem\Select.js
  */
@@ -150,6 +150,9 @@ function generateOption( h, item ) {
       label,
       value,
       disabled
+    },
+    attrs:{
+      'data-value': value
     },
     key: value
   } );
