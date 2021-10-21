@@ -2,7 +2,7 @@
  * @Author: huangyuhui
  * @Date: 2020-09-21 15:55:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-05-31 18:13:24
+ * @LastEditTime: 2021-10-21 14:57:07
  * @Description: 查询栏组件
  * @FilePath: \scm_frontend_common\src\vue-component\QueryBar\index.js
  */
@@ -325,7 +325,7 @@ export default {
           const formElem = this.$refs.form.$el;
 
           // 拖拽改变 了容器 
-          const children = this.getFormItems( formElem );
+          const children = Array.from( this.getFormItems( formElem ) ?? []);
           if ( isEmpty( children ) )  return; 
 
           /* 暂存 溢出的Elem */
