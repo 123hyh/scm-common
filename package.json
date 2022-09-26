@@ -76,6 +76,6 @@
     "vue-js-modal": "^2.0.0-rc.6",
     "vue-loading-overlay": "^3.4.2",
     "vuedraggable": "^2.24.3",
-    "yux-storage": "^1.1.4"
+    "yux-storage": "1.1.4"
   }
 }

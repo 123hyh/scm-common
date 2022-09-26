@@ -119,7 +119,7 @@ export class Collector extends CollectorMeth {
  * @return {*}
  */
 function objToJson<T>( obj: T ) {
-  forEachObject( obj, ( key, value ) => {
+  forEachObject( obj as Object, ( key, value ) => {
     const isObjType =
       Object.prototype.toString.
         call( value ).
